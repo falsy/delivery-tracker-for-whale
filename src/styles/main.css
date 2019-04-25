@@ -64,6 +64,10 @@ ul li div .post-box input {
 	border-right: 0;
 }
 
+ul li div .post-box input:focus {
+  outline: none;
+}
+
 ul li div .post-box button {
 	float: left;
 	width: 20%;
@@ -79,5 +83,8 @@ ul li div .post-box button {
 	letter-spacing: 0.6px;
 }
 
+ul li div .post-box button:focus {
+  outline: none;
+}
 
 
