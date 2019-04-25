@@ -3,10 +3,14 @@
   "name": "택배 배송 조회",
   "version": "1.1.0",
   "description": "간편하게 택배 배송을 조회합니다.",
+  "icons": {
+    "32": "src/imgs/deliverty-32.png",
+    "128": "src/imgs/deliverty-128.png"
+  },
   "sidebar_action": {
     "default_page": "index.html",
     "default_icon": {
-
+      "32": "src/imgs/deliverty-32.png"
     },
     "default_title": "배송 조회",
     "use_navigation_bar": false
