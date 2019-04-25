@@ -87,4 +87,27 @@ ul li div .post-box button:focus {
   outline: none;
 }
 
+#ps-text {
+	margin: 20px 20px 40px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+#ps-text p {
+  font-size: 14px;
+  line-height: 22px;
+  margin-top: 0;
+}
+
+#ps-text button {
+	display: inline-block;
+	width: 120px;
+	font-size: 14px;
+	line-height: 32px;
+	color: #888;
+	background: #eee;
+	border: 1px solid #ddd;
+	cursor: pointer;
+}
 

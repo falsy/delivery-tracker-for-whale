@@ -38,6 +38,12 @@ class Delivery {
     }
   }
 
+  claerPostNumber() {
+    for(const key in DELIVERY_LIST) {
+      document.getElementById(key).value = '';
+    }
+  }
+
   eventListener() {
     this.body.addEventListener('click', (e) => {
       if(e.target.className === 'delivery-btn') {
@@ -54,6 +60,11 @@ class Delivery {
         } else {
           window.open(apiUrl+postNumber, apiTarget, 'resizable=yes,scrollbars=yes,width=720,height=600');
         }
+      }
+
+      if(e.target.id === 'delete-storage') {
+        this.claerPostNumber();
+        WebStorage.clear();
       }
     }, {
       capture: true
