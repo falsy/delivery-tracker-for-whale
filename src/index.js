@@ -19,11 +19,10 @@ class Delivery {
       listDom.innerHTML = `
         <div>
           <h2>${DELIVERY_LIST[key].name}</h2>
-          <label>
-            <span>운송장 번호</span>
-            <input type="text" id="${key}" class="post-number" />
-          </label>
-          <button data-target="${key}" class="delivery-btn">조회</button>
+          <div class="post-box">
+            <input type="number" id="${key}" class="post-number" placeholder="운송장 번호"/>
+            <button data-target="${key}" class="delivery-btn">조회</button>
+          </div>
         </div>
       `;
       list.appendChild(listDom);
