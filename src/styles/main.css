@@ -27,7 +27,13 @@ h1 {
 }
 
 #delivery-list-container {
-	padding: 10px 20px;
+	padding: 20px;
+}
+
+#delivery-list-container > div {
+	padding: 20px;
+	background: #fff;
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
 }
 
 ul {
@@ -112,7 +118,9 @@ ul li div .post-box button:focus {
 }
 
 #add-delivery-section {
-	padding: 10px 20px;
+	padding: 0 20px 30px;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 30px;
 }
 
 #add-delivery {

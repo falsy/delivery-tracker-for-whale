@@ -20,6 +20,8 @@ class Delivery {
     const deliveryBox = document.createElement('div');
           deliveryBox.appendChild(delivery);
     const selectBox = document.createElement('ul');
+    const input = document.createElement('input');
+          input.setAttribute('type', 'text');
     const buttonText = document.createTextNode('조회');
     const button = document.createElement('button');
           button.className = 'delivery-btn';
@@ -33,6 +35,7 @@ class Delivery {
     }
     
     deliveryBox.appendChild(selectBox);
+    deliveryBox.appendChild(input);
     container.appendChild(deliveryBox);
     container.appendChild(button);
 
