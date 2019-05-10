@@ -111,3 +111,18 @@ ul li div .post-box button:focus {
 	cursor: pointer;
 }
 
+#add-delivery-section {
+	padding: 10px 20px;
+}
+
+#add-delivery {
+	display: inline-block;
+	width: 120px;
+	font-size: 14px;
+	line-height: 32px;
+	color: #fff;
+	background: #00dc9b;
+	border: 1px solid #05c38b;
+	cursor: pointer;
+}
+

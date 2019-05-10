@@ -12,23 +12,31 @@ class Delivery {
   }
 
   appendDeliveryListDOM() {
-    const list = document.createElement('ul');
+    const container = document.createElement('div');
+    const deliveryText = document.createTextNode(DELIVERY_LIST[0].name);
+    const delivery = document.createElement('p');
+          delivery.setAttribute('data-delivery', 0);
+          delivery.appendChild(deliveryText);
+    const deliveryBox = document.createElement('div');
+          deliveryBox.appendChild(delivery);
+    const selectBox = document.createElement('ul');
+    const buttonText = document.createTextNode('조회');
+    const button = document.createElement('button');
+          button.className = 'delivery-btn';
+          button.appendChild(buttonText);
 
-    for(const key in DELIVERY_LIST) {
-      const listDom = document.createElement('li');
-      listDom.innerHTML = `
-        <div>
-          <h2>${DELIVERY_LIST[key].name}</h2>
-          <div class="post-box">
-            <input type="number" id="${key}" class="post-number" placeholder="운송장 번호"/>
-            <button data-target="${key}" class="delivery-btn">조회</button>
-          </div>
-        </div>
-      `;
-      list.appendChild(listDom);
+    for(let i=0; i<DELIVERY_LIST.length; i++) {
+      const list = document.createElement('li');
+      const deliveryText = document.createTextNode(DELIVERY_LIST[i].name);
+      list.appendChild(deliveryText);
+      selectBox.appendChild(list);
     }
+    
+    deliveryBox.appendChild(selectBox);
+    container.appendChild(deliveryBox);
+    container.appendChild(button);
 
-    this.deliveryList.appendChild(list);
+    this.deliveryList.appendChild(container);
   }
 
   cachePostNumber() {
