@@ -75,30 +75,24 @@ class Delivery {
     this.deliveryList.appendChild(container);
   }
 
-  // cachePostNumber() {
-  //   const cachePostNoList = WebStorage.get(POST_NUMBER) || {};
-  //   for(const target in cachePostNoList) {
-  //     document.getElementById(target).value = cachePostNoList[target];
-  //   }
-  // }
-
-  // claerPostNumber() {
-  //   for(const key in DELIVERY_LIST) {
-  //     document.getElementById(key).value = '';
-  //   }
-  // }
-
   eventListener() {
     this.body.addEventListener('click', (e) => {
       const selectbox = document.getElementsByClassName('select-box-list');
       const tName = e.target.className;
       
       if(tName === 'delivery-btn') {
-        const apiTarget = e.target.dataset.target;
-        const apiUrl = DELIVERY_LIST[apiTarget].api;
-        const postNumber = document.getElementById(apiTarget).value;
+        const deliveryList = WebStorage.get(DELIVERY_DATA);
+        const container = e.target.parentElement;
+        const cIndex = container.dataset.cIndex;
+        const dIndex = container.dataset.dIndex;
+        const apiTarget = DELIVERY_LIST[dIndex].name;
+        const apiUrl = DELIVERY_LIST[dIndex].api;
+        const postNumber = e.target.previousElementSibling.value;
 
-        if(apiTarget === 'daesin_post') {
+        deliveryList[cIndex].code = postNumber;
+        WebStorage.set(DELIVERY_DATA, deliveryList);
+
+        if(apiTarget === '대신 택배') {
           const billno1 = '?billno1=' + String(postNumber).substring(0, 4);
           const billno2 = '&billno2=' + String(postNumber).substring(4, 7);
           const billno3 = '&billno3=' + String(postNumber).substring(7, 13);
@@ -111,7 +105,7 @@ class Delivery {
 
       if(tName === 'select-box') {
         const display = e.target.nextElementSibling.style.display === 'none' ? 'block' : 'none';
-        
+
         e.target.nextElementSibling.style.display = display;
       } else {
         for(const select of selectbox) {
