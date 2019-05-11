@@ -27,12 +27,24 @@ h1 {
 	line-height: 60px;
 }
 
+a {
+	text-decoration: none;
+	color: inherit;
+	letter-spacing: -0.3px;
+	transition: all 0.3s;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
 #delivery-list-container {
-	padding: 20px;
+	padding: 20px 20px 0;
 }
 
 #delivery-list-container > div {
 	padding: 20px;
+	margin-bottom: 20px;
 	background: #fff;
 	box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
 	position: relative;
@@ -60,7 +72,6 @@ h1 {
 
 ul {
 	position: absolute;
-	display: none;
 	width: 100%;
 	padding: 0;
   line-height: 35px;
@@ -69,6 +80,7 @@ ul {
   margin-top: 0;
 	list-style: none;
 	background: #f9f9f9;
+	z-index: 100;
 }
 
 ul li {
@@ -124,37 +136,11 @@ ul li:hover {
 	opacity: 1;
 }
 
-
-#ps-text {
-	margin: 20px 20px 40px;
-  background: #fff;
-  padding: 20px;
-  box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
-}
-
-#ps-text p {
-  line-height: 22px;
-  margin-top: 0;
-}
-
-#ps-text button {
-	display: inline-block;
-	width: 120px;
-	font-size: 14px;
-	line-height: 32px;
-	color: #888;
-	background: #eee;
-	border: 1px solid #ddd;
-	cursor: pointer;
-}
-
 #add-delivery-section {
-	padding: 0 20px 30px;
-	border-bottom: 1px solid #eee;
-	margin-bottom: 30px;
+	padding: 0 20px 40px;
 }
 
-#add-delivery {
+.add-delivery {
 	display: inline-block;
 	width: 120px;
 	font-size: 14px;
@@ -163,5 +149,14 @@ ul li:hover {
 	background: #00dc9b;
 	border: 1px solid #05c38b;
 	cursor: pointer;
+}
+
+footer {
+	color: #444;
+	font-size: 11px;
+	font-weight: bold;
+	position: fixed;
+  bottom: 15px;
+  left: 15px;
 }
 
