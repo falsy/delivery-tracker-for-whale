@@ -13,10 +13,14 @@ class Delivery {
 
   appendDeliveryListDOM() {
     const container = document.createElement('div');
+    const arrowText = document.createTextNode('›');
+    const arrow = document.createElement('span');
+          arrow.appendChild(arrowText);
     const deliveryText = document.createTextNode(DELIVERY_LIST[0].name);
     const delivery = document.createElement('p');
           delivery.setAttribute('data-delivery', 0);
           delivery.appendChild(deliveryText);
+          delivery.appendChild(arrow);
     const deliveryBox = document.createElement('div');
           deliveryBox.appendChild(delivery);
     const selectBox = document.createElement('ul');
@@ -26,6 +30,10 @@ class Delivery {
     const button = document.createElement('button');
           button.className = 'delivery-btn';
           button.appendChild(buttonText);
+    const closeText = document.createTextNode('×');
+    const closeBtn = document.createElement('span');
+          closeBtn.appendChild(closeText);
+
 
     for(let i=0; i<DELIVERY_LIST.length; i++) {
       const list = document.createElement('li');
@@ -35,9 +43,10 @@ class Delivery {
     }
     
     deliveryBox.appendChild(selectBox);
-    deliveryBox.appendChild(input);
     container.appendChild(deliveryBox);
+    container.appendChild(input);
     container.appendChild(button);
+    container.appendChild(closeBtn);
 
     this.deliveryList.appendChild(container);
   }

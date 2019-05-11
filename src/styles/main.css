@@ -9,6 +9,7 @@
 body {
 	margin: 0;
 	background: #f7f7f7;
+	font-size: 14px;
 }
 
 #wrap {
@@ -34,64 +35,95 @@ h1 {
 	padding: 20px;
 	background: #fff;
 	box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
-}
-
-ul {
-	padding: 0;
-	list-style: none;
-}
-
-ul li div h2 {
-	font-size: 14px;
-	font-weight: normal;
-	padding-left: 2px;
-	color: #444;
-	margin: 15px 0 5px;
-}
-
-ul li div .post-box {
 	position: relative;
 }
 
-ul li div .post-box:after {
-	content: '';
-	clear: both;
-	display: block;
+#delivery-list-container > div > div {
+	position: relative;
+	margin-bottom: 10px;
 }
 
-ul li div .post-box input {
-	float: left;
-	width: 80%;
-	line-height: 40px;
-	padding: 0 10px 0 10px;
-	margin: 0;
-	font-size: 14px;
-	border: 1px solid #ddd;
-	border-right: 0;
+#delivery-list-container p {
+  margin: 0;
+  line-height: 40px;
+  padding: 0 15px;
+  border: 1px solid #ddd;
+  cursor: pointer;
 }
 
-ul li div .post-box input:focus {
-  outline: none;
+#delivery-list-container p span {
+  position: absolute;
+  right: 15px;
+  font-size: 16px;
+  transform: rotate(90deg);
 }
 
-ul li div .post-box button {
-	float: left;
-	width: 20%;
-	line-height: 40px;
+ul {
+	position: absolute;
+	display: none;
+	width: 100%;
 	padding: 0;
-	margin: 0;
-	background: #00dc9b;
-	color: #fff;
-	border: 0;
-	font-size: 14px;
-	cursor: pointer;
-	border: 1px solid #05c38b;
-	letter-spacing: 0.6px;
+  line-height: 35px;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  margin-top: 0;
+	list-style: none;
+	background: #f9f9f9;
 }
 
-ul li div .post-box button:focus {
+ul li {
+	padding: 0 15px;
+	border-bottom: 1px solid #ddd;
+	cursor: pointer;
+}
+
+ul li:hover {
+	background: #fff;
+}
+
+#delivery-list-container input {
+  line-height: 40px;
+  width: 240px;
+  margin: 0;
+  padding: 0 15px;
+  border: 1px solid #ddd;
+  border-right: 1px solid #05c38b;
+  font-size: 14px;
   outline: none;
 }
+
+#delivery-list-container button {
+  border: 1px solid #05c38b;
+  border-left: 0;
+  line-height: 40px;
+  padding: 0;
+  background: #00dc9b;
+  color: #fff;
+  width: 70px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#delivery-list-container > div > span {
+	position: absolute;
+	opacity: 0;
+  top: -10px;
+  right: -10px;
+  line-height: 18px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+#delivery-list-container > div:hover > span {
+	opacity: 1;
+}
+
 
 #ps-text {
 	margin: 20px 20px 40px;
@@ -101,7 +133,6 @@ ul li div .post-box button:focus {
 }
 
 #ps-text p {
-  font-size: 14px;
   line-height: 22px;
   margin-top: 0;
 }
