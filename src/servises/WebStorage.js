@@ -10,4 +10,8 @@ export default class WebStorage {
   static clear() {
     window.localStorage.clear();
   }
+
+  static remove(key) {
+    window.localStorage.removeItem(key);
+  }
 }

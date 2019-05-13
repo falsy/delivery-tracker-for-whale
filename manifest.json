@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "택배 배송 조회",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "description": "간편하게 택배 배송을 조회합니다.",
   "icons": {
     "32": "src/imgs/deliverty-32.png",

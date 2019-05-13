@@ -1,4 +1,4 @@
-import { DELIVERY_INIT, DELIVERY_DATA, DELIVERY_LIST } from './constants/index.js';
+import { POST_NUMBER, DELIVERY_INIT, DELIVERY_DATA, DELIVERY_LIST } from './constants/index.js';
 import WebStorage from './servises/WebStorage.js';
 
 class Delivery {
@@ -8,12 +8,14 @@ class Delivery {
 
     this.getStorageListData();
     this.eventListener();
+
+    if(WebStorage.get(POST_NUMBER)) WebStorage.remove(POST_NUMBER);
   }
 
   getStorageListData() {
     let deliverydata = WebStorage.get(DELIVERY_DATA);
     deliverydata = deliverydata && deliverydata.length  ? deliverydata : [ DELIVERY_INIT ];
-    
+
     WebStorage.set(DELIVERY_DATA, deliverydata);
 
     while(this.deliveryList.firstChild) {
@@ -65,7 +67,7 @@ class Delivery {
       list.appendChild(deliveryText);
       selectBox.appendChild(list);
     }
-    
+
     deliveryBox.appendChild(selectBox);
     container.appendChild(deliveryBox);
     container.appendChild(input);
@@ -79,7 +81,7 @@ class Delivery {
     this.body.addEventListener('click', (e) => {
       const selectbox = document.getElementsByClassName('select-box-list');
       const tName = e.target.className;
-      
+
       if(tName === 'delivery-btn') {
         const deliveryList = WebStorage.get(DELIVERY_DATA);
         const container = e.target.parentElement;

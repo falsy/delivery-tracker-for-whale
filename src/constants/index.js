@@ -1,3 +1,4 @@
+export const POST_NUMBER = 'POST_NUMBER';
 export const DELIVERY_INIT = { idx : 0, code: '' };
 export const DELIVERY_DATA = 'DELIVERY_DATA';
 export const DELIVERY_LIST = [{
