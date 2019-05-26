@@ -34,4 +34,7 @@ export const DELIVERY_LIST = [{
   }, {
     name: '일양로지스',
     api: 'http://www.ilyanglogis.com/functionality/card_form_waybill.asp?hawb_no='
+  }, {
+    name: '국제우편(EMS)',
+    api: 'https://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?displayHeader=N&POST_CODE='
   }];

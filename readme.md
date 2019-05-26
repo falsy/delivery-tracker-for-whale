@@ -6,6 +6,8 @@
 ```
 * 우체국 택배 
 https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?displayHeader=N&sid1=
+* 우체국 국제우편 (EMS)
+https://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?displayHeader=N&POST_CODE=
 * CJ 대한통운
 http://nplus.doortodoor.co.kr/web/detail.jsp?slipno=
 * 한진 택배
