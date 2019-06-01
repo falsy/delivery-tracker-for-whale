@@ -1,16 +1,16 @@
 {
   "manifest_version": 2,
   "name": "택배 배송 조회",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "간편하게 택배 배송을 조회합니다.",
   "icons": {
-    "32": "src/imgs/deliverty-32-v2.png",
-    "128": "src/imgs/deliverty-128-v2.png"
+    "32": "src/imgs/delivery-32-v4.png",
+    "128": "src/imgs/delivery-128-v4.png"
   },
   "sidebar_action": {
     "default_page": "index.html",
     "default_icon": {
-      "32": "src/imgs/deliverty-32-v2.png"
+      "32": "src/imgs/delivery-32-v4.png"
     },
     "default_title": "배송 조회",
     "use_navigation_bar": false
