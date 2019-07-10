@@ -14,21 +14,22 @@ class Delivery {
 
   getStorageListData() {
     let deliverydata = WebStorage.get(DELIVERY_DATA);
-    deliverydata = deliverydata && deliverydata.length  ? deliverydata : [ DELIVERY_INIT ];
-
-    WebStorage.set(DELIVERY_DATA, deliverydata);
+        deliverydata = deliverydata && deliverydata.length  ? deliverydata : [ DELIVERY_INIT ];
 
     while(this.deliveryList.firstChild) {
       this.deliveryList.removeChild(this.deliveryList.firstChild);
     }
 
     deliverydata.forEach((delivery, i) => {
+      if(!delivery.hasOwnProperty('label') || delivery.label === '') delivery.label = '라벨';
       this.appendDeliveryListDOM(delivery, i);
     });
+
+    WebStorage.set(DELIVERY_DATA, deliverydata);
   }
 
   appendDeliveryListDOM(deliveryData, i) {
-    const { idx, code } = deliveryData;
+    const { idx, label, code } = deliveryData;
     const container = document.createElement('div');
           container.className = 'delivery-container';
           container.setAttribute('data-d-Index', idx);
@@ -43,10 +44,15 @@ class Delivery {
           delivery.appendChild(arrow);
     const deliveryBox = document.createElement('div');
           deliveryBox.appendChild(delivery);
+    const labelInput = document.createElement('input');
+          labelInput.setAttribute('class', 'delivery-label');
+          labelInput.setAttribute('type', 'text');
+          labelInput.setAttribute('value', label);
     const selectBox = document.createElement('ul');
           selectBox.className = 'select-box-list';
           selectBox.style.display = 'none';
     const input = document.createElement('input');
+          input.setAttribute('class', 'delivery-number');
           input.setAttribute('type', 'text');
           input.setAttribute('value', code);
     const buttonText = document.createTextNode('조회');
@@ -69,6 +75,7 @@ class Delivery {
     }
 
     deliveryBox.appendChild(selectBox);
+    container.appendChild(labelInput);
     container.appendChild(deliveryBox);
     container.appendChild(input);
     container.appendChild(button);
@@ -89,9 +96,12 @@ class Delivery {
         const dIndex = container.dataset.dIndex;
         const apiTarget = DELIVERY_LIST[dIndex].name;
         const apiUrl = DELIVERY_LIST[dIndex].api;
-        const postNumber = e.target.previousElementSibling.value;
+        const postLabel = container.children[0].value;
+        const postNumber = container.children[2].value;
 
+        deliveryList[cIndex].idx = dIndex;
         deliveryList[cIndex].code = postNumber;
+        deliveryList[cIndex].label = postLabel;
         WebStorage.set(DELIVERY_DATA, deliveryList);
 
         if(apiTarget === '대신 택배') {
@@ -135,15 +145,13 @@ class Delivery {
       }
 
       if(tName === 'choice-delivery') {
-        const deliveryList = WebStorage.get(DELIVERY_DATA);
         const index = e.target.dataset.index;
+        const deliveryName = e.target.innerText;
         const deliveryBox = e.target.parentElement.previousSibling.parentElement.parentElement;
-        const cIndex = deliveryBox.dataset.cIndex;
+        const deliveryElement = e.target.parentElement.previousSibling;
 
         deliveryBox.dataset.dIndex = index;
-        deliveryList[cIndex].idx = index;
-        WebStorage.set(DELIVERY_DATA, deliveryList);
-        this.getStorageListData();
+        deliveryElement.innerHTML = deliveryName + ' <span>›</span>';
       }
 
     }, {
