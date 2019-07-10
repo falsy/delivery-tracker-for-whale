@@ -5,7 +5,7 @@
   "description": "간편하게 택배 배송을 조회합니다.",
   "icons": {
     "32": "src/imgs/delivery-32-v4.png",
-    "128": "src/imgs/delivery-128-v4.png"
+    "128": "src/imgs/delivery-128-v8.png"
   },
   "sidebar_action": {
     "default_page": "index.html",
