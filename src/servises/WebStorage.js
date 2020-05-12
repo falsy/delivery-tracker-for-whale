@@ -1,17 +1,25 @@
-export default class WebStorage {
-  static get(key) {
-    return JSON.parse(window.localStorage.getItem(key));
+class WebStorage {
+  
+  constructor() {
+    this.localStorage = window.localStorage;
   }
 
-  static set(key, value) {
-    window.localStorage.setItem(key, JSON.stringify(value));
+  get(key) {
+    return JSON.parse(this.localStorage.getItem(key));
   }
 
-  static clear() {
-    window.localStorage.clear();
+  set(key, value) {
+    this.localStorage.setItem(key, JSON.stringify(value));
   }
 
-  static remove(key) {
-    window.localStorage.removeItem(key);
+  clear() {
+    this.localStorage.clear();
   }
+
+  remove(key) {
+    this.localStorage.removeItem(key);
+  }
+
 }
+
+export default WebStorage;
