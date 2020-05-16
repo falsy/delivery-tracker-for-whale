@@ -25,7 +25,7 @@ class Delivery {
     }
 
     deliverydata.forEach((delivery, i) => {
-      if(!delivery.hasOwnProperty('label') || delivery.label === '') delivery.label = '라벨';
+      if(!delivery.hasOwnProperty('label') || delivery.label === '') delivery.label = '';
       this.deliveryList.appendChild(this.domElement.appendDeliveryList(delivery, i));
     });
 
@@ -33,40 +33,52 @@ class Delivery {
   }
 
   eventListener() {
-    this.body.addEventListener('click', (e) => {
+    this.body.addEventListener('click', async (e) => {
       const selectbox = document.getElementsByClassName('select-box-list');
       const tName = e.target.className;
 
       if(tName === 'delivery-btn') {
         const deliveryList = this.webStorage.get(DELIVERY_DATA);
-        const container = e.target.parentElement;
+        const container = e.target.parentElement.parentElement;
         const cIndex = container.dataset.cIndex;
         const dIndex = container.dataset.dIndex;
-        const apiTarget = DELIVERY_LIST[dIndex].name;
-        const apiUrl = DELIVERY_LIST[dIndex].api;
-        const postLabel = container.children[0].value;
-        const postNumber = container.children[2].value;
+        const carrierId = DELIVERY_LIST[dIndex].id;
+        const postLabel = container.children[1].value;
+        const postNumber = container.children[3].children[0].value;
 
         deliveryList[cIndex].idx = dIndex;
         deliveryList[cIndex].code = postNumber;
         deliveryList[cIndex].label = postLabel;
         this.webStorage.set(DELIVERY_DATA, deliveryList);
 
-        if(apiTarget === '대신 택배') {
-          const billno1 = '?billno1=' + String(postNumber).substring(0, 4);
-          const billno2 = '&billno2=' + String(postNumber).substring(4, 7);
-          const billno3 = '&billno3=' + String(postNumber).substring(7, 13);
+        if(container.children.length === 5) container.children[4].remove();
+        container.appendChild(this.domElement.appendDeliveryState());
+        const delivery = await this.remote.getDeliveray(carrierId, postNumber);
+        container.children[4].children[0].children[0].remove();
 
-          window.open(apiUrl+billno1+billno2+billno3, apiTarget, 'resizable=yes,scrollbars=yes,width=720,height=600');
+        if(typeof delivery.message !== 'undefined') {
+          container.children[4].children[0].appendChild(this.domElement.appendDeliveryError(delivery.message));
         } else {
-          window.open(apiUrl+postNumber, apiTarget, 'resizable=yes,scrollbars=yes,width=720,height=600');
+          container.children[4].children[0].appendChild(this.domElement.appendDeliveryStateDetail(delivery));
         }
+
+        return;
+      }
+
+      if(tName === 'delivery-state-close-btn') {
+          e.target.parentElement.remove();
+          return;
       }
 
       if(tName === 'select-box') {
         const display = e.target.nextElementSibling.style.display === 'none' ? 'block' : 'none';
-
         e.target.nextElementSibling.style.display = display;
+        for(const select of selectbox) {
+          if(select.style.display === 'block' && select !== e.target.nextElementSibling) {
+            select.style.display = 'none';
+          }
+        }
+        return;
       } else {
         for(const select of selectbox) {
           if(select.style.display === 'block') {
@@ -81,6 +93,7 @@ class Delivery {
         deliveryList.push(DELIVERY_INIT);
         this.webStorage.set(DELIVERY_DATA, deliveryList);
         this.getStorageListData();
+        return;
       }
 
       if(tName === 'delete-btn') {
@@ -90,6 +103,7 @@ class Delivery {
         deliveryList.splice(idx, 1);
         this.webStorage.set(DELIVERY_DATA, deliveryList);
         this.getStorageListData();
+        return;
       }
 
       if(tName === 'choice-delivery') {
@@ -100,6 +114,7 @@ class Delivery {
 
         deliveryBox.dataset.dIndex = index;
         deliveryElement.innerHTML = deliveryName + ' <span>›</span>';
+        return;
       }
 
     }, {
