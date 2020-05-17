@@ -32,6 +32,10 @@ class DomElement {
           input.setAttribute('type', 'text');
           input.setAttribute('placeholder', '운송장 번호를 입력해주세요.');
           input.setAttribute('value', code);
+    const buttonText2 = document.createTextNode('새창');
+    const button2 = document.createElement('button');
+          button2.className = 'delivery-btn-new-window';
+          button2.appendChild(buttonText2);
     const buttonText = document.createTextNode('조회');
     const button = document.createElement('button');
           button.className = 'delivery-btn';
@@ -39,6 +43,7 @@ class DomElement {
     const deliveryBox2 = document.createElement('div');
           deliveryBox2.className = 'delivery-code-box';
           deliveryBox2.appendChild(input);
+          deliveryBox2.appendChild(button2);
           deliveryBox2.appendChild(button);
     const closeText = document.createTextNode('×');
     const closeBtn = document.createElement('span');

@@ -68,6 +68,33 @@ class Delivery {
         return;
       }
 
+      if(tName === 'delivery-btn-new-window') {
+        const deliveryList = this.webStorage.get(DELIVERY_DATA);
+        const $target = $([e.target]);
+        const $container = $target.parents('.delivery-container');
+        const cIndex = $container.attr('data-c-index');
+        const dIndex = $container.attr('data-d-index');
+        const apiTarget = DELIVERY_LIST[dIndex].name;
+        const apiUrl = DELIVERY_LIST[dIndex].api;
+        const postLabel = $container.children('.delivery-label').el().value;
+        const postNumber = $container.children('.delivery-code-box').children('.delivery-number').el().value;
+
+        deliveryList[cIndex].idx = dIndex;
+        deliveryList[cIndex].code = postNumber;
+        deliveryList[cIndex].label = postLabel;
+        this.webStorage.set(DELIVERY_DATA, deliveryList);
+
+        if(apiTarget === '대신 택배') {
+          const billno1 = '?billno1=' + String(postNumber).substring(0, 4);
+          const billno2 = '&billno2=' + String(postNumber).substring(4, 7);
+          const billno3 = '&billno3=' + String(postNumber).substring(7, 13);
+
+          window.open(apiUrl+billno1+billno2+billno3, apiTarget, 'resizable=yes,scrollbars=yes,width=720,height=600');
+        } else {
+          window.open(apiUrl+postNumber, apiTarget, 'resizable=yes,scrollbars=yes,width=720,height=600');
+        }
+      }
+
       if(tName === 'delivery-state-close-btn') {
         const $target = $([e.target]);
         const $stateContainer = $target.parents('.delivery-state-container');
@@ -91,10 +118,16 @@ class Delivery {
 
       if(tName === 'add-delivery') {
         const deliveryList = this.webStorage.get(DELIVERY_DATA);
+        const deliveryListLen = deliveryList.length;
 
         deliveryList.push(DELIVERY_INIT);
         this.webStorage.set(DELIVERY_DATA, deliveryList);
-        this.getStorageListData();
+        this.$deliveryList.append(this.domElement.appendDeliveryList({
+          idx: 0, label: '', code: ''
+        }, deliveryListLen));
+        this.$deliveryList.children().forEach((el, i) => {
+          el.attr('data-c-index', i);
+        });
         return;
       }
 
@@ -104,10 +137,12 @@ class Delivery {
         const idx = Number($container.attr('data-c-index'));
         
         const deliveryList = this.webStorage.get(DELIVERY_DATA);
-
         deliveryList.splice(idx, 1);
         this.webStorage.set(DELIVERY_DATA, deliveryList);
-        this.getStorageListData();
+        this.$deliveryList.children().el(idx).remove();
+        this.$deliveryList.children().forEach((el, i) => {
+          el.attr('data-c-index', i);
+        });
         return;
       }
 

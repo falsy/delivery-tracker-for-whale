@@ -218,8 +218,8 @@ class DomScript {
   }
 
   forEach(callback) {
-    this.element.forEach(el => {
-      callback(new this.constructor([el]));
+    this.element.forEach((el, i) => {
+      callback(new this.constructor([el]), i);
     });
     return this;
   }
