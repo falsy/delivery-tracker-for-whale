@@ -1,5 +1,5 @@
 import { DELIVERY_LIST } from '../constants/index.js';
-import DateFormat from '../utils/dateFormat.js';
+import DateFormat from '../utils/DateFormat.js';
 
 class DomElement {
 
