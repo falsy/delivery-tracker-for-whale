@@ -1,4 +1,5 @@
 import { POST_NUMBER, DELIVERY_INIT, DELIVERY_DATA, DELIVERY_LIST } from '../constants/index.js';
+import $ from '../utils/DomScript.js';
 
 class Delivery {
 
@@ -7,8 +8,8 @@ class Delivery {
     this.webStorage = webStorage;
     this.domElement = domElement;
 
-    this.body = document.body;
-    this.deliveryList = document.getElementById('delivery-list-container');
+    this.$document = $(document);
+    this.$deliveryList = $('#delivery-list-container');
 
     this.getStorageListData();
     this.eventListener();
@@ -20,71 +21,72 @@ class Delivery {
     let deliverydata = this.webStorage.get(DELIVERY_DATA);
         deliverydata = deliverydata && deliverydata.length  ? deliverydata : [ DELIVERY_INIT ];
 
-    while(this.deliveryList.firstChild) {
-      this.deliveryList.removeChild(this.deliveryList.firstChild);
-    }
+    this.$deliveryList.removeAllChild();
 
     deliverydata.forEach((delivery, i) => {
       if(!delivery.hasOwnProperty('label') || delivery.label === '') delivery.label = '';
-      this.deliveryList.appendChild(this.domElement.appendDeliveryList(delivery, i));
+      this.$deliveryList.append(this.domElement.appendDeliveryList(delivery, i));
     });
 
     this.webStorage.set(DELIVERY_DATA, deliverydata);
   }
 
   eventListener() {
-    this.body.addEventListener('click', async (e) => {
-      const selectbox = document.getElementsByClassName('select-box-list');
+    this.$document.event('click', async (e) => {
       const tName = e.target.className;
 
       if(tName === 'delivery-btn') {
         const deliveryList = this.webStorage.get(DELIVERY_DATA);
-        const container = e.target.parentElement.parentElement;
-        const cIndex = container.dataset.cIndex;
-        const dIndex = container.dataset.dIndex;
+        const $target = $([e.target]);
+        const $container = $target.parents('.delivery-container');
+        const cIndex = $container.attr('data-c-index');
+        const dIndex = $container.attr('data-d-index');
         const carrierId = DELIVERY_LIST[dIndex].id;
-        const postLabel = container.children[1].value;
-        const postNumber = container.children[3].children[0].value;
+        const postLabel = $container.children('.delivery-label').el().value;
+        const postNumber = $container.children('.delivery-code-box').children('.delivery-number').el().value;
 
         deliveryList[cIndex].idx = dIndex;
         deliveryList[cIndex].code = postNumber;
         deliveryList[cIndex].label = postLabel;
         this.webStorage.set(DELIVERY_DATA, deliveryList);
 
-        if(container.children.length === 5) container.children[4].remove();
-        container.appendChild(this.domElement.appendDeliveryState());
+        if($container.children('.delivery-state-container').length() > 0) {
+          $container.children('.delivery-state-container').el().remove();
+        }
+        $container.append(this.domElement.appendDeliveryState());
+        
         const delivery = await this.remote.getDeliveray(carrierId, postNumber);
-        container.children[4].children[0].children[0].remove();
+        const $deliveryState = $container.children('.delivery-state-container');
+
+        $deliveryState.children('.delivery-content-area').children('.loading').el().remove();
 
         if(typeof delivery.message !== 'undefined') {
-          container.children[4].children[0].appendChild(this.domElement.appendDeliveryError(delivery.message));
+          $deliveryState.children('.delivery-content-area').append(this.domElement.appendDeliveryError(delivery.message));
         } else {
-          container.children[4].children[0].appendChild(this.domElement.appendDeliveryStateDetail(delivery));
+          $deliveryState.children('.delivery-content-area').append(this.domElement.appendDeliveryStateDetail(delivery));
         }
-
         return;
       }
 
       if(tName === 'delivery-state-close-btn') {
-          e.target.parentElement.remove();
-          return;
+        const $target = $([e.target]);
+        const $stateContainer = $target.parents('.delivery-state-container');
+
+        $stateContainer.el().remove();
+        return;
       }
 
       if(tName === 'select-box') {
-        const display = e.target.nextElementSibling.style.display === 'none' ? 'block' : 'none';
-        e.target.nextElementSibling.style.display = display;
-        for(const select of selectbox) {
-          if(select.style.display === 'block' && select !== e.target.nextElementSibling) {
-            select.style.display = 'none';
-          }
-        }
+        const $target = $([e.target]);
+        const $selectBox = $target.next();
+
+        $selectBox.style('display', $selectBox.style('display') === 'none' ? 'block' : 'none');
+        $('.select-box-list').forEach((el) => {
+          if(el.el() !== $selectBox.el()) el.style('display', 'none');
+        });
         return;
       } else {
-        for(const select of selectbox) {
-          if(select.style.display === 'block') {
-            select.style.display = 'none';
-          }
-        }
+        $('.select-box-list').style('display', 'none');
       }
 
       if(tName === 'add-delivery') {
@@ -97,7 +99,10 @@ class Delivery {
       }
 
       if(tName === 'delete-btn') {
-        const idx = Number(e.target.parentElement.dataset.cIndex);
+        const $target = $([e.target]);
+        const $container = $target.parents('.delivery-container');
+        const idx = Number($container.attr('data-c-index'));
+        
         const deliveryList = this.webStorage.get(DELIVERY_DATA);
 
         deliveryList.splice(idx, 1);
@@ -107,13 +112,14 @@ class Delivery {
       }
 
       if(tName === 'choice-delivery') {
-        const index = e.target.dataset.index;
-        const deliveryName = e.target.innerText;
-        const deliveryBox = e.target.parentElement.previousSibling.parentElement.parentElement;
-        const deliveryElement = e.target.parentElement.previousSibling;
+        const $target = $([e.target]);
+        const index = $target.attr('data-index');
+        const deliveryName = $target.text();
+        const $container = $target.parents('.delivery-container');
+        const $textElement = $target.parent().prev();
 
-        deliveryBox.dataset.dIndex = index;
-        deliveryElement.innerHTML = deliveryName + ' <span>›</span>';
+        $container.attr('data-d-index', index);
+        $textElement.html(deliveryName + ' <span>›</span>');
         return;
       }
 

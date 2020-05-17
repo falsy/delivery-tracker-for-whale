@@ -14,7 +14,7 @@ class DomScript {
     }
 
     if(typeof element === 'string') {
-      this.element = Util.select(element);
+      this.element = this.select(element);
     }
   }
 
@@ -81,7 +81,7 @@ class DomScript {
 
   //
 
-  el(idx) {
+  el(idx=0) {
     return this.element[idx];
   }
 
@@ -189,7 +189,7 @@ class DomScript {
   }
 
   html(htmlValue=null) {
-    if(htmlValue === null) return this.oneSelect.call(this).innerHTML;
+    if(htmlValue === null) return this.oneSelect().innerHTML;
     this.element.forEach(el => {
       el.innerHTML = this.finishValue(htmlValue);
     });
@@ -197,7 +197,7 @@ class DomScript {
   }
 
   text(textValue=null) {
-    if(textValue === null) return this.oneSelect.call(this).innerText;
+    if(textValue === null) return this.oneSelect().innerText;
     this.element.forEach(el => {
       el.innerText = this.finishValue(textValue);
     });
@@ -205,11 +205,27 @@ class DomScript {
   }
 
   removeAllChild() {
-    const el = this.oneSelect.call(this);
+    const el = this.oneSelect();
     while(el.firstChild) {
       el.removeChild(el.firstChild);
     }
     return this;
   }
 
+  append(element) {
+    const el = this.oneSelect();
+    el.appendChild(element);
+  }
+
+  forEach(callback) {
+    this.element.forEach(el => {
+      callback(new this.constructor([el]));
+    });
+    return this;
+  }
+
 }
+
+export default (element) => {
+  return new DomScript(element);
+};
