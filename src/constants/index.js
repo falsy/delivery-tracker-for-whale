@@ -1,5 +1,5 @@
 export const POST_NUMBER = 'POST_NUMBER';
-export const DELIVERY_INIT = { idx : 0, code: '' };
+export const DELIVERY_INIT = { idx : 0, label: '', code: '', isInline: 'false' };
 export const DELIVERY_DATA = 'DELIVERY_DATA';
 export const DELIVERY_LIST = [{
     id: 'kr.epost',
@@ -56,4 +56,13 @@ export const DELIVERY_LIST = [{
     label: '',
     name: '국제우편(EMS)',
     api: 'https://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?displayHeader=N&POST_CODE='
+  }, {
+    id: "us.fedex",
+    name: "Fedex"
+  }, {
+    id: "nl.tnt",
+    name: "TNT"
+  }, {
+    id: "us.ups",
+    name: "UPS"
   }];

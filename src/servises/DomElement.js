@@ -4,11 +4,13 @@ import DateFormat from '../utils/DateFormat.js';
 class DomElement {
 
   appendDeliveryList(deliveryData, i) {
-    const { idx, label, code } = deliveryData;
+    const { idx, label, code, isInline } = deliveryData;
     const container = document.createElement('div');
           container.className = 'delivery-container';
           container.setAttribute('data-d-Index', idx);
           container.setAttribute('data-c-Index', i);
+          container.setAttribute('data-is-inline', isInline);
+          if(isInline === 'true') container.classList.add('only-inline');
     const arrowText = document.createTextNode('›');
     const arrow = document.createElement('span');
           arrow.appendChild(arrowText);
@@ -55,6 +57,11 @@ class DomElement {
       const list = document.createElement('li');
             list.className = 'choice-delivery';
             list.setAttribute('data-index', i);
+            if(typeof DELIVERY_LIST[i].api === 'undefined') {
+              list.setAttribute('data-is-inline', 'true');
+            } else {
+              list.setAttribute('data-is-inline', 'false');
+            }
       const deliveryText = document.createTextNode(DELIVERY_LIST[i].name);
       list.appendChild(deliveryText);
       selectBox.appendChild(list);
@@ -101,6 +108,9 @@ class DomElement {
 
   appendDeliveryStateDetail(delivery) {
     const deliveryStateList = document.createElement('div');
+    const from = delivery.from.name ? delivery.from.name : delivery.from.address;
+    let to = delivery.to.name ? delivery.to.name : delivery.to.address;
+        to = typeof to === 'object' ? to.name : to;
     let summaryMarkUp = `
       <div class="delivery-summary">
         <table>
@@ -113,8 +123,8 @@ class DomElement {
           </thead>
           <tbody>
             <tr>
-              <td>${delivery.from.name}</td>
-              <td>${delivery.to.name}</td>
+              <td>${from}</td>
+              <td>${to}</td>
               <td>${delivery.state.text}</td>
             </tr>
           </tbody>
@@ -140,8 +150,8 @@ class DomElement {
             <p>${year}-${month}-${day}<br />${hour}:${minute}:${second}</p>
           </td>
           <td>
-            <p>[${state.location.name.trim()}]</p>
-            <p>${state.description}</p>
+            ${state.location.name ? `<p>[${state.location.name.trim()}]</p>` : ''}
+            ${state.description ? `<p>${state.description}</p>` : ''}
           </td>
         </tr>
       `;
