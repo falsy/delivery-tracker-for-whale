@@ -138,6 +138,14 @@ ul li:hover {
 	background: #fff;
 }
 
+#delivery-list-container .delivery-container.only-inline .delivery-btn-new-window {
+	display: none;
+}
+
+#delivery-list-container .delivery-container.only-inline .delivery-number {
+	width: 80%;
+}
+
 #delivery-list-container .delivery-label {
 	line-height: 20px;
 	margin: 0 0 10px;
@@ -154,14 +162,14 @@ ul li:hover {
   margin: 0;
   padding: 0 15px;
   border: 1px solid #ddd;
-  /* border-right: 1px solid #05c38b; */
+  border-right: 0;
   font-size: 14px;
   outline: none;
 }
 
 #delivery-list-container .delivery-btn-new-window {
 	border: 1px solid #ddd;
-	border-left: 0;
+	/* border-left: 0; */
 	border-right: 0;
   line-height: 40px;
   padding: 0;

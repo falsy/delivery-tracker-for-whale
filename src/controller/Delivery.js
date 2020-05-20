@@ -19,12 +19,13 @@ class Delivery {
 
   getStorageListData() {
     let deliverydata = this.webStorage.get(DELIVERY_DATA);
-        deliverydata = deliverydata && deliverydata.length  ? deliverydata : [ DELIVERY_INIT ];
+        deliverydata = deliverydata && deliverydata.length ? deliverydata : [ DELIVERY_INIT ];
 
     this.$deliveryList.removeAllChild();
 
     deliverydata.forEach((delivery, i) => {
       if(!delivery.hasOwnProperty('label') || delivery.label === '') delivery.label = '';
+      if(!delivery.hasOwnProperty('isInline') || delivery.isInline === '') delivery.isInline = 'false'; 
       this.$deliveryList.append(this.domElement.appendDeliveryList(delivery, i));
     });
 
@@ -41,6 +42,7 @@ class Delivery {
         const $container = $target.parents('.delivery-container');
         const cIndex = $container.attr('data-c-index');
         const dIndex = $container.attr('data-d-index');
+        const dIsInline = $container.attr('data-is-inline');
         const carrierId = DELIVERY_LIST[dIndex].id;
         const postLabel = $container.children('.delivery-label').el().value;
         const postNumber = $container.children('.delivery-code-box').children('.delivery-number').el().value;
@@ -48,6 +50,7 @@ class Delivery {
         deliveryList[cIndex].idx = dIndex;
         deliveryList[cIndex].code = postNumber;
         deliveryList[cIndex].label = postLabel;
+        deliveryList[cIndex].isInline = dIsInline;
         this.webStorage.set(DELIVERY_DATA, deliveryList);
 
         if($container.children('.delivery-state-container').length() > 0) {
@@ -74,6 +77,7 @@ class Delivery {
         const $container = $target.parents('.delivery-container');
         const cIndex = $container.attr('data-c-index');
         const dIndex = $container.attr('data-d-index');
+        const dIsInline = $container.attr('data-is-inline');
         const apiTarget = DELIVERY_LIST[dIndex].name;
         const apiUrl = DELIVERY_LIST[dIndex].api;
         const postLabel = $container.children('.delivery-label').el().value;
@@ -82,6 +86,7 @@ class Delivery {
         deliveryList[cIndex].idx = dIndex;
         deliveryList[cIndex].code = postNumber;
         deliveryList[cIndex].label = postLabel;
+        deliveryList[cIndex].isInline = dIsInline;
         this.webStorage.set(DELIVERY_DATA, deliveryList);
 
         if(apiTarget === '대신 택배') {
@@ -123,7 +128,7 @@ class Delivery {
         deliveryList.push(DELIVERY_INIT);
         this.webStorage.set(DELIVERY_DATA, deliveryList);
         this.$deliveryList.append(this.domElement.appendDeliveryList({
-          idx: 0, label: '', code: ''
+          idx: 0, label: '', code: '', isInline: 'false'
         }, deliveryListLen));
         this.$deliveryList.children().forEach((el, i) => {
           el.attr('data-c-index', i);
@@ -149,12 +154,20 @@ class Delivery {
       if(tName === 'choice-delivery') {
         const $target = $([e.target]);
         const index = $target.attr('data-index');
+        const isOnlyInline = $target.attr('data-is-inline');
         const deliveryName = $target.text();
         const $container = $target.parents('.delivery-container');
         const $textElement = $target.parent().prev();
+        if(isOnlyInline === 'true') {
+          $container.addClass('only-inline');
+        } else {
+          $container.removeClass('only-inline');
+        }
 
+        $container.attr('data-is-inline', isOnlyInline);
         $container.attr('data-d-index', index);
         $textElement.html(deliveryName + ' <span>›</span>');
+        
         return;
       }
 
