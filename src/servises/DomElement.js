@@ -140,7 +140,7 @@ class DomElement {
           </thead>
           <tbody>
     `;
-
+    delivery.progresses.reverse();
     delivery.progresses.forEach(state => {
       const { year, month, day, hour, minute, second } = DateFormat.convert(state.time);
       summaryMarkUp += `
