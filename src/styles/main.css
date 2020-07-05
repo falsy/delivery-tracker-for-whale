@@ -138,18 +138,38 @@ ul li:hover {
 	background: #fff;
 }
 
+#delivery-list-container .delivery-container.only-inline .delivery-number, 
+#delivery-list-container .delivery-container.only-window .delivery-number {
+	width: 80%;
+}
+
+
 #delivery-list-container .delivery-container.only-inline .delivery-btn-new-window {
 	display: none;
 }
 
-#delivery-list-container .delivery-container.only-inline .delivery-number {
-	width: 80%;
+#delivery-list-container .delivery-container.only-window .delivery-btn {
+	display: none;
+}
+
+#delivery-list-container .delivery-container.only-inline .delivery-btn,
+#delivery-list-container .delivery-container.only-window .delivery-btn-new-window {
+	border: 1px solid #05c38b;
+  line-height: 40px;
+  padding: 0;
+  background: #00dc9b;
+  color: #fff;
+  width: 20%;
+  font-size: 13px;
+	cursor: pointer;
+	text-shadow: 0px 0px 2px #05c38b;
+	letter-spacing: 1px;
 }
 
 #delivery-list-container .delivery-label {
 	line-height: 20px;
 	margin: 0 0 10px;
-	width: 240px;
+	width: 100%;
 	font-size: 13px;
 	padding: 0 2px;
 	border: 0;
@@ -169,7 +189,6 @@ ul li:hover {
 
 #delivery-list-container .delivery-btn-new-window {
 	border: 1px solid #ddd;
-	/* border-left: 0; */
 	border-right: 0;
   line-height: 40px;
   padding: 0;
@@ -177,13 +196,11 @@ ul li:hover {
   font-size: 13px;
 	cursor: pointer;
 	letter-spacing: 1px;
-	/* font-weight: 600; */
 	background: #f5f5f5;
 }
 
 #delivery-list-container .delivery-btn  {
   border: 1px solid #05c38b;
-  /* border-left: 0; */
   line-height: 40px;
   padding: 0;
   background: #00dc9b;
@@ -193,7 +210,6 @@ ul li:hover {
 	cursor: pointer;
 	text-shadow: 0px 0px 2px #05c38b;
 	letter-spacing: 1px;
-	/* font-weight: 600; */
 }
 
 #delivery-list-container .delivery-state-container {
@@ -311,7 +327,24 @@ ul li:hover {
 }
 
 #tip-message p {
-	margin: 5px 0;
+	margin: 4px 0;
+	line-height: 18px;
+	padding-left: 10px;
+	position: relative;
+}
+
+#tip-message p::before {
+	content: '*';
+	position: absolute;
+	left: 0;
+}
+
+#tip-message p .clear-storage-btn {
+	display: inline-block;
+	color: #05c38b;
+	font-weight: bold;
+	padding: 0 2px;
+	cursor: pointer;
 }
 
 footer {

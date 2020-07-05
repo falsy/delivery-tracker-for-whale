@@ -4,17 +4,19 @@ import DateFormat from '../utils/DateFormat.js';
 class DomElement {
 
   appendDeliveryList(deliveryData, i) {
-    const { idx, label, code, isInline } = deliveryData;
+    const { uid, label, code, isInline, isWindow} = deliveryData;
     const container = document.createElement('div');
           container.className = 'delivery-container';
-          container.setAttribute('data-d-Index', idx);
+          container.setAttribute('data-d-uid', uid);
           container.setAttribute('data-c-Index', i);
           container.setAttribute('data-is-inline', isInline);
-          if(isInline === 'true') container.classList.add('only-inline');
+          container.setAttribute('data-is-window', isWindow);
+          if(isInline === 'true' || isInline === true) container.classList.add('only-inline');
+          if(isWindow === 'true' || isWindow === true) container.classList.add('only-window');
     const arrowText = document.createTextNode('›');
     const arrow = document.createElement('span');
           arrow.appendChild(arrowText);
-    const deliveryText = document.createTextNode(DELIVERY_LIST[idx].name);
+    const deliveryText = document.createTextNode(DELIVERY_LIST.filter(d => d.uid === uid)[0].name);
     const delivery = document.createElement('p');
           delivery.className = 'select-box';
           delivery.appendChild(deliveryText);
@@ -23,7 +25,7 @@ class DomElement {
           deliveryBox.appendChild(delivery);
     const labelInput = document.createElement('input');
           labelInput.setAttribute('class', 'delivery-label');
-          labelInput.setAttribute('placeholder', '이곳에 배송에 대한 정보를 적을 수 있어요.');
+          labelInput.setAttribute('placeholder', '배송에 대한 간단한 메모를 적을 수 있어요.');
           labelInput.setAttribute('type', 'text');
           labelInput.setAttribute('value', label);
     const selectBox = document.createElement('ul');
@@ -56,12 +58,10 @@ class DomElement {
     for(let i=0; i<DELIVERY_LIST.length; i++) {
       const list = document.createElement('li');
             list.className = 'choice-delivery';
-            list.setAttribute('data-index', i);
-            if(typeof DELIVERY_LIST[i].api === 'undefined') {
-              list.setAttribute('data-is-inline', 'true');
-            } else {
-              list.setAttribute('data-is-inline', 'false');
-            }
+            list.setAttribute('data-d-uid', DELIVERY_LIST[i].uid);
+            list.setAttribute('data-is-inline', DELIVERY_LIST[i].api === '');
+            list.setAttribute('data-is-window', DELIVERY_LIST[i].isWindow);
+            
       const deliveryText = document.createTextNode(DELIVERY_LIST[i].name);
       list.appendChild(deliveryText);
       selectBox.appendChild(list);
