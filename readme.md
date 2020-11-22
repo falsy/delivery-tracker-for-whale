@@ -40,3 +40,6 @@ http://www.ilyanglogis.com/functionality/card_form_waybill.asp?hawb_no=
 ![Capture](/src/imgs/screenshot-1.png)
 ![Capture](/src/imgs/screenshot-2.png)
 ![Capture](/src/imgs/screenshot-3.png)
+
+### Version
+v1.7.0
