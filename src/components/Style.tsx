@@ -39,6 +39,36 @@ const Style: React.FC = () => {
       a:hover {
         text-decoration: underline;
       }
+
+      button {
+        cursor: pointer;
+        outline: none;
+      }
+      
+      table {
+        table-layout: fixed;
+        width: 100%;
+        text-align: center;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        border-spacing: 0;
+        font-size: 13px;
+      }
+      
+      th, td {
+        border-left: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+      }
+      
+      th {
+        background: #f5f5f5;
+        line-height: 34px;
+      }
+      
+      td {
+        line-height: 20px;
+        padding: 5px;
+      }
     `} />
   )
 }

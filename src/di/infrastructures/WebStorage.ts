@@ -1,4 +1,4 @@
-import { DELIVERY_DATA } from "../../constants"
+import { DELIVERY_DATA, DELIVERY_INIT } from "../../constants"
 import DeliveryDTO, { IDeliveryDTO, IDeliveryParams } from "../dto/DeliveryDTO"
 import { IWebStorage } from "./interfaces/webStorage"
 
@@ -16,7 +16,7 @@ class WebStorage implements IWebStorage {
 
   getDelivery(): Array<IDeliveryDTO> {
     if(this.local.getItem(DELIVERY_DATA) === null ) {
-     return [new DeliveryDTO({ uid: 1, label: '', code: '', isInline: true, isWindow: true })]
+     return [new DeliveryDTO(DELIVERY_INIT)]
     }
 
     try {
@@ -24,7 +24,7 @@ class WebStorage implements IWebStorage {
       return deliveryData.map((data: IDeliveryParams) => new DeliveryDTO(data))
     } catch(e) {
       console.log(e)
-      return [new DeliveryDTO({ uid: 1, label: '', code: '', isInline: true, isWindow: true })]
+      return [new DeliveryDTO(DELIVERY_INIT)]
     }
   }
 

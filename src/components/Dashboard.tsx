@@ -1,8 +1,11 @@
 import * as React from 'react'
+import { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import Footer from './Footer'
 import TipMessage from './TipMessage'
 import Delivery from './Delivery'
+
+import ctrl from '../di'
 
 const S_Title = styled.h1`
   font-size: 18px;
@@ -13,14 +16,21 @@ const S_Title = styled.h1`
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
   color: #000;
   line-height: 49px;
-`;
+`
 
 const Dashboard: React.FC = () => {
+  
+  const [deliveryList, setDeliveryList] = useState([])
+
+  useEffect(() => {
+    setDeliveryList(ctrl.getDelivery())
+  }, [])
+
   return (
     <>
       <S_Title>택배 배송 조회</S_Title>
-      <Delivery />
-      <TipMessage />
+      <Delivery deliveryList={deliveryList} setDeliveryList={setDeliveryList} />
+      <TipMessage setDeliveryList={setDeliveryList} />
       <Footer />
     </>
   )

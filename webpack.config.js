@@ -1,5 +1,5 @@
-const HTMLWeebPackPlugin = require("html-webpack-plugin");
-const path = require("path");
+const HTMLWeebPackPlugin = require("html-webpack-plugin")
+const path = require("path")
 
 module.exports = (env, options) => {
   return {
@@ -23,4 +23,4 @@ module.exports = (env, options) => {
       }),
     ]
   }
-};
+}

@@ -1,6 +1,5 @@
-export const POST_NUMBER = 'POST_NUMBER'
 export const DELIVERY_DATA = 'DELIVERY_DATA'
-export const DELIVERY_INIT = { uid: '1', label: '', code: '', isInline: 'false', isWindow: 'false' }
+export const DELIVERY_INIT = { uid: 1, label: '', code: '', isInline: true, isWindow: true }
 export const DELIVERY_LIST = [{
     uid: 1,
     id: 'kr.epost',
@@ -76,8 +75,8 @@ export const DELIVERY_LIST = [{
     id: '	un.upu.ems',
     name: '국제우편(EMS)',
     api: 'https://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?displayHeader=N&POST_CODE=',
-    isInline: true,
-    isWindow: false
+    isInline: false,
+    isWindow: true
   }, {
     uid: 12,
     id: "us.fedex",
