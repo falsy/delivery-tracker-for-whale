@@ -212,6 +212,7 @@ const Delivery: React.FC<IProps> = ({ deliveryList, setDeliveryList }) => {
 
   const handleClickNewWindowDelivery = (deliveryData: IDeliveryParams) => {
     const { code, uid: targetUid } = deliveryData
+    if(code === '') return alert('운송장 번호를 입력해 주세요.')
     const { uid, name, api } = DELIVERY_LIST.filter(d => d.uid === targetUid)[0]
     
     if(uid === 9) {
@@ -225,6 +226,7 @@ const Delivery: React.FC<IProps> = ({ deliveryList, setDeliveryList }) => {
   }
 
   const handleClickInlineDelivery = (idx: number) => {
+    if(deliveryList[idx].code === '') return alert('운송장 번호를 입력해 주세요.')
     setInlineDeliveryShowIdx(0)
     setInlineDeliveryShowIdx(idx + 1)
   }
