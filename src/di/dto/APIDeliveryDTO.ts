@@ -60,12 +60,18 @@ class DState implements IDState {
 }
 
 class DList implements IDList {
-  constructor(
-    readonly description: string,
-    readonly location: { name: string },
-    readonly status: { id: string, text: string },
-    readonly time: string
-  ) {}
+
+  readonly description: string
+  readonly location: { name: string }
+  readonly status: { id: string, text: string }
+  readonly time: string
+
+  constructor(description: string, location: { name: string }, time: string, status?: { id: string, text: string }) {
+    this.description = description
+    this.location = { name: location.name }
+    this.status = status ? { id: status.id, text: status.text } : { id: '', text: '' }
+    this.time = time;
+  }
 }
 
 export interface IAPIDeliveryParams {
@@ -97,7 +103,7 @@ class APIDeliveryDTO implements IAPIDeliveryDTO {
     this.carrier = new DCarrier(carrier.id, carrier.name, carrier.tel)
     this.from = new DFrom(from.name || from.address, from.time)
     this.progresses = progresses.map(list => {
-      return new DList(list.description, list.location, list.status, list.time)
+      return new DList(list.description, list.location, list.time, list?.status)
     }).reverse()
     this.state = new DState(state.id, state.text)
     this.to = new DTo(to.name || to.address, to.time)

@@ -119,9 +119,9 @@ const DeliveryState: React.FC<IProps> = ({ deliveryId, deliveryCode, closeFnc })
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{deliveryState.from.name}</td>
-                    <td>{deliveryState.to.name}</td>
-                    <td>{deliveryState.state.text}</td>
+                    <td>{deliveryState?.from?.name !== 'undefined' && deliveryState.from.name}</td>
+                    <td>{deliveryState?.to?.name !== 'undefined' && deliveryState.to.name}</td>
+                    <td>{deliveryState?.state?.text !== 'undefined' && deliveryState.state.text}</td>
                   </tr>
                 </tbody>
               </table>
@@ -136,7 +136,6 @@ const DeliveryState: React.FC<IProps> = ({ deliveryId, deliveryCode, closeFnc })
                 </thead>
                 <tbody>
                   {deliveryState.progresses.map(state => {
-                    
                     const dateFormat = new Date(state.time)
                     const year = dateFormat.getFullYear()
                     const month = String(dateFormat.getMonth() + 1).length === 1 ? '0' + (dateFormat.getMonth() + 1) : dateFormat.getMonth() + 1
@@ -148,12 +147,12 @@ const DeliveryState: React.FC<IProps> = ({ deliveryId, deliveryCode, closeFnc })
                     return (
                       <tr>
                         <td>
-                          <p>[{state.status.text.trim()}]</p>
+                          <p>[{state?.status?.text !== 'undefined' && state.status.text.trim()}]</p>
                           <p>{year}-{month}-{date}<br />{hour}:{minute}:{second}</p>
                         </td>
                         <td>
-                          { state.location.name && <p>[{state.location.name.trim()}]</p> }
-                          { state.description && <p>{state.description}</p>}
+                          { state?.location?.name !== 'undefined' && <p>[{state.location.name.trim()}]</p> }
+                          { state?.description !== 'undefined' && <p>{state?.description}</p>}
                         </td>
                       </tr>
                     )

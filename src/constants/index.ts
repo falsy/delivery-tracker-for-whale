@@ -91,11 +91,13 @@ export const DELIVERY_LIST = [{
     api: '',
     isInline: true,
     isWindow: false
-  }, {
-    uid: 14,
-    id: "us.ups",
-    name: "UPS",
-    api: '',
-    isInline: true,
-    isWindow: false
   }]
+
+  // , {
+  //   uid: 14,
+  //   id: "us.ups",
+  //   name: "UPS",
+  //   api: '',
+  //   isInline: true,
+  //   isWindow: false
+  // }
