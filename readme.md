@@ -21,7 +21,7 @@ https://service.epost.go.kr/trace.RetrieveEmsRigiTraceList.comm?displayHeader=N&
 * CJ 대한통운
 http://nplus.doortodoor.co.kr/web/detail.jsp?slipno=
 * 한진 택배
-https://www.hanjin.co.kr/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnum=
+http://www.hanjinexpress.hanjin.net/customer/hddcw18.tracking?w_num=
 * 롯데 택배
 https://www.lotteglogis.com/open/tracking?invno=
 * 로젠 택배
