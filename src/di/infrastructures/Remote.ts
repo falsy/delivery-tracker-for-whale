@@ -4,7 +4,7 @@ import { IRemote } from "./interfaces/remote"
 class Remote implements IRemote {
 
   async getDeliveray(id: string, code: string): Promise<IAPIDeliveryDTO | string> {
-    const deliveryData = await fetch(`https://apis.tracker.delivery/carriers/${id}/tracks/${code}`, {
+    const deliveryData = await fetch(`https://tracker.falsy.me/carriers/${id}/tracks/${code}`, {
       method: 'GET'
     }).then(res => res.json())
 

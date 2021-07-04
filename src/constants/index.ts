@@ -19,7 +19,7 @@ export const DELIVERY_LIST = [{
     id: 'kr.hanjin',
     name: '한진 택배',
     api: 'https://www.hanjin.co.kr/kor/CMS/DeliveryMgr/WaybillResult.do?mCode=MN038&schLang=KR&wblnum=',
-    isInline: true,
+    isInline: false,
     isWindow: true
   }, {
     uid: 4,
