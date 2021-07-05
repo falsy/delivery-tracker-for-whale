@@ -4,10 +4,8 @@
 
 ### 택배 배송 조회 API
 
-사이드바 내에서의 배송 조회는 'tracker.delivery'에서 제공하는 API를 사용합니다.
-
-- tracker.delivery - [Github](https://github.com/shlee322/delivery-tracker)
-- tracker.delivery - [Guide](https://tracker.delivery/guide/)
+사이드바 내에서의 배송 조회는 'tracker.delivery([Github](https://github.com/shlee322/delivery-tracker))'에서 제공하는 API를 기반으로 사용합니다.  
+사용 중인 API 서버 코드 - ([Github](https://github.com/falsy/delivery-tracker))
 
 ### 택배 배송 조회 참고 URI
 
