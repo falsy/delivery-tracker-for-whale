@@ -39,9 +39,7 @@ const TipMessage: React.FC<IProps> = ({ setDeliveryList }) => {
 
   return (
     <S_TipMessageArea>
-      <p>'<a href="https://github.com/shlee322/delivery-tracker" target="_blank">Delivery Tracker</a>'에서 제공하는 API를 사용합니다.</p>
-      <p>'조회'가 되지 않는 경우 '새창'을 통해 확인하실 수 있습니다.</p>
-      <p>업데이트로 인해 정상 동작하지 않을 경우 <span onClick={handleClickReset}>'이곳'</span>을 눌러 데이터를<br />초기화 후 이용해주세요.</p>
+      <p>업데이트로 인해 정상 동작하지 않을 경우 <span onClick={handleClickReset}>'이곳'</span>을 눌러<br />데이터를 초기화하신 후 이용해 주세요.</p>
     </S_TipMessageArea>
   )
 }

@@ -61,8 +61,8 @@ export const DELIVERY_LIST = [{
     id: '	kr.daesin',
     name: '대신 택배',
     api: 'http://home.daesinlogistics.co.kr/daesin/jsp/d_freight_chase/d_general_process2.jsp',
-    isInline: false,
-    isWindow: true
+    isInline: true,
+    isWindow: false
   }, {
     uid: 10,
     id: '	kr.ilyanglogis',
