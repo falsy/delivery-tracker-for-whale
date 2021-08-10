@@ -4,8 +4,8 @@
 
 ### 택배 배송 조회 API
 
-사이드바 내에서의 배송 조회는 'tracker.delivery([Github](https://github.com/shlee322/delivery-tracker))'에서 제공하는 API를 기반으로 사용합니다.  
-사용 중인 API 서버 코드 - ([Github](https://github.com/falsy/delivery-tracker))
+사이드바 내에서의 배송 조회는 'tracker.delivery([Github](https://github.com/shlee322/delivery-tracker))'의 코드를 기반으로 일부 수정하여 개인 서버를 통해 운영하고 있습니다.  
+(현재 사용 중인 API 서버 코드 - ([Github](https://github.com/falsy/delivery-tracker)))
 
 ### 택배 배송 조회 참고 URI
 
@@ -32,8 +32,6 @@ http://www.cvsnet.co.kr/reservation-inquiry/delivery/index.do?dlvry_type=domesti
 https://www.cupost.co.kr/postbox/delivery/localResult.cupost?invoice_no=
 * 경동 택배
 http://kdexp.com/basicNewDelivery.kd?barcode=
-* 대신 택배
-http://home.daesinlogistics.co.kr/daesin/jsp/d_freight_chase/d_general_process2.jsp
 * 일양로지스
 http://www.ilyanglogis.com/functionality/card_form_waybill.asp?hawb_no=
 ```
