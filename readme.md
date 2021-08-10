@@ -46,4 +46,4 @@ http://www.ilyanglogis.com/functionality/card_form_waybill.asp?hawb_no=
 
 ### Version
 
-v1.7.3
+v1.7.4
