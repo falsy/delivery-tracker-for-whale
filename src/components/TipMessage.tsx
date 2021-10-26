@@ -34,6 +34,7 @@ interface IProps {
 const TipMessage: React.FC<IProps> = ({ setDeliveryList }) => {
 
   const handleClickReset = () => {
+    if(window.confirm('초기화하면 기존의 저정된 모든 운송장 번호가 삭제됩니다.\n미리 다른곳에 메모해 주세요.'))
     setDeliveryList([DELIVERY_INIT])
   }
 

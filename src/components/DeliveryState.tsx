@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { keyframes } from '@emotion/react'
 
 import ctrl from '../di'
-import { IAPIDeliveryDTO } from 'src/di/dto/APIDeliveryDTO'
+import { IAPIDeliveryDTO } from '../di/dto/APIDeliveryDTO'
 
 const spin = keyframes`
   to {
@@ -79,20 +79,30 @@ const S_ErrorMessage = styled.p`
 interface IProps {
   deliveryId: string
   deliveryCode: string
+  isReverse: boolean
   closeFnc(): void
 }
 
-const DeliveryState: React.FC<IProps> = ({ deliveryId, deliveryCode, closeFnc }) => {
+const DeliveryState: React.FC<IProps> = ({ deliveryId, deliveryCode, isReverse, closeFnc }) => {
 
   const [isLoading, setLoading] = useState(true)
   const [errMessage, setErrMessage] = useState('')
-  const [deliveryState, setDeliverState] = useState<IAPIDeliveryDTO>(null)
+  const [deliveryState, setDeliverState] = useState(null)
+  const [progresses, setProgresses] = useState([])
 
   useEffect(() => {
     (async () => {
       const deliveryStateData = await ctrl.getDeliveryAPI(deliveryId, deliveryCode)
-      if(typeof deliveryStateData === 'string') setErrMessage(deliveryStateData)
-      else setDeliverState(deliveryStateData)
+      if(typeof deliveryStateData === 'string') {
+        setErrMessage(deliveryStateData)
+      } else {
+        setDeliverState({
+          from: deliveryStateData?.from?.name ? deliveryStateData?.from?.name : '',
+          to: deliveryStateData?.to?.name ? deliveryStateData?.to?.name : '',
+          state: deliveryStateData?.state?.text ? deliveryStateData?.state?.text : ''
+        })
+        setProgresses(isReverse ? deliveryStateData.progresses.reverse() : deliveryStateData.progresses)
+      }
       setLoading(false)
     })()
   }, [])
@@ -119,9 +129,9 @@ const DeliveryState: React.FC<IProps> = ({ deliveryId, deliveryCode, closeFnc })
                 </thead>
                 <tbody>
                   <tr>
-                    <td>{deliveryState?.from?.name !== 'undefined' && deliveryState.from.name}</td>
-                    <td>{deliveryState?.to?.name !== 'undefined' && deliveryState.to.name}</td>
-                    <td>{deliveryState?.state?.text !== 'undefined' && deliveryState.state.text}</td>
+                    <td>{deliveryState.from}</td>
+                    <td>{deliveryState.to}</td>
+                    <td>{deliveryState.state}</td>
                   </tr>
                 </tbody>
               </table>
@@ -135,7 +145,7 @@ const DeliveryState: React.FC<IProps> = ({ deliveryId, deliveryCode, closeFnc })
                   </tr>
                 </thead>
                 <tbody>
-                  {deliveryState.progresses.map(state => {
+                  {progresses.map(state => {
                     const dateFormat = new Date(state.time)
                     const year = dateFormat.getFullYear()
                     const month = String(dateFormat.getMonth() + 1).length === 1 ? '0' + (dateFormat.getMonth() + 1) : dateFormat.getMonth() + 1

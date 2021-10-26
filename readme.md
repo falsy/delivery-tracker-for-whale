@@ -26,8 +26,8 @@ https://www.lotteglogis.com/open/tracking?invno=
 https://www.ilogen.com/web/personal/trace/
 * KGB 택배
 http://www.kgbps.com/delivery/delivery_result.jsp?item_no=
-* CVSnet 편의점 택배
-http://www.cvsnet.co.kr/reservation-inquiry/delivery/index.do?dlvry_type=domestic&invoice_no=
+* GS Postbox 택배
+https://www.cvsnet.co.kr/invoice/tracking.do?invoice_no=
 * CU 편의점 택배
 https://www.cupost.co.kr/postbox/delivery/localResult.cupost?invoice_no=
 * 경동 택배
@@ -44,4 +44,4 @@ http://www.ilyanglogis.com/functionality/card_form_waybill.asp?hawb_no=
 
 ### Version
 
-v1.7.4
+v1.7.5
