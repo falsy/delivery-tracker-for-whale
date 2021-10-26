@@ -104,7 +104,7 @@ class APIDeliveryDTO implements IAPIDeliveryDTO {
     this.from = new DFrom(from.name || from.address, from.time)
     this.progresses = progresses.map(list => {
       return new DList(list.description, list.location, list.time, list?.status)
-    }).reverse()
+    })
     this.state = new DState(state.id, state.text)
     this.to = new DTo(to.name || to.address, to.time)
   }

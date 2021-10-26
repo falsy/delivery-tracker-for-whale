@@ -259,7 +259,7 @@ const Delivery: React.FC<IProps> = ({ deliveryList, setDeliveryList }) => {
               <S_CodeSumbitBtn onClick={handleClickInlineDelivery.bind(this, i)} isShow={delivery.isInline} >조회</S_CodeSumbitBtn>
             </S_CodeBox>
             { inlineDeliveryOpenIdx === i + 1 && (
-              <DeliveryState deliveryCode={delivery.code} deliveryId={DELIVERY_LIST.filter(d => d.uid === delivery.uid)[0].id} closeFnc={handleClickCloseDelivery} />
+              <DeliveryState deliveryCode={delivery.code} deliveryId={DELIVERY_LIST.filter(d => d.uid === delivery.uid)[0].id} isReverse={DELIVERY_LIST.filter(d => d.uid === delivery.uid)[0].isReverse} closeFnc={handleClickCloseDelivery} />
             )}
           </div>
         ))}
