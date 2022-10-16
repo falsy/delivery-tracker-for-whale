@@ -53,7 +53,7 @@ export const DELIVERY_LIST = [{
     id: 'kr.cupost',
     name: 'CU 편의점 택배',
     api: 'https://www.cupost.co.kr/postbox/delivery/localResult.cupost?invoice_no=',
-    isInline: true,
+    isInline: false,
     isWindow: true,
     isReverse: true
   }, {
@@ -77,7 +77,7 @@ export const DELIVERY_LIST = [{
     id: '	kr.ilyanglogis',
     name: '일양로지스',
     api: 'http://www.ilyanglogis.com/functionality/card_form_waybill.asp?hawb_no=',
-    isInline: true,
+    isInline: false,
     isWindow: true,
     isReverse: true
   }, {
@@ -88,25 +88,25 @@ export const DELIVERY_LIST = [{
     isInline: false,
     isWindow: true,
     isReverse: false
-  }, {
-    uid: 12,
-    id: "us.fedex",
-    name: "Fedex",
-    api: '',
-    isInline: true,
-    isWindow: false,
-    isReverse: true
-  }, {
-    uid: 13,
-    id: "nl.tnt",
-    name: "TNT",
-    api: '',
-    isInline: true,
-    isWindow: false,
-    isReverse: true
   }]
 
   // , {
+  //   uid: 12,
+  //   id: "us.fedex",
+  //   name: "Fedex",
+  //   api: '',
+  //   isInline: true,
+  //   isWindow: false,
+  //   isReverse: true
+  // }, {
+  //   uid: 13,
+  //   id: "nl.tnt",
+  //   name: "TNT",
+  //   api: '',
+  //   isInline: true,
+  //   isWindow: false,
+  //   isReverse: true
+  // }, {
   //   uid: 14,
   //   id: "us.ups",
   //   name: "UPS",
