@@ -62,7 +62,7 @@ export const DELIVERY_LIST = [{
     name: '경동 택배',
     api: 'http://kdexp.com/basicNewDelivery.kd?barcode=',
     isInline: true,
-    isWindow: true,
+    isWindow: false,
     isReverse: true
   }, {
     uid: 9,
