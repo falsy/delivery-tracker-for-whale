@@ -1,11 +1,11 @@
 {
   "name": "delivery-tracking-for-whale",
-  "version": "1.0.0",
+  "version": "1.7.8",
   "description": "웨일 브라우저의 사이드바 확장 프로그램으로 간편하게 택배 배송을 조회할 수 있습니다.",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start": "webpack serve --open --mode development"
   },
   "repository": {
     "type": "git",
@@ -18,20 +18,20 @@
   },
   "homepage": "https://github.com/falsy/delivery-tracking-for-whale#readme",
   "devDependencies": {
-    "html-webpack-plugin": "^5.3.2",
-    "ts-loader": "^8.0.11",
-    "typescript": "^4.0.5",
-    "webpack": "^5.42.0",
-    "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
+    "html-webpack-plugin": "^5.6.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "@emotion/react": "^11.1.1",
-    "@emotion/styled": "^11.0.0",
-    "@types/react": "^16.9.56",
-    "@types/react-dom": "^16.9.9",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "emotion": "^11.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

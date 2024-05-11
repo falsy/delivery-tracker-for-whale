@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
+    "lib": [
+      "DOM", "DOM.Iterable", "ESNext"
+    ],
     "outDir": "./dist/",
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es6",
-    "jsx": "react",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "target": "es5",
+    "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
-    "baseUrl": "./",
+    "jsxImportSource": "@emotion/react"
   },
   "include": [
-    "./src/**/*",
+    "src"
   ]
 }

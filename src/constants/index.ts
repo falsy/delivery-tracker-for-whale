@@ -1,5 +1,5 @@
 export const DELIVERY_DATA = 'DELIVERY_DATA'
-export const DELIVERY_INIT = { uid: 1, label: '', code: '', isInline: true, isWindow: true }
+export const DELIVERY_INIT = { uid: 1, label: '', code: '', isInline: true, isWindow: true, memos: [] }
 export const DELIVERY_LIST = [{
     uid: 1,
     id: 'kr.epost',

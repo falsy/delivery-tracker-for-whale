@@ -16,7 +16,7 @@ const Style: React.FC = () => {
         top: 0;
         left: 0;
         right: 0;
-        bottom: 40px;
+        bottom: 0;
         margin: 0;
         background: #f7f7f7;
         font-size: 14px;
@@ -37,7 +37,7 @@ const Style: React.FC = () => {
       }
       
       a:hover {
-        text-decoration: underline;
+        
       }
 
       button {
