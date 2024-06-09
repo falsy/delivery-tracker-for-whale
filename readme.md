@@ -4,9 +4,3 @@
 
 > 1.7.9 버전부터 [`parcel-tracking`](https://github.com/parcel-tracking)에서 개발됩니다.  
 > 많은 관심 가져주셔서 감사합니다. 🙇‍♂️
-
-### Screenshot
-
-![Capture](/src/imgs/screenshot-1.png)
-![Capture](/src/imgs/screenshot-2.png)
-![Capture](/src/imgs/screenshot-3.png)
