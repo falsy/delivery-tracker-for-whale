@@ -1,0 +1,29 @@
+{
+  "name": "parcel-tracking-for-whale",
+  "version": "1.8.1",
+  "description": "웨일 브라우저의 사이드바 확장 프로그램으로 간편하게 택배 배송을 조회할 수 있습니다.",
+  "private": true,
+  "author": "falsy",
+  "license": "WTFPL license",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack serve --open --mode development"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
+    "html-webpack-plugin": "^5.6.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "emotion": "^11.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

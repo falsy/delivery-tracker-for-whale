@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "택배 배송 조회",
+  "version": "1.8.1",
+  "description": "간편하게 택배 배송을 조회합니다.",
+  "icons": {
+    "32": "./imgs/delivery-32-v5.png",
+    "64": "./imgs/delivery-64.png",
+    "128": "./imgs/delivery-128-v9.png",
+    "256": "./imgs/delivery-256.png"
+  },
+  "sidebar_action": {
+    "default_page": "index.html",
+    "default_icon": {
+      "32": "./imgs/delivery-32-v5.png",
+      "64": "./imgs/delivery-64.png",
+      "128": "./imgs/delivery-128-v9.png",
+      "256": "./imgs/delivery-256.png"
+    },
+    "default_title": "배송 조회",
+    "use_navigation_bar": false
+  },
+  "permissions": ["storage"]
+}
