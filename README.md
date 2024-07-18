@@ -4,9 +4,9 @@
 
 ## 스크린샷
 
-![Capture](/src/_readme/screenshot-1.png)
-![Capture](/src/_readme/screenshot-2.png)
-![Capture](/src/_readme/screenshot-3.png)
+![Capture](_readme/screenshot-1.png)
+![Capture](_readme/screenshot-2.png)
+![Capture](_readme/screenshot-3.png)
 
 ## 라이센스
 
