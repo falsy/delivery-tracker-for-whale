@@ -5,7 +5,7 @@ const Footer = () => {
     <$footer>
       &copy;{" "}
       <a href="https://falsy.me" target="_blank">
-        falsy
+        Falsy
       </a>
     </$footer>
   )

@@ -486,6 +486,9 @@ const $codeSumbitBtn = styled.button<{ isWindow?: boolean }>`
     text-shadow: none;
     color: #000;
     font-weight: 500;
+    &:last-of-type {
+      border-right: 1px solid rgb(220, 220, 220);
+    }
     &:hover {
       background: #eaeaea;
     }
@@ -496,6 +499,9 @@ const $codeSumbitBtn = styled.button<{ isWindow?: boolean }>`
       border-right: 0;
       border-top-color: rgb(50, 50, 50);
       border-bottom-color: rgb(50, 50, 50);
+      &:last-of-type {
+        border-right: 1px solid rgb(50, 50, 50);
+      }
       &:hover {
         background: rgb(30, 30, 30);
       }

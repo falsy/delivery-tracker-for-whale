@@ -5,6 +5,7 @@ import useCases from "./useCases"
 
 const httpClient = globalThis.fetch.bind(globalThis)
 const browserStorage = (window as any).whale.storage.local
+// const browserStorage = (window as any).localStorage // dev
 
 const infrastructure = infrastructures(httpClient, browserStorage)
 const repository = repositories(
