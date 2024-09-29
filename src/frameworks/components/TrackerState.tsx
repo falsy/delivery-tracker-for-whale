@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 import styled from "@emotion/styled"
 import { keyframes } from "@emotion/react"
-
-import ctrl from "../di"
+import useDependencies from "../hooks/useDependencies"
 
 interface IProps {
   carrierId: string
@@ -15,13 +14,15 @@ const TrackerState = ({
   trackerTrackingNumber,
   closeFnc
 }: IProps) => {
+  const { controllers } = useDependencies()
+
   const [isLoading, setLoading] = useState(true)
   const [errMessage, setErrMessage] = useState("")
   const [deliveryState, setDeliverState] = useState(null)
   const [progresses, setProgresses] = useState([])
 
   const getDelivery = async () => {
-    const { isError, message, data } = await ctrl.tracker.getDelivery(
+    const { isError, message, data } = await controllers.tracker.getDelivery(
       carrierId,
       trackerTrackingNumber
     )

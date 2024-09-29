@@ -1,21 +1,23 @@
 import styled from "@emotion/styled"
-
-import ctrl from "../di"
+import useDependencies from "../hooks/useDependencies"
 
 interface IProps {
   getTrackerList(): void
 }
 
 const TipMessage = ({ getTrackerList }: IProps) => {
+  const { controllers } = useDependencies()
+
   const handleClickReset = async () => {
     if (
       window.confirm(
         "초기화하면 기존의 저정된 모든 운송장 번호가 삭제됩니다.\n미리 다른곳에 메모해 주세요."
       )
     ) {
-      const { isError: isClearError } = await ctrl.tracker.clearTrackers()
+      const { isError: isClearError } =
+        await controllers.tracker.clearTrackers()
       if (isClearError) return
-      const { isError: isAddError } = await ctrl.tracker.addTracker()
+      const { isError: isAddError } = await controllers.tracker.addTracker()
       if (isAddError) return
       getTrackerList()
     }

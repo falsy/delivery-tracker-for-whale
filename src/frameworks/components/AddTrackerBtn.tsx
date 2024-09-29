@@ -1,6 +1,5 @@
 import styled from "@emotion/styled"
-
-import ctrl from "../di"
+import useDependencies from "../hooks/useDependencies"
 
 interface IPorps {
   getTrackerList(): void
@@ -8,8 +7,10 @@ interface IPorps {
 }
 
 const AddTrackerBtn = ({ getTrackerList, showErrorMessage }: IPorps) => {
+  const { controllers } = useDependencies()
+
   const handleClickAddDelivery = async () => {
-    const { isError } = await ctrl.tracker.addTracker()
+    const { isError } = await controllers.tracker.addTracker()
     if (isError) {
       showErrorMessage()
       return

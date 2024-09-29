@@ -3,11 +3,11 @@ import styled from "@emotion/styled"
 
 import ICarrierDTO from "../../core/dtos/interfaces/ICarrierDTO"
 import ITrackerDTO from "../../core/dtos/interfaces/ITrackerDTO"
+import useDependencies from "../hooks/useDependencies"
 import CloseIcon from "./icons/CloseIcon"
 import PlusIcon from "./icons/PlusIcon"
 import ArrowDownIcon from "./icons/ArrowDownIcon"
 import TrackerState from "./TrackerState"
-import ctrl from "../di"
 
 interface IProps {
   carrierList: ICarrierDTO[]
@@ -30,6 +30,8 @@ const TrackerBox = ({
   getTrackerList,
   showErrorMessage
 }: IProps) => {
+  const { controllers } = useDependencies()
+
   const [isTrackerState, setTrackerState] = useState(false)
   const [trackingNumber, setTrackingNumber] = useState(tracker.trackingNumber)
   const [label, setLabel] = useState(tracker.label)
@@ -45,7 +47,7 @@ const TrackerBox = ({
     const cacheLabel = label
     const newLabel = e.target.value
     setLabel(newLabel)
-    const { isError } = await ctrl.tracker.updateLabel(tracker, newLabel)
+    const { isError } = await controllers.tracker.updateLabel(tracker, newLabel)
     if (isError) {
       showErrorMessage()
       setLabel(cacheLabel)
@@ -59,7 +61,7 @@ const TrackerBox = ({
     const cacheNumber = trackingNumber
     const newNumber = e.target.value
     setTrackingNumber(newNumber)
-    const { isError } = await ctrl.tracker.updateTrackingNumber(
+    const { isError } = await controllers.tracker.updateTrackingNumber(
       tracker,
       newNumber
     )
@@ -71,7 +73,7 @@ const TrackerBox = ({
   }
 
   const handleClickDeleteTracker = async (id: string) => {
-    const { isError } = await ctrl.tracker.deleteTracker(id)
+    const { isError } = await controllers.tracker.deleteTracker(id)
     if (isError) {
       showErrorMessage()
       return
@@ -84,7 +86,10 @@ const TrackerBox = ({
   }
 
   const handleClickSelect = async (carrierId: string) => {
-    const { isError } = await ctrl.tracker.updateCarrierId(tracker, carrierId)
+    const { isError } = await controllers.tracker.updateCarrierId(
+      tracker,
+      carrierId
+    )
     if (isError) {
       showErrorMessage()
       return
@@ -115,7 +120,7 @@ const TrackerBox = ({
   }
 
   const handleClickAddMemo = async (tracker: ITrackerDTO) => {
-    const { isError } = await ctrl.tracker.addMemo(tracker)
+    const { isError } = await controllers.tracker.addMemo(tracker)
     if (isError) {
       showErrorMessage()
       return
@@ -124,7 +129,7 @@ const TrackerBox = ({
   }
 
   const handleDeleteMemo = async (idx: number) => {
-    const { isError } = await ctrl.tracker.deleteMemo(tracker, idx)
+    const { isError } = await controllers.tracker.deleteMemo(tracker, idx)
     if (isError) {
       showErrorMessage()
       return
@@ -141,7 +146,11 @@ const TrackerBox = ({
     const newMemo = e.target.value
     newMemos[idx] = newMemo
     setMemos(newMemos)
-    const { isError } = await ctrl.tracker.updateMemo(tracker, idx, newMemo)
+    const { isError } = await controllers.tracker.updateMemo(
+      tracker,
+      idx,
+      newMemo
+    )
     if (isError) {
       showErrorMessage()
       setMemos(cacheMemos)

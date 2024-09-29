@@ -4,14 +4,16 @@ import styled from "@emotion/styled"
 import ITrackerDTO from "../../core/dtos/interfaces/ITrackerDTO"
 import ICarrierDTO from "../../core/dtos/interfaces/ICarrierDTO"
 import CloseIcon from "./icons/CloseIcon"
+import useDependencies from "../hooks/useDependencies"
 import TipMessage from "./TipMessage"
 import Footer from "./Footer"
 import TrackerBox from "./TrackerBox"
 import AddTrackerBtn from "./AddTrackerBtn"
 import DataMigration from "../services/DataMigration"
-import ctrl from "../di"
 
 const Dashboard = () => {
+  const { controllers } = useDependencies()
+
   const [selectBoxOpenIdx, setSelectBoxOpenIdx] = useState(0)
   const [isErrorMessage, setIsErrorMessage] = useState("")
   const [trackerList, setTrackerList] = useState<ITrackerDTO[]>([])
@@ -35,7 +37,7 @@ const Dashboard = () => {
   }, [])
 
   const getCarrierList = async () => {
-    const { isError, message, data } = await ctrl.carrier.getCarriers()
+    const { isError, message, data } = await controllers.carrier.getCarriers()
     if (isError) {
       showErrorMessage(message)
       return
@@ -55,7 +57,7 @@ const Dashboard = () => {
   }
 
   const getTrackerList = async () => {
-    const { isError, data } = await ctrl.tracker.getTrackers()
+    const { isError, data } = await controllers.tracker.getTrackers()
     if (isError) {
       showErrorMessage()
       return

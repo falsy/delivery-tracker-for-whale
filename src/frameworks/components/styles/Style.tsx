@@ -1,7 +1,6 @@
-import * as React from "react"
 import { Global, css } from "@emotion/react"
 
-const Style: React.FC = () => {
+const Style = () => {
   return (
     <Global
       styles={css`
