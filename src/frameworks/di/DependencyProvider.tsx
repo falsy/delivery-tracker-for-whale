@@ -16,8 +16,9 @@ export default function DependencyProvider({
   children: ReactNode
 }) {
   const httpClient = globalThis.fetch.bind(globalThis)
-  const browserStorage = (window as any).whale.storage.local
-  // const browserStorage = (window as any).localStorage // dev
+  const browserStorage = (window as any).whale
+    ? (window as any).whale.storage.local
+    : (window as any).localStorage // dev
 
   const infrastructures = infrastructuresFn(httpClient, browserStorage)
   const repositories = repositoriesFn(

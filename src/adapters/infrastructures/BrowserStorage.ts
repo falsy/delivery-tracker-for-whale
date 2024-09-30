@@ -14,17 +14,17 @@ export default class BrowserStorage implements IBrowserStorage {
 
   getItem(key: string): Promise<ILayerDTO<string | null>> {
     return new Promise(async (resolve) => {
-      // // dev
-      // if (!(window as any).whale) {
-      //   resolve(
-      //     new LayerDTO({
-      //       data: {
-      //         [key]: window.localStorage.getItem(key)
-      //       }
-      //     } as any)
-      //   )
-      //   return
-      // }
+      // dev
+      if (!(window as any).whale) {
+        resolve(
+          new LayerDTO({
+            data: {
+              [key]: window.localStorage.getItem(key)
+            }
+          } as any)
+        )
+        return
+      }
       this.browserStorage.get([key], (data) => {
         resolve(
           new LayerDTO({
@@ -37,16 +37,16 @@ export default class BrowserStorage implements IBrowserStorage {
 
   setItem(key: string, value: string): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
-      // // dev
-      // if (!(window as any).whale) {
-      //   window.localStorage.setItem(key, value)
-      //   resolve(
-      //     new LayerDTO({
-      //       data: true
-      //     })
-      //   )
-      //   return
-      // }
+      // dev
+      if (!(window as any).whale) {
+        window.localStorage.setItem(key, value)
+        resolve(
+          new LayerDTO({
+            data: true
+          })
+        )
+        return
+      }
       const data = {}
       data[key] = value
       this.browserStorage.set(data, () => {
