@@ -11,7 +11,7 @@ const TipMessage = ({ getTrackerList }: IProps) => {
   const handleClickReset = async () => {
     if (
       window.confirm(
-        "초기화하면 기존의 저정된 모든 운송장 번호가 삭제됩니다.\n미리 다른곳에 메모해 주세요."
+        "초기화하면 기존에 저장된 모든 운송장 번호가 삭제됩니다.\n미리 다른곳에 메모해 주세요."
       )
     ) {
       const { isError: isClearError } =
