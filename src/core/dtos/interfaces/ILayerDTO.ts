@@ -3,5 +3,5 @@ export default interface ILayerDTO<T> {
   readonly message: string
   readonly data?: T
   readonly errorCode?: string
-  readonly errorDetails?: any
+  readonly errorDetails?: unknown
 }

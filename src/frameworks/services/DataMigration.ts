@@ -10,14 +10,18 @@ class DataMigration {
   }
 
   async migration() {
-    return new Promise(async (resolve) => {
-      if (typeof (window as any)?.whale?.storage?.local === "undefined") {
+    const migrationFnc = async (resolve) => {
+      if (typeof globalThis.whale?.storage?.local === "undefined") {
         resolve(false)
         return
       }
       await this.migration1_7_8()
       await this.migration1_8_0()
       resolve(true)
+    }
+
+    return new Promise((resolve) => {
+      return migrationFnc(resolve)
     })
   }
 
@@ -31,7 +35,7 @@ class DataMigration {
 
       const data = {}
       data[TRACKER_LIST] = oldData
-      ;(window as any).whale.storage.local.set(data, () => {
+      globalThis.whale.storage.local.set(data, () => {
         window.localStorage.removeItem(TRACKER_LIST)
         resolve(true)
       })
@@ -59,7 +63,7 @@ class DataMigration {
 
       const data = {}
       data[TRACKER_LIST] = JSON.stringify(newTrackers)
-      ;(window as any).whale.storage.local.set(data, () => {
+      globalThis.whale.storage.local.set(data, () => {
         window.localStorage.removeItem("DELIVERY_DATA")
         resolve(true)
       })

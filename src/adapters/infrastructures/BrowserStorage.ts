@@ -1,31 +1,25 @@
 import LayerDTO from "../../core/dtos/LayerDTO"
 import ILayerDTO from "../../core/dtos/interfaces/ILayerDTO"
-import IBrowserStorage from "./interfaces/IBrowserStorage"
+import IBrowserStorage, {
+  IBrowserStorageParams
+} from "./interfaces/IBrowserStorage"
 
 export default class BrowserStorage implements IBrowserStorage {
-  constructor(
-    private readonly browserStorage: {
-      get(key: string[], callback: (result: string) => void): void
-      set(data: { [key: string]: string }, callback: () => void): void
-      clear(callback: () => void): void
-      remove(key: string, callback: () => void): void
-    }
-  ) {}
+  constructor(private readonly browserStorage: IBrowserStorageParams) {}
 
-  getItem(key: string): Promise<ILayerDTO<string | null>> {
-    return new Promise(async (resolve) => {
+  getItem(key: string): Promise<ILayerDTO<{ [key: string]: string }>> {
+    return new Promise((resolve) => {
       // dev
-      if (!(window as any).whale) {
+      if (!globalThis.whale) {
+        const data = window.localStorage.getItem(key)
         resolve(
           new LayerDTO({
-            data: {
-              [key]: window.localStorage.getItem(key)
-            }
-          } as any)
+            data: { [key]: data }
+          })
         )
         return
       }
-      this.browserStorage.get([key], (data) => {
+      this.browserStorage.get([key], (data: { [key: string]: string }) => {
         resolve(
           new LayerDTO({
             data
@@ -38,7 +32,7 @@ export default class BrowserStorage implements IBrowserStorage {
   setItem(key: string, value: string): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
       // dev
-      if (!(window as any).whale) {
+      if (!globalThis.whale) {
         window.localStorage.setItem(key, value)
         resolve(
           new LayerDTO({
