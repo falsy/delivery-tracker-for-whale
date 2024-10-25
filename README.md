@@ -7,7 +7,3 @@
 ![Capture](_readme/screenshot-1.png)
 ![Capture](_readme/screenshot-2.png)
 ![Capture](_readme/screenshot-3.png)
-
-## 라이센스
-
-자세한 내용은 LICENSE 파일을 참조하세요.
