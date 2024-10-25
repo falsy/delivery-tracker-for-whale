@@ -1,11 +1,11 @@
 import { css } from "@emotion/react"
 import CloseIcon from "../../icons/CloseIcon"
-import { useErrorMessage } from "../../../hooks/zustands/useErrorMessage"
+import useError from "../../../hooks/useError"
 
 export default function ErrorMessage() {
-  const { errMessage, setErrMessage } = useErrorMessage()
+  const { message, setMessage } = useError()
 
-  if (errMessage === "") return null
+  if (message === "") return null
 
   return (
     <div
@@ -29,9 +29,7 @@ export default function ErrorMessage() {
         `}
       >
         <p>
-          {errMessage === "error"
-            ? "알 수 없는 오류가 발생하였습니다."
-            : errMessage}
+          {message === "error" ? "알 수 없는 오류가 발생하였습니다." : message}
         </p>
         <button
           css={css`
@@ -40,7 +38,7 @@ export default function ErrorMessage() {
             line-height: 0;
             padding: 5px;
           `}
-          onClick={() => setErrMessage("")}
+          onClick={() => setMessage()}
         >
           <CloseIcon />
         </button>

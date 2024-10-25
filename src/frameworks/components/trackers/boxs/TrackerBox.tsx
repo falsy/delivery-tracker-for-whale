@@ -2,11 +2,11 @@ import { useState } from "react"
 import { css } from "@emotion/react"
 import ITrackerDTO from "../../../../core/dtos/interfaces/ITrackerDTO"
 import useDependencies from "../../../hooks/useDependencies"
-import { useErrorMessage } from "../../../hooks/zustands/useErrorMessage"
-import { useCarriers } from "../../../hooks/zustands/useCarriers"
-import useTrackerList from "../../../hooks/useTrackerList"
-import LabelBox from "./LabelBox"
+import useError from "../../../hooks/useError"
+import useTrackers from "../../../hooks/useTrackers"
+import useCarriers from "../../../hooks/useCarriers"
 import DeleteButton from "../items/DeleteButton"
+import LabelBox from "./LabelBox"
 import CarrierSelectBox from "./CarrierSelectBox"
 import TrackerNumberBox from "./TrackerNumberBox"
 import MemoBox from "./MemoBox"
@@ -14,9 +14,9 @@ import TrackerState from "./TrackerStateBox"
 
 export default function TrackerBox({ tracker }: { tracker: ITrackerDTO }) {
   const { controllers } = useDependencies()
-  const { setErrMessage } = useErrorMessage()
+  const { setMessage } = useError()
   const { carriers } = useCarriers()
-  const { getTrackerList } = useTrackerList()
+  const { getTrackers } = useTrackers()
 
   const [isLoading, setLoading] = useState(false)
   const [errDeliveryMessage, setDeliveryErrorMessage] = useState("")
@@ -26,10 +26,10 @@ export default function TrackerBox({ tracker }: { tracker: ITrackerDTO }) {
   const handleClickDeleteTracker = async (id: string) => {
     const { isError } = await controllers.tracker.deleteTracker(id)
     if (isError) {
-      setErrMessage()
+      setMessage()
       return
     }
-    getTrackerList()
+    getTrackers()
   }
 
   const resetDeliveryState = () => {

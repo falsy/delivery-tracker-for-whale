@@ -6,7 +6,7 @@ type Carriers = {
   setCarriers: (carriers: ICarrierDTO[]) => void
 }
 
-export const useCarriers = create<Carriers>((set) => ({
+export const useCarrierList = create<Carriers>((set) => ({
   carriers: [],
   setCarriers: (carriers) => set({ carriers })
 }))

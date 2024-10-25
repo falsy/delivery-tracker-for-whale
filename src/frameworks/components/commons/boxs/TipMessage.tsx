@@ -1,10 +1,10 @@
-import useDependencies from "../../../hooks/useDependencies"
-import useTrackerList from "../../../hooks/useTrackerList"
 import { css } from "@emotion/react"
+import useDependencies from "../../../hooks/useDependencies"
+import useTrackers from "../../../hooks/useTrackers"
 
 export default function TipMessage() {
   const { controllers } = useDependencies()
-  const { getTrackerList } = useTrackerList()
+  const { getTrackers } = useTrackers()
 
   const handleClickReset = async () => {
     if (
@@ -12,12 +12,11 @@ export default function TipMessage() {
         "초기화하면 기존에 저장된 모든 운송장 번호가 삭제됩니다.\n미리 다른곳에 메모해 주세요."
       )
     ) {
-      const { isError: isClearError } =
-        await controllers.tracker.clearTrackers()
-      if (isClearError) return
+      const { isError } = await controllers.tracker.clearTrackers()
+      if (isError) return
       const { isError: isAddError } = await controllers.tracker.addTracker()
       if (isAddError) return
-      getTrackerList()
+      getTrackers()
     }
   }
 

@@ -2,10 +2,10 @@ import { KeyboardEvent, useRef, useState } from "react"
 import { css } from "@emotion/react"
 import ICarrierDTO from "../../../../core/dtos/interfaces/ICarrierDTO"
 import ITrackerDTO from "../../../../core/dtos/interfaces/ITrackerDTO"
-import { useErrorMessage } from "../../../hooks/zustands/useErrorMessage"
 import useDependencies from "../../../hooks/useDependencies"
-import useTrackerList from "../../../hooks/useTrackerList"
-import { useCarriers } from "../../../hooks/zustands/useCarriers"
+import useError from "../../../hooks/useError"
+import useTrackers from "../../../hooks/useTrackers"
+import useCarriers from "../../../hooks/useCarriers"
 import ArrowDownIcon from "../../icons/ArrowDownIcon"
 
 export default function CarrierSelectBox({
@@ -16,8 +16,8 @@ export default function CarrierSelectBox({
   tracker: ITrackerDTO
 }) {
   const { controllers } = useDependencies()
-  const { setErrMessage } = useErrorMessage()
-  const { getTrackerList } = useTrackerList()
+  const { setMessage } = useError()
+  const { getTrackers } = useTrackers()
   const { carriers } = useCarriers()
 
   const menuRef = useRef(null)
@@ -30,11 +30,11 @@ export default function CarrierSelectBox({
       carrierId
     )
     if (isError) {
-      setErrMessage()
+      setMessage()
       return
     }
     setIsShowSelectBox(false)
-    getTrackerList()
+    getTrackers()
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {

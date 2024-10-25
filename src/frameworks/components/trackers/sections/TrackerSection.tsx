@@ -1,9 +1,9 @@
 import { css } from "@emotion/react"
-import useTrackerList from "../../../hooks/useTrackerList"
+import useTrackers from "../../../hooks/useTrackers"
 import TrackerBox from "../boxs/TrackerBox"
 
 export default function TrackerSection() {
-  const { trackerList } = useTrackerList()
+  const { trackers } = useTrackers()
 
   return (
     <div
@@ -11,7 +11,7 @@ export default function TrackerSection() {
         padding: 20px 20px 0;
       `}
     >
-      {trackerList.map((tracker) => {
+      {trackers.map((tracker) => {
         return <TrackerBox key={tracker.id} tracker={tracker} />
       })}
     </div>

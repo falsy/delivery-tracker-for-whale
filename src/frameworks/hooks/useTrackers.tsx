@@ -1,13 +1,13 @@
 import useDependencies from "./useDependencies"
 import { useErrorMessage } from "./zustands/useErrorMessage"
-import { useTrackers } from "./zustands/useTrackers"
+import { useTrackerList } from "./zustands/useTrackerList"
 
-export default function useTrackerList() {
+export default function useTrackers() {
   const { controllers } = useDependencies()
   const { setErrMessage } = useErrorMessage()
-  const { trackers, setTrackers } = useTrackers()
+  const { trackers, setTrackers } = useTrackerList()
 
-  const getTrackerList = async () => {
+  const getTrackers = async () => {
     const { isError, data } = await controllers.tracker.getTrackers()
     if (isError) {
       setErrMessage()
@@ -17,7 +17,8 @@ export default function useTrackerList() {
   }
 
   return {
-    trackerList: trackers,
-    getTrackerList
+    trackers,
+    setTrackers,
+    getTrackers
   }
 }

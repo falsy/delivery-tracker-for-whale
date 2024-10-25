@@ -3,7 +3,7 @@ import { css } from "@emotion/react"
 import ITrackerDTO from "../../../../core/dtos/interfaces/ITrackerDTO"
 import ICarrierDTO from "../../../../core/dtos/interfaces/ICarrierDTO"
 import useDependencies from "../../../hooks/useDependencies"
-import { useErrorMessage } from "../../../hooks/zustands/useErrorMessage"
+import useError from "../../../hooks/useError"
 import NewWinodwButton from "../items/NewWinodwButton"
 import SubmitButton from "../items/SubmitButton"
 
@@ -17,7 +17,7 @@ export default function TrackerNumberBox({
   getDelivery: (carrierId: string, trackerTrackingNumber: string) => void
 }) {
   const { controllers } = useDependencies()
-  const { setErrMessage } = useErrorMessage()
+  const { setMessage } = useError()
   const [trackingNumber, setTrackingNumber] = useState(tracker.trackingNumber)
 
   const handleChangeTrackingNumber = async (
@@ -31,7 +31,7 @@ export default function TrackerNumberBox({
       newNumber
     )
     if (isError) {
-      setErrMessage()
+      setMessage()
       setTrackingNumber(cacheNumber)
       return
     }

@@ -6,7 +6,7 @@ type Trackers = {
   setTrackers: (Trackers: ITrackerDTO[]) => void
 }
 
-export const useTrackers = create<Trackers>((set) => ({
+export const useTrackerList = create<Trackers>((set) => ({
   trackers: [],
   setTrackers: (trackers) => set({ trackers })
 }))
