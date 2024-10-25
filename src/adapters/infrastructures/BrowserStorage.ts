@@ -41,6 +41,7 @@ export default class BrowserStorage implements IBrowserStorage {
         )
         return
       }
+
       const data = {}
       data[key] = value
       this.browserStorage.set(data, () => {
