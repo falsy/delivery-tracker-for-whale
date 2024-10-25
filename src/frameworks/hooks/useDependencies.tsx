@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { DependencyContext } from "../di/DependencyProvider"
+import { DependencyContext } from "@di/DependencyProvider"
 
 export default function useDependencies() {
   const dependencies = useContext(DependencyContext)

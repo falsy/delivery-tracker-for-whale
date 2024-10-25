@@ -1,6 +1,6 @@
 import { css } from "@emotion/react"
-import useDependencies from "../../../hooks/useDependencies"
-import useTrackers from "../../../hooks/useTrackers"
+import useDependencies from "@hooks/useDependencies"
+import useTrackers from "@hooks/useTrackers"
 
 export default function TipMessage() {
   const { controllers } = useDependencies()

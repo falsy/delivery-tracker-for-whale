@@ -1,8 +1,8 @@
 import { css } from "@emotion/react"
-import useDependencies from "../../../hooks/useDependencies"
-import useError from "../../../hooks/useError"
-import useTrackers from "../../../hooks/useTrackers"
-import Button from "../../commons/items/Button"
+import useDependencies from "@hooks/useDependencies"
+import useError from "@hooks/useError"
+import useTrackers from "@hooks/useTrackers"
+import Button from "@components/commons/items/Button"
 
 export default function CreateTracker() {
   const { controllers } = useDependencies()

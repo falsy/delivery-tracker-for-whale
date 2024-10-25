@@ -8,6 +8,15 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": "src",
+    "paths": {
+      "@core/*": ["core/*"],
+      "@constants/*": ["constants/*"],
+      "@di/*": ["frameworks/di/*"],
+      "@components/*": ["frameworks/components/*"],
+      "@services/*": ["frameworks/services/*"],
+      "@hooks/*": ["frameworks/hooks/*"]
+    }
   }
 }

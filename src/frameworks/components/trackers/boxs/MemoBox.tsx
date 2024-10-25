@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { css } from "@emotion/react"
-import ITrackerDTO from "../../../../core/dtos/interfaces/ITrackerDTO"
-import useDependencies from "../../../hooks/useDependencies"
-import useError from "../../../hooks/useError"
-import useTrackers from "../../../hooks/useTrackers"
-import PlusIcon from "../../icons/PlusIcon"
-import CloseIcon from "../../icons/CloseIcon"
+import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
+import useDependencies from "@hooks/useDependencies"
+import useError from "@hooks/useError"
+import useTrackers from "@hooks/useTrackers"
+import PlusIcon from "@components/icons/PlusIcon"
+import CloseIcon from "@components/icons/CloseIcon"
 
 export default function MemoBox({ tracker }: { tracker: ITrackerDTO }) {
   const { controllers } = useDependencies()

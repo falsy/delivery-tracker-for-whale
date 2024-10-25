@@ -8,7 +8,15 @@ module.exports = (env, options) => {
       rules: [{ test: /\.tsx?$/, loader: "ts-loader" }]
     },
     resolve: {
-      extensions: [".tsx", ".ts", ".js"]
+      extensions: [".tsx", ".ts", ".js"],
+      alias: {
+        "@core": path.resolve(__dirname, "./src/core/"),
+        "@constants": path.resolve(__dirname, "./src/constants/"),
+        "@di": path.resolve(__dirname, "./src/frameworks/di/"),
+        "@services": path.resolve(__dirname, "./src/frameworks/services/"),
+        "@hooks": path.resolve(__dirname, "./src/frameworks/hooks/"),
+        "@components": path.resolve(__dirname, "./src/frameworks/components/")
+      }
     },
     output: {
       filename: "delivery-bundle.js",

@@ -1,12 +1,12 @@
 import { KeyboardEvent, useRef, useState } from "react"
 import { css } from "@emotion/react"
-import ICarrierDTO from "../../../../core/dtos/interfaces/ICarrierDTO"
-import ITrackerDTO from "../../../../core/dtos/interfaces/ITrackerDTO"
-import useDependencies from "../../../hooks/useDependencies"
-import useError from "../../../hooks/useError"
-import useTrackers from "../../../hooks/useTrackers"
-import useCarriers from "../../../hooks/useCarriers"
-import ArrowDownIcon from "../../icons/ArrowDownIcon"
+import ICarrierDTO from "@core/dtos/interfaces/ICarrierDTO"
+import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
+import useDependencies from "@hooks/useDependencies"
+import useError from "@hooks/useError"
+import useTrackers from "@hooks/useTrackers"
+import useCarriers from "@hooks/useCarriers"
+import ArrowDownIcon from "@components/icons/ArrowDownIcon"
 
 export default function CarrierSelectBox({
   carrier,

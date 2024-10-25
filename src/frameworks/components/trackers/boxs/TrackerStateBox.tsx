@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { css } from "@emotion/react"
-import IDeliveryProgressVO from "../../../../core/vos/interfaces/IDeliveryProgressVO"
-import Loading from "../../commons/items/Loading"
+import IDeliveryProgressVO from "@core/vos/interfaces/IDeliveryProgressVO"
+import Loading from "@components/commons/items/Loading"
 
 export default function TrackerStateBox({
   isLoading,

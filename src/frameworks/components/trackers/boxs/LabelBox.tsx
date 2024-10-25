@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { css } from "@emotion/react"
-import ITrackerDTO from "../../../../core/dtos/interfaces/ITrackerDTO"
-import useDependencies from "../../../hooks/useDependencies"
-import useError from "../../../hooks/useError"
+import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
+import useDependencies from "@hooks/useDependencies"
+import useError from "@hooks/useError"
 
 export default function LabelBox({ tracker }: { tracker: ITrackerDTO }) {
   const { controllers } = useDependencies()

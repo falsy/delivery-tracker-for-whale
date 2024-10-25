@@ -1,6 +1,6 @@
 import { css } from "@emotion/react"
-import CloseIcon from "../../icons/CloseIcon"
-import useError from "../../../hooks/useError"
+import useError from "@hooks/useError"
+import CloseIcon from "@components/icons/CloseIcon"
 
 export default function ErrorMessage() {
   const { message, setMessage } = useError()

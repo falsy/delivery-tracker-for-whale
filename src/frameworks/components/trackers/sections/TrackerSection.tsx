@@ -1,5 +1,5 @@
 import { css } from "@emotion/react"
-import useTrackers from "../../../hooks/useTrackers"
+import useTrackers from "@hooks/useTrackers"
 import TrackerBox from "../boxs/TrackerBox"
 
 export default function TrackerSection() {
