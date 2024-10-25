@@ -12,7 +12,11 @@ export default class ClientHTTP implements IClientHTTP {
     return this.httpClient(url, { ...options, method: "GET" })
   }
 
-  async post(url: string, body: any, options?: RequestInit): Promise<Response> {
+  async post(
+    url: string,
+    body: unknown,
+    options?: RequestInit
+  ): Promise<Response> {
     return this.httpClient(url, {
       method: "POST",
       body: JSON.stringify(body),
@@ -21,7 +25,11 @@ export default class ClientHTTP implements IClientHTTP {
     })
   }
 
-  async put(url: string, body: any, options?: RequestInit): Promise<Response> {
+  async put(
+    url: string,
+    body: unknown,
+    options?: RequestInit
+  ): Promise<Response> {
     return this.httpClient(url, {
       method: "PUT",
       body: JSON.stringify(body),

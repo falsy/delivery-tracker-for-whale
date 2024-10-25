@@ -5,7 +5,7 @@ export default class LayerDTO<T> implements ILayerDTO<T> {
   readonly message: string
   readonly data?: T
   readonly errorCode?: string
-  readonly errorDetails?: any
+  readonly errorDetails?: unknown
 
   constructor({
     isError = false,
@@ -18,7 +18,7 @@ export default class LayerDTO<T> implements ILayerDTO<T> {
     message?: string
     data?: T
     errorCode?: string
-    errorDetails?: any
+    errorDetails?: unknown
   } = {}) {
     this.isError = isError
     this.message = message

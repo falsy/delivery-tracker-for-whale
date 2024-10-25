@@ -1,4 +1,4 @@
-export default () => {
+export default function ArrowDownIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
