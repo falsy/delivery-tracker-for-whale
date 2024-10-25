@@ -56,6 +56,17 @@ export default class BrowserStorage implements IBrowserStorage {
 
   removeItem(key: string): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
+      // dev
+      if (!globalThis.whale) {
+        window.localStorage.removeItem(key)
+        resolve(
+          new LayerDTO({
+            data: true
+          })
+        )
+        return
+      }
+
       this.browserStorage.remove(key, () => {
         resolve(
           new LayerDTO({
@@ -68,6 +79,17 @@ export default class BrowserStorage implements IBrowserStorage {
 
   clear(): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
+      // dev
+      if (!globalThis.whale) {
+        window.localStorage.clear()
+        resolve(
+          new LayerDTO({
+            data: true
+          })
+        )
+        return
+      }
+
       this.browserStorage.clear(() => {
         resolve(
           new LayerDTO({
