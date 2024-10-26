@@ -1,5 +1,5 @@
 import { css } from "@emotion/react"
-import ICarrierDTO from "../../../../core/dtos/interfaces/ICarrierDTO"
+import ICarrierDTO from "@core/dtos/interfaces/ICarrierDTO"
 
 export default function NewWinodwButton({
   carrier,

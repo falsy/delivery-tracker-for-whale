@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 import { css } from "@emotion/react"
-import ITrackerDTO from "../../../../core/dtos/interfaces/ITrackerDTO"
-import useDependencies from "../../../hooks/useDependencies"
-import { useErrorMessage } from "../../../hooks/zustands/useErrorMessage"
-import useTrackerList from "../../../hooks/useTrackerList"
-import PlusIcon from "../../icons/PlusIcon"
-import CloseIcon from "../../icons/CloseIcon"
+import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
+import useDependencies from "@hooks/useDependencies"
+import useError from "@hooks/useError"
+import useTrackers from "@hooks/useTrackers"
+import PlusIcon from "@components/icons/PlusIcon"
+import CloseIcon from "@components/icons/CloseIcon"
 
 export default function MemoBox({ tracker }: { tracker: ITrackerDTO }) {
   const { controllers } = useDependencies()
-  const { setErrMessage } = useErrorMessage()
-  const { getTrackerList } = useTrackerList()
+  const { setMessage } = useError()
+  const { getTrackers } = useTrackers()
 
   const [memos, setMemos] = useState(tracker.memos)
 
@@ -35,7 +35,7 @@ export default function MemoBox({ tracker }: { tracker: ITrackerDTO }) {
       newMemo
     )
     if (isError) {
-      setErrMessage()
+      setMessage()
       setMemos(cacheMemos)
       return
     }
@@ -44,19 +44,19 @@ export default function MemoBox({ tracker }: { tracker: ITrackerDTO }) {
   const handleClickAddMemo = async (tracker: ITrackerDTO) => {
     const { isError } = await controllers.tracker.addMemo(tracker)
     if (isError) {
-      setErrMessage()
+      setMessage()
       return
     }
-    getTrackerList()
+    getTrackers()
   }
 
   const handleDeleteMemo = async (idx: number) => {
     const { isError } = await controllers.tracker.deleteMemo(tracker, idx)
     if (isError) {
-      setErrMessage()
+      setMessage()
       return
     }
-    getTrackerList()
+    getTrackers()
   }
 
   return (

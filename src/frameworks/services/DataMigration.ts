@@ -1,6 +1,6 @@
-import { TRACKER_LIST } from "../../constants"
-import Tracker from "../../core/domains/entities/Tracker"
-import ICarrierDTO from "../../core/dtos/interfaces/ICarrierDTO"
+import { TRACKER_LIST } from "@constants/index"
+import Tracker from "@core/domains/entities/Tracker"
+import ICarrierDTO from "@core/dtos/interfaces/ICarrierDTO"
 
 class DataMigration {
   private carrierList: ICarrierDTO[]

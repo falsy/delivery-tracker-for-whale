@@ -1,10 +1,10 @@
 import { useEffect } from "react"
 import { css } from "@emotion/react"
-import useDependencies from "../hooks/useDependencies"
-import { useErrorMessage } from "../hooks/zustands/useErrorMessage"
-import useTrackers from "../hooks/useTrackerList"
-import { useCarriers } from "../hooks/zustands/useCarriers"
-import DataMigration from "../services/DataMigration"
+import useDependencies from "@hooks/useDependencies"
+import useError from "@hooks/useError"
+import useTrackers from "@hooks/useTrackers"
+import useCarriers from "@hooks/useCarriers"
+import DataMigration from "@services/DataMigration"
 import TipMessage from "./commons/boxs/TipMessage"
 import Footer from "./commons/layouts/Footer"
 import Header from "./commons/layouts/Header"
@@ -14,9 +14,9 @@ import TrackerSection from "./trackers/sections/TrackerSection"
 
 const Dashboard = () => {
   const { controllers } = useDependencies()
-  const { setErrMessage } = useErrorMessage()
+  const { setMessage } = useError()
   const { carriers, setCarriers } = useCarriers()
-  const { getTrackerList } = useTrackers()
+  const { getTrackers } = useTrackers()
 
   useEffect(() => {
     getCarrierList()
@@ -25,7 +25,7 @@ const Dashboard = () => {
   const getCarrierList = async () => {
     const { isError, message, data } = await controllers.carrier.getCarriers()
     if (isError) {
-      setErrMessage(message)
+      setMessage(message)
       return
     }
     setCarriers(data)
@@ -39,7 +39,7 @@ const Dashboard = () => {
   const checkDataMigration = async () => {
     const dataMigration = new DataMigration(carriers)
     await dataMigration.migration()
-    getTrackerList()
+    getTrackers()
   }
 
   return (

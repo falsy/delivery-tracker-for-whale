@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { css } from "@emotion/react"
-import ITrackerDTO from "../../../../core/dtos/interfaces/ITrackerDTO"
-import useDependencies from "../../../hooks/useDependencies"
-import { useErrorMessage } from "../../../hooks/zustands/useErrorMessage"
+import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
+import useDependencies from "@hooks/useDependencies"
+import useError from "@hooks/useError"
 
 export default function LabelBox({ tracker }: { tracker: ITrackerDTO }) {
   const { controllers } = useDependencies()
-  const { setErrMessage } = useErrorMessage()
+  const { setMessage } = useError()
 
   const [label, setLabel] = useState(tracker.label)
 
@@ -16,7 +16,7 @@ export default function LabelBox({ tracker }: { tracker: ITrackerDTO }) {
     setLabel(newLabel)
     const { isError } = await controllers.tracker.updateLabel(tracker, newLabel)
     if (isError) {
-      setErrMessage()
+      setMessage()
       setLabel(cacheLabel)
       return
     }

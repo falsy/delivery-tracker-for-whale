@@ -1,21 +1,21 @@
 import { css } from "@emotion/react"
-import useDependencies from "../../../hooks/useDependencies"
-import { useErrorMessage } from "../../../hooks/zustands/useErrorMessage"
-import useTrackerList from "../../../hooks/useTrackerList"
-import Button from "../../commons/items/Button"
+import useDependencies from "@hooks/useDependencies"
+import useError from "@hooks/useError"
+import useTrackers from "@hooks/useTrackers"
+import Button from "@components/commons/items/Button"
 
 export default function CreateTracker() {
   const { controllers } = useDependencies()
-  const { setErrMessage } = useErrorMessage()
-  const { getTrackerList } = useTrackerList()
+  const { setMessage } = useError()
+  const { getTrackers } = useTrackers()
 
   const createTracker = async () => {
     const { isError } = await controllers.tracker.addTracker()
     if (isError) {
-      setErrMessage()
+      setMessage()
       return
     }
-    getTrackerList()
+    getTrackers()
   }
 
   return (

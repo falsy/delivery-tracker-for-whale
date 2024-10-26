@@ -1,5 +1,5 @@
 import { css } from "@emotion/react"
-import CloseIcon from "../../icons/CloseIcon"
+import CloseIcon from "@components/icons/CloseIcon"
 
 export default function DeleteButton({
   handleClick
