@@ -1,7 +1,7 @@
 const HTMLWeebPackPlugin = require("html-webpack-plugin")
 const path = require("path")
 
-module.exports = (env, options) => {
+module.exports = () => {
   return {
     entry: path.resolve(__dirname, "src/index.tsx"),
     module: {
