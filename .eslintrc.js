@@ -23,6 +23,7 @@ module.exports = {
     "@typescript-eslint/no-require-imports": "off",
     "react/react-in-jsx-scope": "off",
     "react/no-unknown-property": ["error", { ignore: ["css"] }],
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "no-extra-semi": "off"
   }
 }
