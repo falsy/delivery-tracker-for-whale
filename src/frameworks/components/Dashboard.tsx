@@ -4,7 +4,7 @@ import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
-import DataMigration from "@services/DataMigration"
+import Migration from "@services/Migration"
 import TipMessage from "./commons/boxs/TipMessage"
 import Footer from "./commons/layouts/Footer"
 import Header from "./commons/layouts/Header"
@@ -37,8 +37,7 @@ const Dashboard = () => {
   }, [carriers])
 
   const checkDataMigration = async () => {
-    const dataMigration = new DataMigration(carriers)
-    await dataMigration.migration()
+    await new Migration(carriers).migration()
     getTrackers()
   }
 

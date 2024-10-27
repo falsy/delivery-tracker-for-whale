@@ -14,6 +14,9 @@ export default function Loading() {
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
+        text-indent: -9999px;
+        font-size: 0;
         &::after {
           content: "";
           display: inline-block;
@@ -26,6 +29,8 @@ export default function Loading() {
           animation: ${spin} 0.85s ease-in-out infinite;
         }
       `}
-    />
+    >
+      loading...
+    </div>
   )
 }

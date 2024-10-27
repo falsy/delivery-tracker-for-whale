@@ -8,6 +8,7 @@ export default function DeleteButton({
 }) {
   return (
     <button
+      aria-label="delete-button"
       className="delete-button"
       css={css`
         width: 30px;
@@ -15,7 +16,6 @@ export default function DeleteButton({
         display: flex;
         justify-content: center;
         align-items: center;
-        // transform: translate3d(5px, 0, 0);
 
         @media (prefers-color-scheme: dark) {
           background: rgb(160, 160, 160);

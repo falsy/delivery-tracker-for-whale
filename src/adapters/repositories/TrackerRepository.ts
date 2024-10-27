@@ -96,7 +96,8 @@ export default class TrackerRepository implements ITrackerRepository {
     }
 
     try {
-      const newTrackers = data.concat(tracker)
+      const trackerDTO = new TrackerDTO(tracker)
+      const newTrackers = data.concat(trackerDTO)
       const parseString = JSON.stringify(newTrackers)
 
       const { data: innerData } = await this.browserStorage.setItem(

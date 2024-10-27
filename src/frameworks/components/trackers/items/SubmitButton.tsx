@@ -7,6 +7,7 @@ export default function SubmitButton({
 }) {
   return (
     <button
+      aria-label="submit-button"
       css={css`
         border: 1px solid #05c38b;
         line-height: 40px;
