@@ -1,5 +1,6 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react"
-import Button from "../../frameworks/components/commons/items/Button"
+import { render, screen, waitFor } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import Button from "@components/commons/items/Button"
 
 describe("Button", () => {
   test("버튼이 정상적으로 렌더링 되어야 한다.", () => {
@@ -19,7 +20,7 @@ describe("Button", () => {
 
     const addDeliveryButton = screen.getByText("추가")
 
-    fireEvent.click(addDeliveryButton)
+    userEvent.click(addDeliveryButton)
 
     await waitFor(() => {
       expect(clickEvent).toHaveBeenCalled()

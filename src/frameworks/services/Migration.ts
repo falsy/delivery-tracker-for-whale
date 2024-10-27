@@ -42,8 +42,8 @@ export default class Migration {
         data[TRACKER_LIST] = JSON.stringify(newTrackers)
         globalThis.whale.storage.local.set(data, () => {
           window.localStorage.removeItem("DELIVERY_DATA")
-          resolve(true)
         })
+        resolve(true)
       } catch {
         resolve(false)
       }
@@ -58,12 +58,16 @@ export default class Migration {
         return
       }
 
-      const data = {}
-      data[TRACKER_LIST] = oldData
-      globalThis.whale.storage.local.set(data, () => {
-        window.localStorage.removeItem(TRACKER_LIST)
+      try {
+        const data = {}
+        data[TRACKER_LIST] = oldData
+        globalThis.whale.storage.local.set(data, () => {
+          window.localStorage.removeItem(TRACKER_LIST)
+        })
         resolve(true)
-      })
+      } catch {
+        resolve(false)
+      }
     })
   }
 

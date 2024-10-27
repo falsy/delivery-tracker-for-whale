@@ -8,7 +8,7 @@ module.exports = {
   moduleNameMapper: {
     "^@core/(.*)$": "<rootDir>/core/$1",
     "^@constants/(.*)$": "<rootDir>/constants/$1",
-    "^@di/(.*)$": "<rootDir>/di/$1",
+    "^@di/(.*)$": "<rootDir>/frameworks/di/$1",
     "^@components/(.*)$": "<rootDir>/frameworks/components/$1",
     "^@services/(.*)$": "<rootDir>/frameworks/services/$1",
     "^@hooks/(.*)$": "<rootDir>/frameworks/hooks/$1"
