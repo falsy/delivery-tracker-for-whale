@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "택배 배송 조회",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "간편하게 택배 배송을 조회합니다.",
   "icons": {
     "32": "./imgs/delivery-32-v5.png",

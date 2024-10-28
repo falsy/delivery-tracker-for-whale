@@ -1,4 +1,4 @@
-import { KeyboardEvent, useRef, useState } from "react"
+import { KeyboardEvent, useEffect, useRef, useState } from "react"
 import { css } from "@emotion/react"
 import ICarrierDTO from "@core/dtos/interfaces/ICarrierDTO"
 import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
@@ -20,6 +20,7 @@ export default function CarrierSelectBox({
   const { getTrackers } = useTrackers()
   const { carriers } = useCarriers()
 
+  const menuButtonRef = useRef(null)
   const menuRef = useRef(null)
 
   const [isShowSelectBox, setIsShowSelectBox] = useState(false)
@@ -35,6 +36,9 @@ export default function CarrierSelectBox({
     }
     setIsShowSelectBox(false)
     getTrackers()
+    if (menuButtonRef?.current) {
+      menuButtonRef.current.focus()
+    }
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -56,6 +60,16 @@ export default function CarrierSelectBox({
     }
   }
 
+  useEffect(() => {
+    if (isShowSelectBox && menuRef?.current) {
+      const items = menuRef.current.querySelectorAll('[role="menuitem"]')
+      const index = carriers.findIndex((c) => c.id === tracker.carrierId)
+      if (items.length > 0) {
+        items[index].focus()
+      }
+    }
+  }, [isShowSelectBox])
+
   return (
     <div
       css={css`
@@ -64,6 +78,7 @@ export default function CarrierSelectBox({
       `}
     >
       <button
+        ref={menuButtonRef}
         aria-expanded={isShowSelectBox}
         aria-controls="carrier-select-box"
         css={css`
