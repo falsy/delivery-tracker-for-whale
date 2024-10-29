@@ -48,13 +48,6 @@ describe("TipMessage", () => {
       ).toHaveBeenCalled()
     })
 
-    // 새로운 빈 트래커 추가
-    await waitFor(() => {
-      expect(
-        useDependencies().controllers.tracker.addTracker
-      ).toHaveBeenCalled()
-    })
-
     // 트래거 리스트를 리로드
     await waitFor(() => {
       expect(useTrackers().getTrackers).toHaveBeenCalled()

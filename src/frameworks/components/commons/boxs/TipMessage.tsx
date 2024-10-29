@@ -14,8 +14,6 @@ export default function TipMessage() {
     ) {
       const { isError } = await controllers.tracker.clearTrackers()
       if (isError) return
-      const { isError: isAddError } = await controllers.tracker.addTracker()
-      if (isAddError) return
       getTrackers()
     }
   }
