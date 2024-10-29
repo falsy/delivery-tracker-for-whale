@@ -5,5 +5,3 @@
 ## 스크린샷
 
 ![Capture](_readme/screenshot-1.png)
-![Capture](_readme/screenshot-2.png)
-![Capture](_readme/screenshot-3.png)

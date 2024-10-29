@@ -62,14 +62,13 @@ export default function CarrierSelectBox({
   }
 
   useEffect(() => {
-    if (isShowSelectBox && menuRef?.current) {
+    if (isShowSelectBox && tracker && menuRef?.current) {
       const items = menuRef.current.querySelectorAll('[role="menuitem"]')
-      const index = carriers.findIndex((c) => c.id === tracker.carrierId)
-      if (items.length > 0) {
-        items[index].focus()
-      }
+      const findIndex = carriers.findIndex((c) => c.id === tracker.carrierId)
+      const index = findIndex === -1 ? 0 : findIndex
+      items[index]?.focus()
     }
-  }, [isShowSelectBox])
+  }, [isShowSelectBox, tracker])
 
   return (
     <div
