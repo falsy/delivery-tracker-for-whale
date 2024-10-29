@@ -1,24 +1,26 @@
 import { useState } from "react"
 import { css } from "@emotion/react"
-import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
 import ICarrierDTO from "@core/dtos/interfaces/ICarrierDTO"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import NewWinodwButton from "../items/NewWinodwButton"
 import SubmitButton from "../items/SubmitButton"
+import useTrackers from "@hooks/useTrackers"
 
 export default function TrackerNumberBox({
   carrier,
-  tracker,
+  trackerId,
   getDelivery
 }: {
   carrier: ICarrierDTO
-  tracker: ITrackerDTO
+  trackerId: string
   getDelivery: (carrierId: string, trackerTrackingNumber: string) => void
 }) {
   const { controllers } = useDependencies()
+  const { trackers, getTrackers } = useTrackers()
   const { setMessage } = useError()
 
+  const tracker = trackers.find((tracker) => tracker.id === trackerId)
   const [trackingNumber, setTrackingNumber] = useState(tracker.trackingNumber)
 
   const handleChangeTrackingNumber = async (
@@ -37,6 +39,7 @@ export default function TrackerNumberBox({
       setTrackingNumber(cacheNumber)
       return
     }
+    getTrackers()
   }
 
   return (

@@ -13,7 +13,7 @@ jest.mock("@hooks/useTrackers")
 
 describe("MemoBox 컴포넌트", () => {
   const tracker = new TrackerDTO({
-    id: "id",
+    id: "aaa",
     carrierId: "carrierId",
     label: "initial label",
     trackingNumber: "1234",
@@ -34,12 +34,13 @@ describe("MemoBox 컴포넌트", () => {
       setMessage: jest.fn()
     })
     ;(useTrackers as any).mockReturnValue({
+      trackers: [tracker],
       getTrackers: jest.fn()
     })
   })
 
   test("초기 렌더링 시 tracker.memos 값이 input 필드에 설정되어야 한다", () => {
-    render(<MemoBox tracker={tracker} />)
+    render(<MemoBox trackerId={"aaa"} />)
 
     const inputs = screen.getAllByPlaceholderText(
       "이곳에 추가적인 메모를 입력할 수 있어요."
@@ -54,7 +55,7 @@ describe("MemoBox 컴포넌트", () => {
       isError: false
     })
 
-    render(<MemoBox tracker={tracker} />)
+    render(<MemoBox trackerId={"aaa"} />)
     const addButton = screen.getByRole("button", { name: /메모 추가/i })
 
     await userEvent.click(addButton)
@@ -67,7 +68,7 @@ describe("MemoBox 컴포넌트", () => {
       isError: false
     })
 
-    render(<MemoBox tracker={tracker} />)
+    render(<MemoBox trackerId={"aaa"} />)
     const inputs = screen.getAllByPlaceholderText(
       "이곳에 추가적인 메모를 입력할 수 있어요."
     ) as HTMLInputElement[]
@@ -88,7 +89,7 @@ describe("MemoBox 컴포넌트", () => {
       isError: false
     })
 
-    render(<MemoBox tracker={tracker} />)
+    render(<MemoBox trackerId={"aaa"} />)
     const deleteButtons = screen.getAllByRole("button")
 
     await userEvent.click(deleteButtons[1]) // 두 번째 버튼이 첫 번째 메모 삭제 버튼임
@@ -103,7 +104,7 @@ describe("MemoBox 컴포넌트", () => {
       isError: true
     })
 
-    render(<MemoBox tracker={tracker} />)
+    render(<MemoBox trackerId={"aaa"} />)
     const inputs = screen.getAllByPlaceholderText(
       "이곳에 추가적인 메모를 입력할 수 있어요."
     ) as HTMLInputElement[]

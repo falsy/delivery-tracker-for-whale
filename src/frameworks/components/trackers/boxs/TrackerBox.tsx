@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { css } from "@emotion/react"
-import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useTrackers from "@hooks/useTrackers"
@@ -12,11 +11,11 @@ import TrackerNumberBox from "./TrackerNumberBox"
 import MemoBox from "./MemoBox"
 import TrackerState from "./TrackerStateBox"
 
-export default function TrackerBox({ tracker }: { tracker: ITrackerDTO }) {
+export default function TrackerBox({ trackerId }: { trackerId: string }) {
   const { controllers } = useDependencies()
   const { setMessage } = useError()
   const { carriers } = useCarriers()
-  const { getTrackers } = useTrackers()
+  const { trackers, getTrackers } = useTrackers()
 
   const [isLoading, setLoading] = useState(false)
   const [errDeliveryMessage, setDeliveryErrorMessage] = useState("")
@@ -24,6 +23,7 @@ export default function TrackerBox({ tracker }: { tracker: ITrackerDTO }) {
   const [progresses, setProgresses] = useState([])
 
   const handleClickDeleteTracker = async (id: string) => {
+    if (!window.confirm("조회 정보를 삭제하시겠습니까?")) return
     const { isError } = await controllers.tracker.deleteTracker(id)
     if (isError) {
       setMessage()
@@ -68,6 +68,7 @@ export default function TrackerBox({ tracker }: { tracker: ITrackerDTO }) {
     setLoading(false)
   }
 
+  const tracker = trackers.find((tracker) => tracker.id === trackerId)
   const carrier = tracker.carrierId
     ? carriers.find((carrier) => carrier.id === tracker.carrierId)
     : carriers[0]
@@ -94,17 +95,15 @@ export default function TrackerBox({ tracker }: { tracker: ITrackerDTO }) {
           padding: 5px 0 10px;
         `}
       >
-        <LabelBox tracker={tracker} />
-        <DeleteButton
-          handleClick={() => handleClickDeleteTracker(tracker.id)}
-        />
+        <LabelBox trackerId={trackerId} />
+        <DeleteButton handleClick={() => handleClickDeleteTracker(trackerId)} />
       </div>
 
-      <CarrierSelectBox carrier={carrier} tracker={tracker} />
+      <CarrierSelectBox carrier={carrier} trackerId={trackerId} />
 
       <TrackerNumberBox
         carrier={carrier}
-        tracker={tracker}
+        trackerId={trackerId}
         getDelivery={handleClickDelivery}
       />
 
@@ -118,7 +117,7 @@ export default function TrackerBox({ tracker }: { tracker: ITrackerDTO }) {
         />
       )}
 
-      <MemoBox tracker={tracker} />
+      <MemoBox trackerId={trackerId} />
     </div>
   )
 }

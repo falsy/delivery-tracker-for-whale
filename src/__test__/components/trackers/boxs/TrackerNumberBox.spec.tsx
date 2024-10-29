@@ -1,20 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
 import ICarrierDTO from "@core/dtos/interfaces/ICarrierDTO"
-import TrackerNumberBox from "@components/trackers/boxs/TrackerNumberBox"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
+import useTrackers from "@hooks/useTrackers"
+import TrackerNumberBox from "@components/trackers/boxs/TrackerNumberBox"
+import TrackerDTO from "@core/dtos/TrackerDTO"
 
 jest.mock("@hooks/useDependencies")
 jest.mock("@hooks/useError")
+jest.mock("@hooks/useTrackers")
 
 describe("TrackerNumberBox 컴포넌트", () => {
-  const tracker: ITrackerDTO = {
-    id: "tracker-id",
-    trackingNumber: "123456789"
-  } as ITrackerDTO
+  const tracker = new TrackerDTO({
+    id: "aaa",
+    carrierId: "carrierId",
+    label: "initial label",
+    trackingNumber: "123456789",
+    memos: []
+  })
 
   const carrier: ICarrierDTO = {
     id: "carrier-id",
@@ -36,13 +41,17 @@ describe("TrackerNumberBox 컴포넌트", () => {
     ;(useError as any).mockReturnValue({
       setMessage: jest.fn()
     })
+    ;(useTrackers as any).mockReturnValue({
+      trackers: [tracker],
+      getTrackers: jest.fn()
+    })
   })
 
   test("초기 렌더링 시 trackingNumber 값이 input 필드에 설정되어야 한다", () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
-        tracker={tracker}
+        trackerId={"aaa"}
         getDelivery={getDeliveryMock}
       />
     )
@@ -60,7 +69,7 @@ describe("TrackerNumberBox 컴포넌트", () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
-        tracker={tracker}
+        trackerId={"aaa"}
         getDelivery={getDeliveryMock}
       />
     )
@@ -86,7 +95,7 @@ describe("TrackerNumberBox 컴포넌트", () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
-        tracker={tracker}
+        trackerId={"aaa"}
         getDelivery={getDeliveryMock}
       />
     )
@@ -106,7 +115,7 @@ describe("TrackerNumberBox 컴포넌트", () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
-        tracker={tracker}
+        trackerId={"aaa"}
         getDelivery={getDeliveryMock}
       />
     )
@@ -118,7 +127,7 @@ describe("TrackerNumberBox 컴포넌트", () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
-        tracker={tracker}
+        trackerId={"aaa"}
         getDelivery={getDeliveryMock}
       />
     )
@@ -130,7 +139,7 @@ describe("TrackerNumberBox 컴포넌트", () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
-        tracker={tracker}
+        trackerId={"aaa"}
         getDelivery={getDeliveryMock}
       />
     )

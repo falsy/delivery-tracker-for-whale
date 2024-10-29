@@ -4,14 +4,16 @@ import userEvent from "@testing-library/user-event"
 import TrackerDTO from "@core/dtos/TrackerDTO"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
+import useTrackers from "@hooks/useTrackers"
 import LabelBox from "@components/trackers/boxs/LabelBox"
 
 jest.mock("@hooks/useDependencies")
 jest.mock("@hooks/useError")
+jest.mock("@hooks/useTrackers")
 
 describe("LabelBox 컴포넌트", () => {
   const tracker = new TrackerDTO({
-    id: "id",
+    id: "aaa",
     carrierId: "carrierId",
     label: "initial label",
     trackingNumber: "1234",
@@ -29,10 +31,14 @@ describe("LabelBox 컴포넌트", () => {
     ;(useError as any).mockReturnValue({
       setMessage: jest.fn()
     })
+    ;(useTrackers as any).mockReturnValue({
+      trackers: [tracker],
+      getTrackers: jest.fn()
+    })
   })
 
   test("초기 렌더링 시 input에 tracker.label 값이 설정되어야 한다", () => {
-    render(<LabelBox tracker={tracker} />)
+    render(<LabelBox trackerId={"aaa"} />)
     const input = screen.getByPlaceholderText(
       "이곳에 배송에 대한 간단한 메모를 적을 수 있어요."
     )
@@ -50,7 +56,7 @@ describe("LabelBox 컴포넌트", () => {
       }
     })
 
-    render(<LabelBox tracker={tracker} />)
+    render(<LabelBox trackerId={"aaa"} />)
     const input = screen.getByPlaceholderText(
       "이곳에 배송에 대한 간단한 메모를 적을 수 있어요."
     )
@@ -79,7 +85,7 @@ describe("LabelBox 컴포넌트", () => {
       })
     })
 
-    render(<LabelBox tracker={tracker} />)
+    render(<LabelBox trackerId={"aaa"} />)
     const input = screen.getByPlaceholderText(
       "이곳에 배송에 대한 간단한 메모를 적을 수 있어요."
     )

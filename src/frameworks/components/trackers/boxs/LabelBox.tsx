@@ -1,13 +1,15 @@
 import { useState } from "react"
 import { css } from "@emotion/react"
-import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
+import useTrackers from "@hooks/useTrackers"
 
-export default function LabelBox({ tracker }: { tracker: ITrackerDTO }) {
+export default function LabelBox({ trackerId }: { trackerId: string }) {
   const { controllers } = useDependencies()
+  const { trackers, getTrackers } = useTrackers()
   const { setMessage } = useError()
 
+  const tracker = trackers.find((tracker) => tracker.id === trackerId)
   const [label, setLabel] = useState(tracker.label)
 
   const handleChangeLabel = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +22,7 @@ export default function LabelBox({ tracker }: { tracker: ITrackerDTO }) {
       setLabel(cacheLabel)
       return
     }
+    getTrackers()
   }
 
   return (
@@ -45,6 +48,7 @@ export default function LabelBox({ tracker }: { tracker: ITrackerDTO }) {
         type="text"
         value={label}
         onChange={(e) => handleChangeLabel(e)}
+        onBlur={(e) => handleChangeLabel(e)}
         placeholder="이곳에 배송에 대한 간단한 메모를 적을 수 있어요."
       />
     </div>

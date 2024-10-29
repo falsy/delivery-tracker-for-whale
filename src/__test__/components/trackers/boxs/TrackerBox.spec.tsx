@@ -6,22 +6,21 @@ import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
-import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
+import TrackerDTO from "@core/dtos/TrackerDTO"
 
-// 모듈 모킹
 jest.mock("@hooks/useDependencies")
 jest.mock("@hooks/useError")
 jest.mock("@hooks/useTrackers")
 jest.mock("@hooks/useCarriers")
 
 describe("TrackerBox 컴포넌트", () => {
-  const tracker: ITrackerDTO = {
-    id: "tracker-id",
-    carrierId: "carrier-id",
+  const tracker = new TrackerDTO({
+    id: "aaa",
+    carrierId: "carrierId",
+    label: "initial label",
     trackingNumber: "123456789",
-    memos: [],
-    label: "Sample Label"
-  } as ITrackerDTO // 필요한 필드만 포함하도록 설정
+    memos: []
+  })
 
   beforeEach(() => {
     ;(useDependencies as any).mockReturnValue({
@@ -36,13 +35,15 @@ describe("TrackerBox 컴포넌트", () => {
       setMessage: jest.fn()
     })
     ;(useTrackers as any).mockReturnValue({
+      trackers: [tracker],
       getTrackers: jest.fn()
     })
     ;(useCarriers as any).mockReturnValue({
       carriers: [
         {
-          id: "carrier-id",
+          id: "carrierId",
           name: "CarrierName",
+          displayName: "CarrierName",
           popupURL: "https://example.com",
           isCrawlable: true
         }
@@ -51,7 +52,7 @@ describe("TrackerBox 컴포넌트", () => {
   })
 
   test("초기 렌더링 시 하위 컴포넌트들이 렌더링되어야 한다", () => {
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox trackerId={"aaa"} />)
 
     expect(
       screen.getByPlaceholderText(
@@ -70,12 +71,14 @@ describe("TrackerBox 컴포넌트", () => {
       isError: false
     })
 
-    render(<TrackerBox tracker={tracker} />)
+    jest.spyOn(window, "confirm").mockReturnValue(true)
+
+    render(<TrackerBox trackerId={"aaa"} />)
     const deleteButton = screen.getByRole("button", { name: "delete-button" })
 
     await userEvent.click(deleteButton)
 
-    expect(controllers.tracker.deleteTracker).toHaveBeenCalledWith("tracker-id")
+    expect(controllers.tracker.deleteTracker).toHaveBeenCalledWith("aaa")
   })
 
   test("유효한 carrierId와 trackingNumber로 handleClickDelivery 호출 시 getDelivery 함수가 호출되어야 한다", async () => {
@@ -98,7 +101,7 @@ describe("TrackerBox 컴포넌트", () => {
       }
     })
 
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox trackerId={"aaa"} />)
     const getDeliveryButton = screen.getByRole("button", {
       name: "submit-button"
     })
@@ -106,7 +109,7 @@ describe("TrackerBox 컴포넌트", () => {
     await userEvent.click(getDeliveryButton)
 
     expect(controllers.tracker.getDelivery).toHaveBeenCalledWith(
-      "carrier-id",
+      "carrierId",
       "123456789"
     )
   })
@@ -120,7 +123,7 @@ describe("TrackerBox 컴포넌트", () => {
       data: null
     })
 
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox trackerId={"aaa"} />)
     const getDeliveryButton = screen.getByRole("button", {
       name: "submit-button"
     })

@@ -1,7 +1,6 @@
 import { KeyboardEvent, useEffect, useRef, useState } from "react"
 import { css } from "@emotion/react"
 import ICarrierDTO from "@core/dtos/interfaces/ICarrierDTO"
-import ITrackerDTO from "@core/dtos/interfaces/ITrackerDTO"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useTrackers from "@hooks/useTrackers"
@@ -10,20 +9,22 @@ import ArrowDownIcon from "@components/icons/ArrowDownIcon"
 
 export default function CarrierSelectBox({
   carrier,
-  tracker
+  trackerId
 }: {
   carrier: ICarrierDTO
-  tracker: ITrackerDTO
+  trackerId: string
 }) {
   const { controllers } = useDependencies()
   const { setMessage } = useError()
-  const { getTrackers } = useTrackers()
+  const { trackers, getTrackers } = useTrackers()
   const { carriers } = useCarriers()
 
   const menuButtonRef = useRef(null)
   const menuRef = useRef(null)
 
   const [isShowSelectBox, setIsShowSelectBox] = useState(false)
+
+  const tracker = trackers.find((t) => t.id === trackerId)
 
   const handleClickSelect = async (carrierId: string) => {
     const { isError } = await controllers.tracker.updateCarrierId(

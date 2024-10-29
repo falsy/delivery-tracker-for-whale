@@ -7,11 +7,12 @@ import useTrackers from "@hooks/useTrackers"
 import PlusIcon from "@components/icons/PlusIcon"
 import CloseIcon from "@components/icons/CloseIcon"
 
-export default function MemoBox({ tracker }: { tracker: ITrackerDTO }) {
+export default function MemoBox({ trackerId }: { trackerId: string }) {
   const { controllers } = useDependencies()
   const { setMessage } = useError()
-  const { getTrackers } = useTrackers()
+  const { trackers, getTrackers } = useTrackers()
 
+  const tracker = trackers.find((tracker) => tracker.id === trackerId)
   const [memos, setMemos] = useState(tracker.memos)
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export default function MemoBox({ tracker }: { tracker: ITrackerDTO }) {
       setMemos(cacheMemos)
       return
     }
+    getTrackers()
   }
 
   const handleClickAddMemo = async (tracker: ITrackerDTO) => {
@@ -117,6 +119,9 @@ export default function MemoBox({ tracker }: { tracker: ITrackerDTO }) {
                     type="text"
                     value={memo}
                     onChange={(e) => {
+                      handleChangeMemo(e, i)
+                    }}
+                    onBlur={(e) => {
                       handleChangeMemo(e, i)
                     }}
                     placeholder="이곳에 추가적인 메모를 입력할 수 있어요."

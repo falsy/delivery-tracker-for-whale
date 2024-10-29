@@ -12,7 +12,7 @@ export default function TrackerSection() {
       `}
     >
       {trackers.map((tracker) => {
-        return <TrackerBox key={tracker.id} tracker={tracker} />
+        return <TrackerBox key={tracker.id} trackerId={tracker.id} />
       })}
     </div>
   )
