@@ -1,0 +1,1 @@
+{"version":3,"file":"NTrackerUseCase.d.ts","sourceRoot":"","sources":["../../../src/frameworks/useCases/NTrackerUseCase.ts"],"names":[],"mappings":"AACA,OAAO,cAAc,MAAM,kCAAkC,CAAA;AAC7D,OAAO,kBAAkB,MAAM,qDAAqD,CAAA;AACpF,OAAO,kBAAkB,MAAM,qDAAqD,CAAA;AAGpF,MAAM,CAAC,OAAO,OAAO,eAAgB,SAAQ,cAAc;gBAEzB,iBAAiB,EAAE,kBAAkB,EACrC,iBAAiB,EAAE,kBAAkB;CAItE"}

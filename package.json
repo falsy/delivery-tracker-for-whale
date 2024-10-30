@@ -10,11 +10,11 @@
   "scripts": {
     "lint": "eslint packages/*/src --ext .ts",
     "start:client": "yarn workspace client start",
-    "start:server": "yarn workspace server start",
+    "start:server": "yarn workspace api-server start",
     "build:client": "yarn workspace client build",
-    "build:server": "yarn workspace server build",
+    "build:server": "yarn workspace api-server build",
     "test:client": "yarn workspace client test",
-    "test:server": "yarn workspace server test"
+    "test:server": "yarn workspace api-server test"
   },
   "devDependencies": {
     "@types/jest": "^29.5.13",

@@ -1,0 +1,1 @@
+{"version":3,"file":"IDeliveryProgressVO.d.ts","sourceRoot":"","sources":["../../../../src/domains/vos/interfaces/IDeliveryProgressVO.ts"],"names":[],"mappings":"AAAA,OAAO,gBAAgB,MAAM,oBAAoB,CAAA;AAEjD,MAAM,CAAC,OAAO,WAAW,mBAAmB;IAC1C,QAAQ,CAAC,WAAW,EAAE,MAAM,CAAA;IAC5B,QAAQ,CAAC,QAAQ,EAAE,MAAM,CAAA;IACzB,QAAQ,CAAC,IAAI,EAAE,MAAM,CAAA;IACrB,QAAQ,CAAC,KAAK,EAAE,gBAAgB,CAAA;CACjC"}
