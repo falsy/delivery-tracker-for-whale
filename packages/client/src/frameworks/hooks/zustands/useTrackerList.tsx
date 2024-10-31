@@ -1,9 +1,9 @@
+import ITracker from "@domains/entities/interfaces/ITracker"
 import { create } from "zustand"
-import ITrackerDTO from "../../../domains/dtos/interfaces/ITrackerDTO"
 
 type Trackers = {
-  trackers: ITrackerDTO[]
-  setTrackers: (Trackers: ITrackerDTO[]) => void
+  trackers: ITracker[]
+  setTrackers: (Trackers: ITracker[]) => void
 }
 
 export const useTrackerList = create<Trackers>((set) => ({

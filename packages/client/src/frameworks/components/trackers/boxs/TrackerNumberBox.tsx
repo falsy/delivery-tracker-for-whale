@@ -1,47 +1,19 @@
-import { useState } from "react"
 import { css } from "@emotion/react"
 import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
-import useDependencies from "@hooks/useDependencies"
-import useError from "@hooks/useError"
 import NewWinodwButton from "../items/NewWinodwButton"
 import SubmitButton from "../items/SubmitButton"
-import useTrackers from "@hooks/useTrackers"
 
 export default function TrackerNumberBox({
   carrier,
-  trackerId,
+  trackingNumber,
+  patchTracker,
   getDelivery
 }: {
   carrier: ICarrierDTO
-  trackerId: string
+  trackingNumber: string
+  patchTracker: ({ trackingNumber }) => void
   getDelivery: (carrierId: string, trackerTrackingNumber: string) => void
 }) {
-  const { controllers } = useDependencies()
-  const { trackers, getTrackers } = useTrackers()
-  const { setMessage } = useError()
-
-  const tracker = trackers.find((tracker) => tracker.id === trackerId)
-  const [trackingNumber, setTrackingNumber] = useState(tracker.trackingNumber)
-
-  const handleChangeTrackingNumber = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const cacheNumber = trackingNumber
-    const newNumber = e.target.value
-    setTrackingNumber(newNumber)
-
-    const { isError } = await controllers.tracker.updateTrackingNumber(
-      tracker,
-      newNumber
-    )
-    if (isError) {
-      setMessage()
-      setTrackingNumber(cacheNumber)
-      return
-    }
-    getTrackers()
-  }
-
   return (
     <div
       css={css`
@@ -73,7 +45,7 @@ export default function TrackerNumberBox({
         `}
         type="text"
         value={trackingNumber}
-        onChange={(e) => handleChangeTrackingNumber(e)}
+        onChange={(e) => patchTracker({ trackingNumber: e.target.value })}
         placeholder="운송장 번호를 입력해주세요."
       />
       {carrier.isPopupEnabled && (

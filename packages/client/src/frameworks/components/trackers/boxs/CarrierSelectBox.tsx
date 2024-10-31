@@ -1,22 +1,16 @@
 import { KeyboardEvent, useEffect, useRef, useState } from "react"
 import { css } from "@emotion/react"
 import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
-import useDependencies from "@hooks/useDependencies"
-import useError from "@hooks/useError"
-import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
 import ArrowDownIcon from "@components/icons/ArrowDownIcon"
 
 export default function CarrierSelectBox({
   carrier,
-  trackerId
+  patchTracker
 }: {
   carrier: ICarrierDTO
-  trackerId: string
+  patchTracker: ({ carrierId }) => void
 }) {
-  const { controllers } = useDependencies()
-  const { setMessage } = useError()
-  const { trackers, getTrackers } = useTrackers()
   const { carriers } = useCarriers()
 
   const menuButtonRef = useRef(null)
@@ -24,22 +18,12 @@ export default function CarrierSelectBox({
 
   const [isShowSelectBox, setIsShowSelectBox] = useState(false)
 
-  const tracker = trackers.find((t) => t.id === trackerId)
-
   const handleClickSelect = async (carrierId: string) => {
-    const { isError } = await controllers.tracker.updateCarrierId(
-      tracker,
-      carrierId
-    )
-    if (isError) {
-      setMessage()
-      return
-    }
     setIsShowSelectBox(false)
-    getTrackers()
     if (menuButtonRef?.current) {
       menuButtonRef.current.focus()
     }
+    patchTracker({ carrierId })
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -62,13 +46,13 @@ export default function CarrierSelectBox({
   }
 
   useEffect(() => {
-    if (isShowSelectBox && tracker && menuRef?.current) {
+    if (isShowSelectBox && carrier && menuRef?.current) {
       const items = menuRef.current.querySelectorAll('[role="menuitem"]')
-      const findIndex = carriers.findIndex((c) => c.id === tracker.carrierId)
+      const findIndex = carriers.findIndex((c) => c.id === carrier.id)
       const index = findIndex === -1 ? 0 : findIndex
       items[index]?.focus()
     }
-  }, [isShowSelectBox, tracker])
+  }, [isShowSelectBox, carrier])
 
   return (
     <div

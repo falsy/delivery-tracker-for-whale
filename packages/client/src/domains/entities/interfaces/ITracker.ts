@@ -4,10 +4,4 @@ export default interface ITracker {
   label: string
   trackingNumber: string
   memos: string[]
-  updateLabel(newLabel: string): void
-  updateTrackingNumber(newTrackingNumber: string): void
-  updateCarrierId(newCarrierId: string): void
-  addMemo(): void
-  updateMemo(index: number, newMemo: string): void
-  deleteMemo(index: number): void
 }

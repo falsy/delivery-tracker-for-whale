@@ -3,7 +3,9 @@ import ITracker from "@domains/entities/interfaces/ITracker"
 import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
 import IDeliveryDTO from "@domains/dtos/interfaces/IDeliveryDTO"
 import ILayerDTO from "@domains/dtos/interfaces/ILayerDTO"
-import ITrackerDTO from "@domains/dtos/interfaces/ITrackerDTO"
+import ITrackerDTO, {
+  ITrackerProps
+} from "@domains/dtos/interfaces/ITrackerDTO"
 import ITrackerRepository from "@domains/repositories/interfaces/ITrackerRepository"
 import LayerDTO from "@adapters/dtos/LayerDTO"
 import TrackerDTO from "@adapters/dtos/TrackerDTO"
@@ -83,6 +85,33 @@ export default class TrackerRepository implements ITrackerRepository {
         message: error.message
       })
     }
+  }
+
+  async patchTracker(
+    id: string,
+    trackerProps: ITrackerProps
+  ): Promise<ILayerDTO<boolean>> {
+    const { isError, message, data } = await this.getTrackers()
+
+    if (isError) {
+      return new LayerDTO({
+        isError,
+        message
+      })
+    }
+
+    const newTrackers = data.map((tracker) => {
+      return tracker.id === id ? { ...tracker, ...trackerProps } : tracker
+    })
+
+    const { data: innerData } = await this.browserStorage.setItem(
+      TRACKER_LIST,
+      JSON.stringify(newTrackers)
+    )
+
+    return new LayerDTO({
+      data: innerData
+    })
   }
 
   async addTracker(tracker: ITracker): Promise<ILayerDTO<boolean>> {
