@@ -1,6 +1,6 @@
 import { KeyboardEvent, useEffect, useRef, useState } from "react"
 import { css } from "@emotion/react"
-import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
+import ICarrier from "@domains/entities/interfaces/ICarrier"
 import useCarriers from "@hooks/useCarriers"
 import ArrowDownIcon from "@components/icons/ArrowDownIcon"
 
@@ -8,7 +8,7 @@ export default function CarrierSelectBox({
   carrier,
   patchTracker
 }: {
-  carrier: ICarrierDTO
+  carrier: ICarrier
   patchTracker: ({ carrierId }) => void
 }) {
   const { carriers } = useCarriers()

@@ -1,10 +1,9 @@
 import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
-import ILayerDTO from "@domains/dtos/interfaces/ILayerDTO"
 import ICarrierRepository from "@domains/repositories/interfaces/ICarrierRepository"
-import CarrierDTO from "@adapters/dtos/CarrierDTO"
+import ILayerDTO from "@domains/dtos/interfaces/ILayerDTO"
 import LayerDTO from "@adapters/dtos/LayerDTO"
-import Carrier from "../entities/Carrier"
 import ICarrier from "../entities/interfaces/ICarrier"
+import Carrier from "../entities/Carrier"
 import ICarrierUseCase from "./interfaces/ICarrierUseCase"
 
 export default class CarrierUseCase implements ICarrierUseCase {
@@ -14,7 +13,7 @@ export default class CarrierUseCase implements ICarrierUseCase {
     this.carrierRepository = carrierRepository
   }
 
-  async getCarriers(): Promise<ILayerDTO<ICarrierDTO[]>> {
+  async getCarriers(): Promise<ILayerDTO<ICarrier[]>> {
     const { isError, message, data } =
       await this.carrierRepository.getCarriers()
 
@@ -29,16 +28,12 @@ export default class CarrierUseCase implements ICarrierUseCase {
       return this.convertToEntity(carrierDTO)
     })
 
-    const carrierDTOs = carriers.map((carrier: ICarrier) => {
-      return this.convertToDTO(carrier)
-    })
-
     return new LayerDTO({
-      data: carrierDTOs
+      data: carriers
     })
   }
 
-  async getCarrier(carrierId: string): Promise<ILayerDTO<ICarrierDTO>> {
+  async getCarrier(carrierId: string): Promise<ILayerDTO<ICarrier>> {
     const { isError, message, data } =
       await this.carrierRepository.getCarrier(carrierId)
 
@@ -49,11 +44,10 @@ export default class CarrierUseCase implements ICarrierUseCase {
       })
     }
 
-    const carriers = this.convertToEntity(data)
-    const carrierDTOs = this.convertToDTO(carriers)
+    const carrier = this.convertToEntity(data)
 
     return new LayerDTO({
-      data: carrierDTOs
+      data: carrier
     })
   }
 
@@ -66,18 +60,6 @@ export default class CarrierUseCase implements ICarrierUseCase {
       isCrawlable: carrierDTO.isCrawlable,
       isPopupEnabled: carrierDTO.isPopupEnabled,
       popupURL: carrierDTO.popupURL
-    })
-  }
-
-  protected convertToDTO(carrier: ICarrier): ICarrierDTO {
-    return new CarrierDTO({
-      id: carrier.id,
-      no: carrier.no,
-      name: carrier.name,
-      displayName: carrier.displayName,
-      isCrawlable: carrier.isCrawlable,
-      isPopupEnabled: carrier.isPopupEnabled,
-      popupURL: carrier.popupURL
     })
   }
 }

@@ -1,9 +1,9 @@
 import { create } from "zustand"
-import ICarrierDTO from "../../../domains/dtos/interfaces/ICarrierDTO"
+import ICarrier from "@domains/entities/interfaces/ICarrier"
 
 type Carriers = {
-  carriers: ICarrierDTO[]
-  setCarriers: (carriers: ICarrierDTO[]) => void
+  carriers: ICarrier[]
+  setCarriers: (carriers: ICarrier[]) => void
 }
 
 export const useCarrierList = create<Carriers>((set) => ({
