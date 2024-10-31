@@ -1,5 +1,5 @@
 import { css } from "@emotion/react"
-import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
+import ICarrier from "@domains/entities/interfaces/ICarrier"
 import NewWinodwButton from "../items/NewWinodwButton"
 import SubmitButton from "../items/SubmitButton"
 
@@ -9,7 +9,7 @@ export default function TrackerNumberBox({
   patchTracker,
   getDelivery
 }: {
-  carrier: ICarrierDTO
+  carrier: ICarrier
   trackingNumber: string
   patchTracker: ({ trackingNumber }) => void
   getDelivery: (carrierId: string, trackerTrackingNumber: string) => void
