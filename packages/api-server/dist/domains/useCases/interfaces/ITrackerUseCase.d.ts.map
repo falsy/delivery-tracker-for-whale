@@ -1,0 +1,1 @@
+{"version":3,"file":"ITrackerUseCase.d.ts","sourceRoot":"","sources":["../../../../src/domains/useCases/interfaces/ITrackerUseCase.ts"],"names":[],"mappings":"AAAA,OAAO,YAAY,MAAM,uCAAuC,CAAA;AAChE,OAAO,SAAS,MAAM,oCAAoC,CAAA;AAE1D,MAAM,CAAC,OAAO,WAAW,eAAe;IACtC,WAAW,CACT,SAAS,EAAE,MAAM,EACjB,cAAc,EAAE,MAAM,GACrB,OAAO,CAAC,SAAS,CAAC,YAAY,CAAC,CAAC,CAAA;CACpC"}

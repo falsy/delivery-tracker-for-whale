@@ -1,47 +1,32 @@
 {
-  "name": "parcel-tracking-for-whale",
-  "version": "1.8.3",
-  "description": "웨일 브라우저의 사이드바 확장 프로그램으로 간편하게 택배 배송을 조회할 수 있습니다.",
+  "name": "delivery-tracker-for-whale",
   "private": true,
+  "version": "1.8.4",
   "author": "falsy",
   "license": "The Unlicense",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack serve --open --mode development",
-    "lint": "eslint src --ext .ts,.tsx",
-    "test": "jest"
+    "lint": "eslint packages/*/src --ext .ts",
+    "start:client": "yarn workspace client start",
+    "start:server": "yarn workspace api-server start",
+    "build:client": "yarn workspace client build",
+    "build:server": "yarn workspace api-server build",
+    "test:client": "yarn workspace client test",
+    "test:server": "yarn workspace api-server test"
   },
   "devDependencies": {
-    "@emotion/eslint-plugin": "^11.12.0",
-    "@testing-library/jest-dom": "^6.6.2",
-    "@testing-library/react": "^16.0.1",
-    "@testing-library/user-event": "^14.5.2",
-    "@types/jest": "^29.5.14",
-    "@types/react": "^18.3.2",
-    "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.11.0",
-    "@typescript-eslint/parser": "^8.11.0",
-    "eslint": "^8.57.1",
+    "@types/jest": "^29.5.13",
+    "@typescript-eslint/eslint-plugin": "^8.10.0",
+    "@typescript-eslint/parser": "^8.10.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "html-webpack-plugin": "^5.6.0",
     "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.5",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.4.5",
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "typescript": "^5.6.3"
   },
-  "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "emotion": "^11.0.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "zustand": "^5.0.0"
-  }
+  "packageManager": "yarn@4.2.2"
 }

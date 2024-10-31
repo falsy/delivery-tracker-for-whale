@@ -1,3 +1,0 @@
-[submodule "src/core"]
-	path = src/core
-	url = https://github.com/parcel-tracking/core.git
