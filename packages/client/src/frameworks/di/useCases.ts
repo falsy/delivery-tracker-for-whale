@@ -1,5 +1,5 @@
-import CarrierUseCase from "../../domains/useCases/CarrierUseCase"
-import TrackerUseCase from "../../domains/useCases/TrackerUseCase"
+import CarrierUseCase from "@domains/useCases/CarrierUseCase"
+import TrackerUseCase from "@domains/useCases/TrackerUseCase"
 import IRepositories from "./interfaces/IRepositories"
 import IUseCases from "./interfaces/IUseCases"
 

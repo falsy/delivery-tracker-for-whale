@@ -1,4 +1,4 @@
-import { API_URL, TRACKER_LIST } from "../../constants"
+import { API_URL, TRACKER_LIST } from "@constants/index"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
 import IDeliveryDTO from "@domains/dtos/interfaces/IDeliveryDTO"

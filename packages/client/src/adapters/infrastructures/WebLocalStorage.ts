@@ -1,59 +1,61 @@
 import ILayerDTO from "@domains/dtos/interfaces/ILayerDTO"
 import LayerDTO from "../dtos/LayerDTO"
-import IBrowserStorage, {
-  IBrowserStorageParams
-} from "./interfaces/IBrowserStorage"
+import IBrowserStorage from "./interfaces/IBrowserStorage"
 
-export default class BrowserStorage implements IBrowserStorage {
-  constructor(private readonly browserStorage: IBrowserStorageParams) {}
-
+export default class WebLocalStorage implements IBrowserStorage {
   getItem(key: string): Promise<ILayerDTO<{ [key: string]: string }>> {
     return new Promise((resolve) => {
-      this.browserStorage.get([key], (data: { [key: string]: string }) => {
+      if (!globalThis.whale) {
+        const data = window.localStorage.getItem(key)
         resolve(
           new LayerDTO({
-            data
+            data: { [key]: data }
           })
         )
-      })
+        return
+      }
     })
   }
 
   setItem(key: string, value: string): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
-      const data = {}
-      data[key] = value
-      this.browserStorage.set(data, () => {
+      if (!globalThis.whale) {
+        window.localStorage.setItem(key, value)
         resolve(
           new LayerDTO({
             data: true
           })
         )
-      })
+        return
+      }
     })
   }
 
   removeItem(key: string): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
-      this.browserStorage.remove(key, () => {
+      if (!globalThis.whale) {
+        window.localStorage.removeItem(key)
         resolve(
           new LayerDTO({
             data: true
           })
         )
-      })
+        return
+      }
     })
   }
 
   clear(): Promise<ILayerDTO<boolean>> {
     return new Promise((resolve) => {
-      this.browserStorage.clear(() => {
+      if (!globalThis.whale) {
+        window.localStorage.clear()
         resolve(
           new LayerDTO({
             data: true
           })
         )
-      })
+        return
+      }
     })
   }
 }

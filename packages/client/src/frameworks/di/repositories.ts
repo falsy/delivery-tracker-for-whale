@@ -1,7 +1,7 @@
-import IBrowserStorage from "../../adapters/infrastructures/interfaces/IBrowserStorage"
-import IClientHTTP from "../../adapters/infrastructures/interfaces/IClientHTTP"
-import CarrierRepository from "../../adapters/repositories/CarrierRepository"
-import TrackerRepository from "../../adapters/repositories/TrackerRepository"
+import IBrowserStorage from "@adapters/infrastructures/interfaces/IBrowserStorage"
+import IClientHTTP from "@adapters/infrastructures/interfaces/IClientHTTP"
+import CarrierRepository from "@adapters/repositories/CarrierRepository"
+import TrackerRepository from "@adapters/repositories/TrackerRepository"
 import IRepositories from "./interfaces/IRepositories"
 
 export default (

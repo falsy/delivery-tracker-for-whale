@@ -1,8 +1,5 @@
+import controllersFn from "@di/index"
 import { createContext, ReactNode } from "react"
-import controllersFn from "@di/controllers"
-import infrastructuresFn from "@di/infrastructures"
-import repositoriesFn from "@di/repositories"
-import useCasesFn from "@di/useCases"
 
 interface Dependencies {
   controllers: ReturnType<typeof controllersFn>
@@ -15,18 +12,7 @@ export default function DependencyProvider({
 }: {
   children: ReactNode
 }) {
-  const httpClient = globalThis.fetch.bind(globalThis)
-  const browserStorage = globalThis.whale
-    ? globalThis.whale.storage.local
-    : globalThis.localStorage // dev
-
-  const infrastructures = infrastructuresFn(httpClient, browserStorage)
-  const repositories = repositoriesFn(
-    infrastructures.clientHTTP,
-    infrastructures.browserStorage
-  )
-  const useCases = useCasesFn(repositories)
-  const controllers = controllersFn(useCases)
+  const controllers = controllersFn()
 
   const dependencies = {
     controllers
