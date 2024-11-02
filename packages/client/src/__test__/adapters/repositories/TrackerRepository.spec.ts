@@ -1,14 +1,14 @@
 import { API_URL, TRACKER_LIST } from "@constants/index"
+import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
+import ITracker from "@domains/entities/interfaces/ITracker"
+import Tracker from "@domains/entities/Tracker"
+import ITrackerDTO from "@domains/dtos/interfaces/ITrackerDTO"
 import IClientHTTP from "@adapters/infrastructures/interfaces/IClientHTTP"
 import IBrowserStorage from "@adapters/infrastructures/interfaces/IBrowserStorage"
 import LayerDTO from "@adapters/dtos/LayerDTO"
 import TrackerDTO from "@adapters/dtos/TrackerDTO"
 import TrackerRepository from "@adapters/repositories/TrackerRepository"
-import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
-import ITracker from "@domains/entities/interfaces/ITracker"
 import carriers from "../../mocks/carrierMock"
-import Tracker from "@domains/entities/Tracker"
-import ITrackerDTO from "@domains/dtos/interfaces/ITrackerDTO"
 
 describe("TrackerRepository", () => {
   let mockClientHTTP: jest.Mocked<IClientHTTP>

@@ -1,7 +1,7 @@
-import LayerDTO from "@adapters/dtos/LayerDTO"
-import IClientHTTP from "@adapters/infrastructures/interfaces/IClientHTTP"
-import CarrierRepository from "@adapters/repositories/CarrierRepository"
 import { API_URL } from "@constants/index"
+import IClientHTTP from "@adapters/infrastructures/interfaces/IClientHTTP"
+import LayerDTO from "@adapters/dtos/LayerDTO"
+import CarrierRepository from "@adapters/repositories/CarrierRepository"
 
 describe("CarrierRepository", () => {
   let mockClientHTTP: jest.Mocked<IClientHTTP>
