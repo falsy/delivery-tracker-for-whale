@@ -1,9 +1,9 @@
 import IDeliveryDTO from "@domains/dtos/interfaces/IDeliveryDTO"
+import ITracker from "@domains/entities/interfaces/ITracker"
 import ILayerDTO from "@domains/dtos/interfaces/ILayerDTO"
 import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ITrackerUseCase from "@domains/useCases/interfaces/ITrackerUseCase"
 import ITrackerController from "./interfaces/ITrackerController"
-import ITracker from "@domains/entities/interfaces/ITracker"
 
 export default class TrackerController implements ITrackerController {
   constructor(private readonly trackerUseCase: ITrackerUseCase) {}

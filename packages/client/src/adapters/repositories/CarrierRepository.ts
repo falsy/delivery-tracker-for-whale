@@ -16,16 +16,16 @@ export default class CarrierRepository implements ICarrierRepository {
     try {
       const res = await this.clientHTTP.get(`${API_URL}/carriers`)
       const { isError, message, data } = await res.json()
-      if (isError) {
+
+      if (!res.ok || isError) {
         return new LayerDTO({
           isError,
           message
         })
-      } else {
-        return new LayerDTO({
-          data
-        })
       }
+      return new LayerDTO({
+        data
+      })
     } catch (error) {
       return new LayerDTO({
         isError: true,
@@ -39,16 +39,15 @@ export default class CarrierRepository implements ICarrierRepository {
       const res = await this.clientHTTP.get(`${API_URL}/carrier/${carrierId}`)
       const { isError, message, data } = await res.json()
 
-      if (isError) {
+      if (!res.ok || isError) {
         return new LayerDTO({
           isError,
           message
         })
-      } else {
-        return new LayerDTO({
-          data
-        })
       }
+      return new LayerDTO({
+        data
+      })
     } catch (error) {
       return new LayerDTO({
         isError: true,

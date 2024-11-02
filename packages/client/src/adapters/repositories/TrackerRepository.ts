@@ -32,16 +32,15 @@ export default class TrackerRepository implements ITrackerRepository {
       )
       const { isError, message, data } = await res.json()
 
-      if (isError) {
+      if (!res.ok || isError) {
         return new LayerDTO({
           isError,
           message
         })
-      } else {
-        return new LayerDTO({
-          data
-        })
       }
+      return new LayerDTO({
+        data
+      })
     } catch (error) {
       return new LayerDTO({
         isError: true,
@@ -62,7 +61,7 @@ export default class TrackerRepository implements ITrackerRepository {
       }
 
       const parseJSON = JSON.parse(trackerList)
-      if (parseJSON === null || !Array.isArray(parseJSON)) {
+      if (!Array.isArray(parseJSON)) {
         return new LayerDTO({
           data: []
         })
@@ -124,25 +123,18 @@ export default class TrackerRepository implements ITrackerRepository {
       })
     }
 
-    try {
-      const trackerDTO = new TrackerDTO(tracker)
-      const newTrackers = data.concat(trackerDTO)
-      const parseString = JSON.stringify(newTrackers)
+    const trackerDTO = new TrackerDTO(tracker)
+    const newTrackers = data.concat(trackerDTO)
+    const parseString = JSON.stringify(newTrackers)
 
-      const { data: innerData } = await this.browserStorage.setItem(
-        TRACKER_LIST,
-        parseString
-      )
+    const { data: innerData } = await this.browserStorage.setItem(
+      TRACKER_LIST,
+      parseString
+    )
 
-      return new LayerDTO({
-        data: innerData
-      })
-    } catch (error) {
-      new LayerDTO({
-        isError: true,
-        message: error.message
-      })
-    }
+    return new LayerDTO({
+      data: innerData
+    })
   }
 
   async updateTracker(tracker: ITracker): Promise<ILayerDTO<boolean>> {
@@ -155,25 +147,18 @@ export default class TrackerRepository implements ITrackerRepository {
       })
     }
 
-    try {
-      const newTrackers = data.map((target) => {
-        return target.id === tracker.id ? tracker : target
-      })
+    const newTrackers = data.map((target) => {
+      return target.id === tracker.id ? tracker : target
+    })
 
-      const { data: innerData } = await this.browserStorage.setItem(
-        TRACKER_LIST,
-        JSON.stringify(newTrackers)
-      )
+    const { data: innerData } = await this.browserStorage.setItem(
+      TRACKER_LIST,
+      JSON.stringify(newTrackers)
+    )
 
-      return new LayerDTO({
-        data: innerData
-      })
-    } catch (error) {
-      new LayerDTO({
-        isError: true,
-        message: error.message
-      })
-    }
+    return new LayerDTO({
+      data: innerData
+    })
   }
 
   async deleteTracker(trackerId: string): Promise<ILayerDTO<boolean>> {
@@ -186,39 +171,25 @@ export default class TrackerRepository implements ITrackerRepository {
       })
     }
 
-    try {
-      const newTrackers = data.filter((target) => {
-        return target.id !== trackerId
-      })
+    const newTrackers = data.filter((target) => {
+      return target.id !== trackerId
+    })
 
-      const { data: innerData } = await this.browserStorage.setItem(
-        TRACKER_LIST,
-        JSON.stringify(newTrackers)
-      )
+    const { data: innerData } = await this.browserStorage.setItem(
+      TRACKER_LIST,
+      JSON.stringify(newTrackers)
+    )
 
-      return new LayerDTO({
-        data: innerData
-      })
-    } catch (error) {
-      new LayerDTO({
-        isError: true,
-        message: error.message
-      })
-    }
+    return new LayerDTO({
+      data: innerData
+    })
   }
 
   async clearTrackers(): Promise<ILayerDTO<boolean>> {
-    try {
-      const { data } = await this.browserStorage.removeItem(TRACKER_LIST)
+    const { data } = await this.browserStorage.removeItem(TRACKER_LIST)
 
-      return new LayerDTO({
-        data: data
-      })
-    } catch (error) {
-      new LayerDTO({
-        isError: true,
-        message: error.message
-      })
-    }
+    return new LayerDTO({
+      data: data
+    })
   }
 }

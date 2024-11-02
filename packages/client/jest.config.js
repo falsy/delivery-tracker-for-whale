@@ -10,6 +10,9 @@ module.exports = {
     "^@domains/(.*)$": "<rootDir>/src/domains/$1",
     "^@adapters/(.*)$": "<rootDir>/src/adapters/$1",
     "^@di/(.*)$": "<rootDir>/src/frameworks/di/$1",
+    "^@pages/(.*)$": "<rootDir>/src/frameworks/pages/$1",
+    "^@providers/(.*)$": "<rootDir>/src/frameworks/providers/$1",
+    "^@containers/(.*)$": "<rootDir>/src/frameworks/containers/$1",
     "^@components/(.*)$": "<rootDir>/src/frameworks/components/$1",
     "^@services/(.*)$": "<rootDir>/src/frameworks/services/$1",
     "^@hooks/(.*)$": "<rootDir>/src/frameworks/hooks/$1"
