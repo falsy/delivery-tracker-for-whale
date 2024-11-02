@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client"
+import DependencyProvider from "@providers/DependencyProvider"
 import Style from "@components/styles/Style"
-import DependencyProvider from "@di/DependencyProvider"
-import Dashboard from "@components/Dashboard"
+import Dashboard from "@pages/Dashboard"
 
 const container = document.getElementById("wrap")
 const root = ReactDOM.createRoot(container as HTMLElement)

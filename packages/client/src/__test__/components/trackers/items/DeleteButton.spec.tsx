@@ -1,6 +1,6 @@
-import DeleteButton from "@components/trackers/items/DeleteButton"
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import DeleteButton from "@components/trackers/items/DeleteButton"
 
 describe("트래커 삭제 버튼", () => {
   test("버튼이 정상적으로 렌더링 되어야 한다.", () => {

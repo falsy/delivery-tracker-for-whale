@@ -1,6 +1,6 @@
-import SubmitButton from "@components/trackers/items/SubmitButton"
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import SubmitButton from "@components/trackers/items/SubmitButton"
 
 describe("조회 버튼", () => {
   test("버튼이 정상적으로 렌더링 되어야 한다.", () => {

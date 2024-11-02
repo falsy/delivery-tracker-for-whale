@@ -1,8 +1,8 @@
 import { createContext, ReactNode } from "react"
-import controllersFn from "./controllers"
-import infrastructuresFn from "./infrastructures"
-import repositoriesFn from "./repositories"
-import useCasesFn from "./useCases"
+import controllersFn from "@di/controllers"
+import infrastructuresFn from "@di/infrastructures"
+import repositoriesFn from "@di/repositories"
+import useCasesFn from "@di/useCases"
 
 interface Dependencies {
   controllers: ReturnType<typeof controllersFn>

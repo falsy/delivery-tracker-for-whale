@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import ErrorMessage from "@components/commons/boxs/ErrorMessage"
 import useError from "@hooks/useError"
+import ErrorMessage from "@containers/commons/boxs/ErrorMessage"
 
 jest.mock("@hooks/useError")
 

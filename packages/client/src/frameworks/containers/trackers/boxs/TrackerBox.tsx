@@ -1,17 +1,17 @@
 import { useState } from "react"
 import { css } from "@emotion/react"
-import ITracker from "@domains/entities/interfaces/ITracker"
 import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
+import ITracker from "@domains/entities/interfaces/ITracker"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
-import DeleteButton from "../items/DeleteButton"
-import LabelBox from "./LabelBox"
-import CarrierSelectBox from "./CarrierSelectBox"
-import TrackerNumberBox from "./TrackerNumberBox"
-import MemoBox from "./MemoBox"
-import TrackerState from "./TrackerStateBox"
+import LabelBox from "@components/trackers/boxs/LabelBox"
+import DeleteButton from "@components/trackers/items/DeleteButton"
+import CarrierSelectBox from "@containers/carriers/boxs/CarrierSelectBox"
+import TrackerNumberBox from "@components/trackers/boxs/TrackerNumberBox"
+import TrackerStateBox from "@components/trackers/boxs/TrackerStateBox"
+import MemoBox from "@components/trackers/boxs/MemoBox"
 
 export default function TrackerBox({ tracker }: { tracker: ITracker }) {
   const { controllers } = useDependencies()
@@ -124,7 +124,7 @@ export default function TrackerBox({ tracker }: { tracker: ITracker }) {
       />
 
       {(isLoading || deliveryState !== null || errDeliveryMessage !== "") && (
-        <TrackerState
+        <TrackerStateBox
           isLoading={isLoading}
           errDeliveryMessage={errDeliveryMessage}
           deliveryState={deliveryState}

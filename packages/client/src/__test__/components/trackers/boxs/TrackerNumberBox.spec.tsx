@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import TrackerNumberBox from "@components/trackers/boxs/TrackerNumberBox"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
+import TrackerNumberBox from "@components/trackers/boxs/TrackerNumberBox"
 
 describe("TrackerNumberBox 컴포넌트", () => {
   const carrier: ICarrier = {

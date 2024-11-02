@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import TipMessage from "@components/commons/boxs/TipMessage"
 import useDependencies from "@hooks/useDependencies"
 import useTrackers from "@hooks/useTrackers"
+import TipMessage from "@containers/commons/boxs/TipMessage"
 
 jest.mock("@hooks/useDependencies")
 jest.mock("@hooks/useTrackers")

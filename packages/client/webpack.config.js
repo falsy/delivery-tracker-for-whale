@@ -24,9 +24,12 @@ module.exports = {
       "@domains": path.resolve(__dirname, "./src/domains/"),
       "@adapters": path.resolve(__dirname, "./src/adapters/"),
       "@di": path.resolve(__dirname, "./src/frameworks/di/"),
+      "@pages": path.resolve(__dirname, "./src/frameworks/pages/"),
+      "@providers": path.resolve(__dirname, "./src/frameworks/providers/"),
+      "@containers": path.resolve(__dirname, "./src/frameworks/containers/"),
+      "@components": path.resolve(__dirname, "./src/frameworks/components/"),
       "@services": path.resolve(__dirname, "./src/frameworks/services/"),
-      "@hooks": path.resolve(__dirname, "./src/frameworks/hooks/"),
-      "@components": path.resolve(__dirname, "./src/frameworks/components/")
+      "@hooks": path.resolve(__dirname, "./src/frameworks/hooks/")
     }
   },
   plugins: [

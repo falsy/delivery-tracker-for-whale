@@ -1,6 +1,6 @@
-import NewWinodwButton from "@components/trackers/items/NewWinodwButton"
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import NewWinodwButton from "@components/trackers/items/NewWinodwButton"
 import carriers from "../../../mocks/carrierMock"
 
 describe("새창 조회 버튼", () => {

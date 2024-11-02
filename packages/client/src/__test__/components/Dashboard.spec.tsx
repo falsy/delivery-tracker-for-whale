@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, waitFor } from "@testing-library/react"
-import Dashboard from "@components/Dashboard"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
 import Migration from "@services/Migration"
+import Dashboard from "@pages/Dashboard"
 
 jest.mock("@hooks/useDependencies")
 jest.mock("@hooks/useError")

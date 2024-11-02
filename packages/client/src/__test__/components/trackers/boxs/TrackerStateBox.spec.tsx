@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import TrackerStateBox from "@components/trackers/boxs/TrackerStateBox"
 import IDeliveryProgressVO from "@domains/vos/interfaces/IDeliveryProgressVO"
+import TrackerStateBox from "@components/trackers/boxs/TrackerStateBox"
 
 describe("TrackerStateBox 컴포넌트", () => {
   const deliveryState = {
