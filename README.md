@@ -4,4 +4,4 @@
 
 ## 스크린샷
 
-![Capture](_readme/screenshot-1.png)
+![Capture](.github/images/screenshot.png)
