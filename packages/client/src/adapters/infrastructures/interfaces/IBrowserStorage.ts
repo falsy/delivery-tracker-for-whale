@@ -1,5 +1,9 @@
 import ILayerDTO from "../../../domains/dtos/interfaces/ILayerDTO"
 
+export interface IBrowserRuntime {
+  lastError: Error
+}
+
 export interface IBrowserStorageParams {
   get(
     key: string[],
