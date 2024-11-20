@@ -8,7 +8,8 @@ async function bootstrap() {
 
   if (isDev) {
     app.enableCors({
-      origin: "*"
+      origin: "*",
+      exposedHeaders: ["ETag"]
     })
   } else {
     const allowedOrigins = [
@@ -24,7 +25,8 @@ async function bootstrap() {
           callback(new Error("Not allowed by CORS"))
         }
       },
-      credentials: true
+      credentials: true,
+      exposedHeaders: ["ETag"]
     })
   }
 
