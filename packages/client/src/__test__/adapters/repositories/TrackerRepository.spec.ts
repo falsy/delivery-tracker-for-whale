@@ -9,10 +9,12 @@ import LayerDTO from "@adapters/dtos/LayerDTO"
 import TrackerDTO from "@adapters/dtos/TrackerDTO"
 import TrackerRepository from "@adapters/repositories/TrackerRepository"
 import carriers from "../../mocks/carrierMock"
+import IETagManager from "@services/interfaces/IETagManager"
 
 describe("TrackerRepository", () => {
   let mockClientHTTP: jest.Mocked<IClientHTTP>
   let mockBrowserStorage: jest.Mocked<IBrowserStorage>
+  let mockETagManager: jest.Mocked<IETagManager>
   let trackerRepository: TrackerRepository
 
   beforeEach(() => {
@@ -30,9 +32,16 @@ describe("TrackerRepository", () => {
       clear: jest.fn()
     } as jest.Mocked<IBrowserStorage>
 
+    mockETagManager = {
+      getETag: jest.fn(),
+      getData: jest.fn(),
+      setETagData: jest.fn()
+    }
+
     trackerRepository = new TrackerRepository(
       mockClientHTTP,
-      mockBrowserStorage
+      mockBrowserStorage,
+      mockETagManager
     )
   })
 
@@ -84,11 +93,13 @@ describe("TrackerRepository", () => {
       const mockTrackerDTO = new TrackerDTO(mockTracker)
       const mockTrackers = JSON.stringify([mockTrackerDTO])
 
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: { [TRACKER_LIST]: mockTrackers }
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: { [TRACKER_LIST]: mockTrackers }
+        })
+      )
 
       const result = await trackerRepository.getTrackers()
 
@@ -101,11 +112,13 @@ describe("TrackerRepository", () => {
     })
 
     it("tracker 리스트가 비어 있을 때 빈 배열을 반환해야 한다", async () => {
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: {}
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: {}
+        })
+      )
 
       const result = await trackerRepository.getTrackers()
 
@@ -132,16 +145,20 @@ describe("TrackerRepository", () => {
       const trackerProps = { label: "Updated Label" }
       const mockData = [{ id: "1", label: "Old Label" }]
 
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: { [TRACKER_LIST]: JSON.stringify(mockData) }
-      })
-      mockBrowserStorage.setItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: true
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: { [TRACKER_LIST]: JSON.stringify(mockData) }
+        })
+      )
+      mockBrowserStorage.setItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: true
+        })
+      )
 
       const result = await trackerRepository.patchTracker(
         trackerId,
@@ -156,11 +173,13 @@ describe("TrackerRepository", () => {
       const trackerProps = { label: "Updated Label" }
       const mockData = [{ id: "1", label: "Old Label" }]
 
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: { [TRACKER_LIST]: JSON.stringify(mockData) }
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: { [TRACKER_LIST]: JSON.stringify(mockData) }
+        })
+      )
 
       mockBrowserStorage.setItem.mockRejectedValue(new Error("Error"))
 
@@ -183,16 +202,20 @@ describe("TrackerRepository", () => {
       const mockTrackerData: ITrackerDTO = new Tracker({ id: "1" })
       const tracker: ITracker = new Tracker({ id: "2" })
 
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
-      })
-      mockBrowserStorage.setItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: true
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
+        })
+      )
+      mockBrowserStorage.setItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: true
+        })
+      )
 
       const result = await trackerRepository.addTracker(tracker)
 
@@ -203,11 +226,13 @@ describe("TrackerRepository", () => {
       const mockTrackerData: ITrackerDTO = new Tracker({ id: "1" })
       const tracker: ITracker = new Tracker({ id: "2" })
 
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
+        })
+      )
       mockBrowserStorage.setItem.mockRejectedValue(new Error("Error"))
 
       const result = await trackerRepository.addTracker(tracker)
@@ -229,16 +254,20 @@ describe("TrackerRepository", () => {
       })
       const tracker: ITracker = new Tracker({ id: "1", label: "Updated Label" })
 
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
-      })
-      mockBrowserStorage.setItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: true
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
+        })
+      )
+      mockBrowserStorage.setItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: true
+        })
+      )
 
       const result = await trackerRepository.updateTracker(tracker)
 
@@ -252,11 +281,13 @@ describe("TrackerRepository", () => {
       })
       const tracker: ITracker = new Tracker({ id: "1", label: "Updated Label" })
 
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
+        })
+      )
       mockBrowserStorage.setItem.mockRejectedValue(new Error("Error"))
 
       const result = await trackerRepository.updateTracker(tracker)
@@ -274,16 +305,20 @@ describe("TrackerRepository", () => {
     it("tracker 삭제가 성공하면 true를 반환해야 한다", async () => {
       const mockTrackerData: ITrackerDTO = new Tracker({ id: "1" })
 
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
-      })
-      mockBrowserStorage.setItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: true
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
+        })
+      )
+      mockBrowserStorage.setItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: true
+        })
+      )
 
       const result = await trackerRepository.deleteTracker("1")
 
@@ -293,11 +328,13 @@ describe("TrackerRepository", () => {
     it("tracker 삭제가 실패하면 오류 DTO를 반환해야 한다", async () => {
       const mockTrackerData: ITrackerDTO = new Tracker({ id: "1" })
 
-      mockBrowserStorage.getItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
-      })
+      mockBrowserStorage.getItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: { [TRACKER_LIST]: JSON.stringify([mockTrackerData]) }
+        })
+      )
       mockBrowserStorage.setItem.mockRejectedValue(new Error("Error"))
 
       const result = await trackerRepository.deleteTracker("1")
@@ -313,11 +350,13 @@ describe("TrackerRepository", () => {
 
   describe("clearTrackers", () => {
     it("tracker 리스트 삭제가 성공하면 true를 반환해야 한다", async () => {
-      mockBrowserStorage.removeItem.mockResolvedValueOnce({
-        isError: false,
-        message: "",
-        data: true
-      })
+      mockBrowserStorage.removeItem.mockResolvedValueOnce(
+        new LayerDTO({
+          isError: false,
+          message: "",
+          data: true
+        })
+      )
 
       const result = await trackerRepository.clearTrackers()
 

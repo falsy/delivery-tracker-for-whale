@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TRACKER_LIST } from "@constants/index"
 import ITrackerDTO from "@domains/dtos/interfaces/ITrackerDTO"
-import Migration from "@services/Migration"
+import Migration from "services/Migration"
 import carriers from "../mocks/carrierMock"
 
 describe("Migration", () => {
