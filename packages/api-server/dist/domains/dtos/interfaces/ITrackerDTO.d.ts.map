@@ -1,1 +1,0 @@
-{"version":3,"file":"ITrackerDTO.d.ts","sourceRoot":"","sources":["../../../../src/domains/dtos/interfaces/ITrackerDTO.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,WAAW,WAAW;IAClC,QAAQ,CAAC,EAAE,EAAE,MAAM,CAAA;IACnB,SAAS,EAAE,MAAM,CAAA;IACjB,KAAK,EAAE,MAAM,CAAA;IACb,cAAc,EAAE,MAAM,CAAA;IACtB,KAAK,EAAE,MAAM,EAAE,CAAA;CAChB"}
