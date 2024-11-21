@@ -72,7 +72,7 @@ export default function CarrierSelectBox({
           border: 1px solid #ddd;
           display: block;
           width: 100%;
-          background: #fff;
+          background: transparent;
           text-align: left;
 
           @media (prefers-color-scheme: dark) {
@@ -168,6 +168,9 @@ export default function CarrierSelectBox({
                       padding: 0 14px;
                       text-align: left;
                       line-height: 35px;
+                      @media (prefers-color-scheme: dark) {
+                        color: #fff;
+                      }
                     `}
                     onClick={() => handleClickSelect(carrier.id)}
                   >

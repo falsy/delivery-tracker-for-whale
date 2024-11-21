@@ -17,13 +17,10 @@ export default function DeleteButton({
         justify-content: center;
         align-items: center;
 
-        @media (prefers-color-scheme: dark) {
-          background: rgb(160, 160, 160);
-        }
-
         svg {
           width: 18px;
           height: 18px;
+          stroke: #fff;
         }
       `}
       onClick={handleClick}
