@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common"
-import CarrierUseCase from "@domains/usecases/CarrierUseCase"
+import CarrierUseCase from "@domains/useCases/CarrierUseCase"
 import ICarrierRepository from "@domains/repositories/interfaces/ICarrierRepository"
 
 @Injectable()
