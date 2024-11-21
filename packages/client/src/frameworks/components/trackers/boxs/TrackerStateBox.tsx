@@ -33,7 +33,17 @@ export default function TrackerStateBox({
           padding: 0 15px 0 0;
         `}
       >
-        {isLoading && <Loading />}
+        {isLoading && (
+          <div
+            css={css`
+              position: fixed;
+              width: 100%;
+              left: 0;
+            `}
+          >
+            <Loading />
+          </div>
+        )}
         {!isLoading && !!errDeliveryMessage && (
           <p
             css={css`
@@ -49,7 +59,7 @@ export default function TrackerStateBox({
             {errDeliveryMessage}
           </p>
         )}
-        {!isLoading && !errDeliveryMessage && (
+        {progresses.length > 0 && !errDeliveryMessage && (
           <div>
             <div
               css={css`
