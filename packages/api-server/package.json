@@ -3,7 +3,8 @@
   "packageManager": "yarn@4.2.2",
   "scripts": {
     "build": "nest build",
-    "start": "NODE_ENV=development nest start --watch",
+    "dev": "NODE_ENV=development nest start --watch",
+    "start": "NODE_ENV=production node dist/main",
     "test": "jest"
   },
   "dependencies": {
