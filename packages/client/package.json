@@ -3,7 +3,7 @@
   "packageManager": "yarn@4.2.2",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack serve --open --mode development",
+    "start": "webpack serve --mode development",
     "test": "jest"
   },
   "devDependencies": {

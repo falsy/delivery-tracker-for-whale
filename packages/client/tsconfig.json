@@ -16,12 +16,12 @@
       "@constants/*": ["constants/*"],
       "@domains/*": ["domains/*"],
       "@adapters/*": ["adapters/*"],
+      "@services/*": ["services/*"],
       "@di/*": ["frameworks/di/*"],
       "@pages/*": ["frameworks/pages/*"],
       "@providers/*": ["frameworks/providers/*"],
       "@containers/*": ["frameworks/containers/*"],
       "@components/*": ["frameworks/components/*"],
-      "@services/*": ["frameworks/services/*"],
       "@hooks/*": ["frameworks/hooks/*"]
     }
   },

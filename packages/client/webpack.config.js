@@ -23,12 +23,12 @@ module.exports = {
       "@constants": path.resolve(__dirname, "./src/constants/"),
       "@domains": path.resolve(__dirname, "./src/domains/"),
       "@adapters": path.resolve(__dirname, "./src/adapters/"),
+      "@services": path.resolve(__dirname, "./src/services/"),
       "@di": path.resolve(__dirname, "./src/frameworks/di/"),
       "@pages": path.resolve(__dirname, "./src/frameworks/pages/"),
       "@providers": path.resolve(__dirname, "./src/frameworks/providers/"),
       "@containers": path.resolve(__dirname, "./src/frameworks/containers/"),
       "@components": path.resolve(__dirname, "./src/frameworks/components/"),
-      "@services": path.resolve(__dirname, "./src/frameworks/services/"),
       "@hooks": path.resolve(__dirname, "./src/frameworks/hooks/")
     }
   },

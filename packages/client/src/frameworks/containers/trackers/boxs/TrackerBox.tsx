@@ -47,7 +47,6 @@ export default function TrackerBox({ tracker }: { tracker: ITracker }) {
     if (trackingNumber === "") return
 
     setLoading(true)
-    resetDeliveryState()
 
     const { isError, message, data } = await controllers.tracker.getDelivery(
       carrierId,

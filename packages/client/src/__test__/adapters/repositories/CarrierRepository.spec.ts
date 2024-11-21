@@ -2,9 +2,11 @@ import { API_URL } from "@constants/index"
 import IClientHTTP from "@adapters/infrastructures/interfaces/IClientHTTP"
 import LayerDTO from "@adapters/dtos/LayerDTO"
 import CarrierRepository from "@adapters/repositories/CarrierRepository"
+import IETagManager from "@services/interfaces/IETagManager"
 
 describe("CarrierRepository", () => {
   let mockClientHTTP: jest.Mocked<IClientHTTP>
+  let mockETagManager: jest.Mocked<IETagManager>
   let carrierRepository: CarrierRepository
 
   beforeEach(() => {
@@ -14,7 +16,12 @@ describe("CarrierRepository", () => {
       put: jest.fn(),
       delete: jest.fn()
     } as jest.Mocked<IClientHTTP>
-    carrierRepository = new CarrierRepository(mockClientHTTP)
+    mockETagManager = {
+      getETag: jest.fn(),
+      getData: jest.fn(),
+      setETagData: jest.fn()
+    }
+    carrierRepository = new CarrierRepository(mockClientHTTP, mockETagManager)
   })
 
   describe("getCarriers", () => {

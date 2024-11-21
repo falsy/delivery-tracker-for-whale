@@ -78,6 +78,7 @@ export default function MemoBox({
                       font-size: 13px;
                       padding: 2px 5px;
                       border: 0;
+                      background: transparent;
 
                       @media (prefers-color-scheme: dark) {
                         color: #bbb;

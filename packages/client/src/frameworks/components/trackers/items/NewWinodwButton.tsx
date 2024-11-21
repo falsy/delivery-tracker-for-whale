@@ -35,6 +35,11 @@ export default function NewWinodwButton({
         &:last-of-type {
           border-right: 1px solid rgb(220, 220, 220);
         }
+        transition: all 0.3s;
+        &:hover {
+          background: #eaeaea;
+          opacity: 0.8;
+        }
 
         @media (prefers-color-scheme: dark) {
           background: rgb(44, 44, 44);
@@ -49,12 +54,6 @@ export default function NewWinodwButton({
           &:hover {
             background: rgb(30, 30, 30);
           }
-        }
-
-        transition: all 0.3s;
-        &:hover {
-          background: #eaeaea;
-          opacity: 0.8;
         }
       `}
       onClick={handleClickNewWindowTracker}

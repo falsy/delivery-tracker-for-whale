@@ -8,15 +8,14 @@ export default class ClientHTTP implements IClientHTTP {
     ) => Promise<Response>
   ) {}
 
-  async get(url: string, options?: RequestInit): Promise<Response> {
-    return this.httpClient(url, { ...options, method: "GET" })
+  get(url: string, options?: RequestInit): Promise<Response> {
+    return this.httpClient(url, {
+      method: "GET",
+      ...options
+    })
   }
 
-  async post(
-    url: string,
-    body: unknown,
-    options?: RequestInit
-  ): Promise<Response> {
+  post(url: string, body: unknown, options?: RequestInit): Promise<Response> {
     return this.httpClient(url, {
       method: "POST",
       body: JSON.stringify(body),
@@ -25,11 +24,7 @@ export default class ClientHTTP implements IClientHTTP {
     })
   }
 
-  async put(
-    url: string,
-    body: unknown,
-    options?: RequestInit
-  ): Promise<Response> {
+  put(url: string, body: unknown, options?: RequestInit): Promise<Response> {
     return this.httpClient(url, {
       method: "PUT",
       body: JSON.stringify(body),
@@ -38,7 +33,7 @@ export default class ClientHTTP implements IClientHTTP {
     })
   }
 
-  async delete(url: string, options?: RequestInit): Promise<Response> {
+  delete(url: string, options?: RequestInit): Promise<Response> {
     return this.httpClient(url, { ...options, method: "DELETE" })
   }
 }

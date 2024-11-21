@@ -9,16 +9,23 @@ import ITrackerDTO, {
 import ITrackerRepository from "@domains/repositories/interfaces/ITrackerRepository"
 import LayerDTO from "@adapters/dtos/LayerDTO"
 import TrackerDTO from "@adapters/dtos/TrackerDTO"
+import IETagManager from "@services/interfaces/IETagManager"
 import IBrowserStorage from "../infrastructures/interfaces/IBrowserStorage"
 import IClientHTTP from "../infrastructures/interfaces/IClientHTTP"
 
 export default class TrackerRepository implements ITrackerRepository {
   private readonly clientHTTP: IClientHTTP
   private readonly browserStorage: IBrowserStorage
+  private readonly etagManager: IETagManager
 
-  constructor(clientHTTP: IClientHTTP, browserStorage: IBrowserStorage) {
+  constructor(
+    clientHTTP: IClientHTTP,
+    browserStorage: IBrowserStorage,
+    etagManager: IETagManager
+  ) {
     this.clientHTTP = clientHTTP
     this.browserStorage = browserStorage
+    this.etagManager = etagManager
   }
 
   async getDelivery(
@@ -27,9 +34,22 @@ export default class TrackerRepository implements ITrackerRepository {
   ): Promise<ILayerDTO<IDeliveryDTO>> {
     try {
       const { id: carrierId } = carrier
-      const res = await this.clientHTTP.get(
-        `${API_URL}/tracker/${carrierId}/${trackingNumber}`
-      )
+      const url = `${API_URL}/tracker/${carrierId}/${trackingNumber}`
+      const etag = this.etagManager.getETag(url)
+        ? { "If-None-Match": this.etagManager.getETag(url) }
+        : {}
+      const res = await this.clientHTTP.get(url, {
+        headers: {
+          ...etag
+        }
+      })
+
+      if (res.status === 304) {
+        return new LayerDTO({
+          data: this.etagManager.getData(url) as IDeliveryDTO
+        })
+      }
+
       const { isError, message, data } = await res.json()
 
       if (!res.ok || isError) {
@@ -38,10 +58,14 @@ export default class TrackerRepository implements ITrackerRepository {
           message
         })
       }
+
+      this.etagManager.setETagData(url, res.headers.get("ETag"), data)
+
       return new LayerDTO({
         data
       })
     } catch (error) {
+      console.log(error)
       return new LayerDTO({
         isError: true,
         message: error.message

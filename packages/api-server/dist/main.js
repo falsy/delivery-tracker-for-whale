@@ -8,7 +8,8 @@ async function bootstrap() {
     const port = isDev ? 3000 : process.env.PORT;
     if (isDev) {
         app.enableCors({
-            origin: "*"
+            origin: "*",
+            exposedHeaders: ["ETag"]
         });
     }
     else {
@@ -25,7 +26,8 @@ async function bootstrap() {
                     callback(new Error("Not allowed by CORS"));
                 }
             },
-            credentials: true
+            credentials: true,
+            exposedHeaders: ["ETag"]
         });
     }
     await app.listen(port);
