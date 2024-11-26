@@ -13,7 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const CarrierUseCase_1 = require("../../domains/usecases/CarrierUseCase");
+const CarrierUseCase_1 = require("../../domains/useCases/CarrierUseCase");
 let NCarrierUseCase = class NCarrierUseCase extends CarrierUseCase_1.default {
     constructor(carrierRepository) {
         super(carrierRepository);

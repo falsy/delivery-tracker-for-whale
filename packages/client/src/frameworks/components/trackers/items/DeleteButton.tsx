@@ -20,7 +20,9 @@ export default function DeleteButton({
         svg {
           width: 18px;
           height: 18px;
-          stroke: #fff;
+          @media (prefers-color-scheme: dark) {
+            stroke: #fff;
+          }
         }
       `}
       onClick={handleClick}
