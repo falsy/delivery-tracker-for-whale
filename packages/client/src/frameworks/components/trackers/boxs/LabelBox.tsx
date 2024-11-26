@@ -30,7 +30,7 @@ export default function LabelBox({
         type="text"
         value={label}
         onChange={(e) => patchTracker({ label: e.target.value })}
-        placeholder="이곳에 배송에 대한 간단한 메모를 적을 수 있어요."
+        placeholder="배송에 대한 간단한 메모를 적을 수 있어요."
       />
     </div>
   )
