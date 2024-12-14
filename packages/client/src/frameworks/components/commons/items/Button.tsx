@@ -2,13 +2,16 @@ import { css } from "@emotion/react"
 
 export default function Button({
   text,
-  handleClick
+  handleClick,
+  id
 }: {
   text: string
   handleClick(): void
+  id?: string
 }) {
   return (
     <button
+      id={id}
       css={css`
         display: inline-block;
         width: 80px;
