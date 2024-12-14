@@ -35,7 +35,10 @@ jobs:
         env:
           NODE_ENV: development
 
-      - name: Wait for server and client
+      - name: Wait for server
+        run: npx wait-on http://localhost:3000
+
+      - name: Wait for client
         run: npx wait-on http://localhost:2000
 
       - name: Run Cypress tests
