@@ -36,6 +36,7 @@ export default function MemoBox({
     >
       <div>
         <button
+          id="create-memo-button"
           css={css`
             display: flex;
             line-height: 20px;
@@ -59,7 +60,7 @@ export default function MemoBox({
       </div>
       {memos.length > 0 && (
         <div>
-          <ul>
+          <ul id="memo-list">
             {memos.map((memo, i) => (
               <li key={i}>
                 <div
@@ -95,6 +96,7 @@ export default function MemoBox({
                     placeholder="이곳에 추가적인 메모를 입력할 수 있어요."
                   />
                   <button
+                    className="delete-memo-button"
                     css={css`
                       cursor: pointer;
                       svg {

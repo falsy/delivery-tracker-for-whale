@@ -40,6 +40,7 @@ export default function TipMessage() {
       </p>
       <p>
         <button
+          id="reset-button"
           css={css`
             display: block;
             color: #05c38b;

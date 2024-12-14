@@ -28,16 +28,26 @@ export default function TrackerSection() {
           padding: 20px 20px 0;
         `}
       >
-        {trackers.map((tracker) => {
-          return <TrackerBox key={tracker.id} tracker={tracker} />
-        })}
+        {trackers.length > 0 && (
+          <ul id="tracker-list">
+            {trackers.map((tracker) => (
+              <li key={tracker.id}>
+                <TrackerBox key={tracker.id} tracker={tracker} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div
         css={css`
           padding: 0 20px 40px;
         `}
       >
-        <Button text={"추가"} handleClick={handleClickCreateTracker} />
+        <Button
+          id="create-tracker-button"
+          text={"추가"}
+          handleClick={handleClickCreateTracker}
+        />
       </div>
     </section>
   )
