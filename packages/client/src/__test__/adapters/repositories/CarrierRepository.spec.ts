@@ -29,12 +29,16 @@ describe("CarrierRepository", () => {
       const mockData = [{ id: "1", name: "Carrier1" }]
       mockClientHTTP.get.mockResolvedValueOnce({
         ok: true,
+        headers: new Headers(),
         json: async () => ({ isError: false, data: mockData })
       } as Response)
 
       const result = await carrierRepository.getCarriers()
 
-      expect(mockClientHTTP.get).toHaveBeenCalledWith(`${API_URL}/carriers`)
+      expect(mockClientHTTP.get).toHaveBeenCalledWith(
+        `${API_URL}/carriers`,
+        null
+      )
       expect(result).toEqual(new LayerDTO({ data: mockData }))
     })
 
@@ -68,13 +72,15 @@ describe("CarrierRepository", () => {
       const mockData = { id: carrierId, name: "Carrier1" }
       mockClientHTTP.get.mockResolvedValueOnce({
         ok: true,
+        headers: new Headers(),
         json: async () => ({ isError: false, data: mockData })
       } as Response)
 
       const result = await carrierRepository.getCarrier(carrierId)
 
       expect(mockClientHTTP.get).toHaveBeenCalledWith(
-        `${API_URL}/carrier/${carrierId}`
+        `${API_URL}/carrier/${carrierId}`,
+        null
       )
       expect(result).toEqual(new LayerDTO({ data: mockData }))
     })

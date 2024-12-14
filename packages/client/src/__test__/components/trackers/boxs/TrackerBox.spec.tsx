@@ -55,9 +55,7 @@ describe("TrackerBox 컴포넌트", () => {
     render(<TrackerBox tracker={tracker} />)
 
     expect(
-      screen.getByPlaceholderText(
-        "이곳에 배송에 대한 간단한 메모를 적을 수 있어요."
-      )
+      screen.getByPlaceholderText("배송에 대한 간단한 메모를 적을 수 있어요.")
     ).toBeInTheDocument()
     expect(
       screen.getByPlaceholderText("운송장 번호를 입력해주세요.")

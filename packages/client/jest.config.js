@@ -14,7 +14,7 @@ module.exports = {
     "^@providers/(.*)$": "<rootDir>/src/frameworks/providers/$1",
     "^@containers/(.*)$": "<rootDir>/src/frameworks/containers/$1",
     "^@components/(.*)$": "<rootDir>/src/frameworks/components/$1",
-    "^@services/(.*)$": "<rootDir>/src/frameworks/services/$1",
+    "^@services/(.*)$": "<rootDir>/src/services/$1",
     "^@hooks/(.*)$": "<rootDir>/src/frameworks/hooks/$1"
   }
 }
