@@ -46,6 +46,7 @@ export default function TrackerBox({ tracker }: { tracker: ITracker }) {
   ) => {
     if (trackingNumber === "") return
 
+    setDeliveryErrorMessage("")
     setLoading(true)
 
     const { isError, message, data } = await controllers.tracker.getDelivery(

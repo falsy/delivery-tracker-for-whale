@@ -31,20 +31,27 @@ export default function TrackerStateBox({
           height: 200px;
           overflow: auto;
           padding: 0 15px 0 0;
+          position: relative;
         `}
       >
         {isLoading && (
           <div
             css={css`
-              position: fixed;
-              width: 100%;
-              left: 0;
+              position: sticky;
+              top: 0;
             `}
           >
-            <Loading />
+            <div
+              css={css`
+                position: absolute;
+                width: 100%;
+              `}
+            >
+              <Loading />
+            </div>
           </div>
         )}
-        {!isLoading && !!errDeliveryMessage && (
+        {!!errDeliveryMessage && (
           <p
             css={css`
               padding: 0 2px;
