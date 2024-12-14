@@ -20,12 +20,11 @@ export default class CarrierRepository implements ICarrierRepository {
       const url = `${API_URL}/carriers`
       const etag = this.etagManager.getETag(url)
         ? { "If-None-Match": this.etagManager.getETag(url) }
-        : {}
-      const res = await this.clientHTTP.get(url, {
-        headers: {
-          ...etag
-        }
-      })
+        : null
+      const res = await this.clientHTTP.get(
+        url,
+        etag === null ? null : { headers: { ...etag } }
+      )
 
       if (res.status === 304) {
         return new LayerDTO({
@@ -60,12 +59,11 @@ export default class CarrierRepository implements ICarrierRepository {
       const url = `${API_URL}/carrier/${carrierId}`
       const etag = this.etagManager.getETag(url)
         ? { "If-None-Match": this.etagManager.getETag(url) }
-        : {}
-      const res = await this.clientHTTP.get(url, {
-        headers: {
-          ...etag
-        }
-      })
+        : null
+      const res = await this.clientHTTP.get(
+        url,
+        etag === null ? null : { headers: { ...etag } }
+      )
 
       if (res.status === 304) {
         return new LayerDTO({

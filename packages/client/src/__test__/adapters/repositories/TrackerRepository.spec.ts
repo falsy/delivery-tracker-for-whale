@@ -18,6 +18,8 @@ describe("TrackerRepository", () => {
   let trackerRepository: TrackerRepository
 
   beforeEach(() => {
+    jest.clearAllMocks()
+
     mockClientHTTP = {
       get: jest.fn(),
       post: jest.fn(),
@@ -53,6 +55,7 @@ describe("TrackerRepository", () => {
 
       mockClientHTTP.get.mockResolvedValueOnce({
         ok: true,
+        headers: new Headers(),
         json: async () => ({ isError: false, data: mockData })
       } as Response)
 
@@ -62,8 +65,10 @@ describe("TrackerRepository", () => {
       )
 
       expect(mockClientHTTP.get).toHaveBeenCalledWith(
-        `${API_URL}/tracker/${carrier.id}/12345`
+        `${API_URL}/tracker/${carrier.id}/12345`,
+        null
       )
+
       expect(result).toEqual(new LayerDTO({ data: mockData }))
     })
 

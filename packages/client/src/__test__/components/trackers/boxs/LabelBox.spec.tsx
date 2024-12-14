@@ -10,7 +10,7 @@ describe("LabelBox 컴포넌트", () => {
   test("초기 렌더링 시 input에 tracker.label 값이 설정되어야 한다", () => {
     render(<LabelBox label={label} patchTracker={patchTracker} />)
     const input = screen.getByPlaceholderText(
-      "이곳에 배송에 대한 간단한 메모를 적을 수 있어요."
+      "배송에 대한 간단한 메모를 적을 수 있어요."
     )
 
     expect(input).toHaveValue("initial label")
@@ -19,7 +19,7 @@ describe("LabelBox 컴포넌트", () => {
   test("input의 값을 변경했을 때 patchTracker 함수가 호출되어야 한다", async () => {
     render(<LabelBox label={label} patchTracker={patchTracker} />)
     const input = screen.getByPlaceholderText(
-      "이곳에 배송에 대한 간단한 메모를 적을 수 있어요."
+      "배송에 대한 간단한 메모를 적을 수 있어요."
     )
 
     await userEvent.clear(input)

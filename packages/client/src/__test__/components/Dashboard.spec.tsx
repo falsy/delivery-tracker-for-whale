@@ -4,7 +4,7 @@ import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
-import Migration from "services/Migration"
+import Migration from "@services/Migration"
 import Dashboard from "@pages/Dashboard"
 
 jest.mock("@hooks/useDependencies")

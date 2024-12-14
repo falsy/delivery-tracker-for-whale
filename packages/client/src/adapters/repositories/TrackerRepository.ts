@@ -37,12 +37,11 @@ export default class TrackerRepository implements ITrackerRepository {
       const url = `${API_URL}/tracker/${carrierId}/${trackingNumber}`
       const etag = this.etagManager.getETag(url)
         ? { "If-None-Match": this.etagManager.getETag(url) }
-        : {}
-      const res = await this.clientHTTP.get(url, {
-        headers: {
-          ...etag
-        }
-      })
+        : null
+      const res = await this.clientHTTP.get(
+        url,
+        etag === null ? null : { headers: { ...etag } }
+      )
 
       if (res.status === 304) {
         return new LayerDTO({
