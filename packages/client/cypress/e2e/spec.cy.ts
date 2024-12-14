@@ -1,7 +1,7 @@
 describe("배송 조회 페이지", () => {
   beforeEach(() => {
     // 배송 조회 박스 추가
-    cy.intercept("GET", "http://localhost:3000/carriers").as("getCarriers")
+    cy.intercept("GET", "https://parcel.falsy.me/carriers").as("getCarriers")
     cy.visit("http://localhost:2000")
     cy.wait("@getCarriers")
     cy.get("#create-tracker-button").click()

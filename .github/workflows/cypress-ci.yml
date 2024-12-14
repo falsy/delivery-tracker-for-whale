@@ -25,18 +25,10 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Start server
-        run: yarn dev:server &
-        env:
-          NODE_ENV: development
-
       - name: Start client
         run: yarn start:client &
         env:
           NODE_ENV: development
-
-      - name: Wait for server
-        run: npx wait-on http://localhost:3000
 
       - name: Wait for client
         run: npx wait-on http://localhost:2000
