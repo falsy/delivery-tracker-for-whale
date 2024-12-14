@@ -15,7 +15,8 @@
     "build:client": "yarn workspace client build",
     "build:server": "yarn workspace api-server build",
     "test:client": "yarn workspace client test",
-    "test:server": "yarn workspace api-server test"
+    "test:server": "yarn workspace api-server test",
+    "cy:open": "yarn workspace client cy:open"
   },
   "devDependencies": {
     "@types/jest": "^29.5.13",
@@ -28,6 +29,9 @@
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.5",
     "typescript": "^5.6.3"
+  },
+  "resolutions": {
+    "path-to-regexp": "0.1.12"
   },
   "packageManager": "yarn@4.2.2"
 }
