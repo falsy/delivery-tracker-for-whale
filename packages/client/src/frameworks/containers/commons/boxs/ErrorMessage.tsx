@@ -38,7 +38,7 @@ export default function ErrorMessage() {
             line-height: 0;
             padding: 5px;
           `}
-          onClick={() => setMessage()}
+          onClick={() => setMessage("")}
         >
           <CloseIcon />
         </button>

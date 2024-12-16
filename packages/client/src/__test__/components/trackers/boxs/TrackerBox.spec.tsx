@@ -4,13 +4,11 @@ import userEvent from "@testing-library/user-event"
 import TrackerBox from "@containers/trackers/boxs/TrackerBox"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
-import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
 import TrackerDTO from "@adapters/dtos/TrackerDTO"
 
 jest.mock("@hooks/useDependencies")
 jest.mock("@hooks/useError")
-jest.mock("@hooks/useTrackers")
 jest.mock("@hooks/useCarriers")
 
 describe("TrackerBox 컴포넌트", () => {
@@ -21,6 +19,8 @@ describe("TrackerBox 컴포넌트", () => {
     trackingNumber: "123456789",
     memos: []
   })
+
+  const deleteTracker = jest.fn()
 
   beforeEach(() => {
     ;(useDependencies as any).mockReturnValue({
@@ -33,10 +33,6 @@ describe("TrackerBox 컴포넌트", () => {
     })
     ;(useError as any).mockReturnValue({
       setMessage: jest.fn()
-    })
-    ;(useTrackers as any).mockReturnValue({
-      trackers: [tracker],
-      getTrackers: jest.fn()
     })
     ;(useCarriers as any).mockReturnValue({
       carriers: [
@@ -52,7 +48,7 @@ describe("TrackerBox 컴포넌트", () => {
   })
 
   test("초기 렌더링 시 하위 컴포넌트들이 렌더링되어야 한다", () => {
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
 
     expect(
       screen.getByPlaceholderText("배송에 대한 간단한 메모를 적을 수 있어요.")
@@ -64,19 +60,14 @@ describe("TrackerBox 컴포넌트", () => {
   })
 
   test("삭제 버튼 클릭 시 deleteTracker 함수가 호출되어야 한다", async () => {
-    const { controllers } = useDependencies()
-    ;(controllers.tracker.deleteTracker as jest.Mock).mockResolvedValue({
-      isError: false
-    })
-
     jest.spyOn(window, "confirm").mockReturnValue(true)
 
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
     const deleteButton = screen.getByRole("button", { name: "delete-button" })
 
     await userEvent.click(deleteButton)
 
-    expect(controllers.tracker.deleteTracker).toHaveBeenCalledWith("aaa")
+    expect(deleteTracker).toHaveBeenCalledWith("aaa")
   })
 
   test("유효한 carrierId와 trackingNumber로 handleClickDelivery 호출 시 getDelivery 함수가 호출되어야 한다", async () => {
@@ -99,7 +90,7 @@ describe("TrackerBox 컴포넌트", () => {
       }
     })
 
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
     const getDeliveryButton = screen.getByRole("button", {
       name: "submit-button"
     })
@@ -121,7 +112,7 @@ describe("TrackerBox 컴포넌트", () => {
       data: null
     })
 
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
     const getDeliveryButton = screen.getByRole("button", {
       name: "submit-button"
     })

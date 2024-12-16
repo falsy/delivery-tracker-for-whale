@@ -5,10 +5,10 @@ import LabelBox from "@components/trackers/boxs/LabelBox"
 
 describe("LabelBox 컴포넌트", () => {
   const label = "initial label"
-  const patchTracker = jest.fn()
+  const changeLabel = jest.fn()
 
   test("초기 렌더링 시 input에 tracker.label 값이 설정되어야 한다", () => {
-    render(<LabelBox label={label} patchTracker={patchTracker} />)
+    render(<LabelBox label={label} changeLabel={changeLabel} />)
     const input = screen.getByPlaceholderText(
       "배송에 대한 간단한 메모를 적을 수 있어요."
     )
@@ -16,8 +16,8 @@ describe("LabelBox 컴포넌트", () => {
     expect(input).toHaveValue("initial label")
   })
 
-  test("input의 값을 변경했을 때 patchTracker 함수가 호출되어야 한다", async () => {
-    render(<LabelBox label={label} patchTracker={patchTracker} />)
+  test("input의 값을 변경했을 때 changeLabel 함수가 호출되어야 한다", async () => {
+    render(<LabelBox label={label} changeLabel={changeLabel} />)
     const input = screen.getByPlaceholderText(
       "배송에 대한 간단한 메모를 적을 수 있어요."
     )
@@ -26,7 +26,7 @@ describe("LabelBox 컴포넌트", () => {
     await userEvent.type(input, "new label")
 
     waitFor(() =>
-      expect(patchTracker).toHaveBeenCalledWith({ label: "new label" })
+      expect(changeLabel).toHaveBeenCalledWith({ label: "new label" })
     )
   })
 })

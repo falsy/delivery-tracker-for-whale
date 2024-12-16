@@ -1,18 +1,33 @@
 import { css } from "@emotion/react"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
-import useTrackers from "@hooks/useTrackers"
 import ErrorMessage from "@containers/commons/boxs/ErrorMessage"
 import TrackerBox from "@containers/trackers/boxs/TrackerBox"
 import Button from "@components/commons/items/Button"
+import ITracker from "@domains/entities/interfaces/ITracker"
 
-export default function TrackerSection() {
+export default function TrackerSection({
+  trackers,
+  getTrackers
+}: {
+  trackers: ITracker[]
+  getTrackers: () => void
+}) {
   const { controllers } = useDependencies()
   const { setMessage } = useError()
-  const { trackers, getTrackers } = useTrackers()
 
   const handleClickCreateTracker = async () => {
     const { isError } = await controllers.tracker.addTracker()
+    if (isError) {
+      setMessage()
+      return
+    }
+    getTrackers()
+  }
+
+  const handleClickDeleteTracker = async (id: string) => {
+    if (!window.confirm("조회 정보를 삭제하시겠습니까?")) return
+    const { isError } = await controllers.tracker.deleteTracker(id)
     if (isError) {
       setMessage()
       return
@@ -32,7 +47,11 @@ export default function TrackerSection() {
           <ul id="tracker-list">
             {trackers.map((tracker) => (
               <li key={tracker.id}>
-                <TrackerBox key={tracker.id} tracker={tracker} />
+                <TrackerBox
+                  key={tracker.id}
+                  tracker={tracker}
+                  deleteTracker={handleClickDeleteTracker}
+                />
               </li>
             ))}
           </ul>

@@ -1,10 +1,9 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { css } from "@emotion/react"
 import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
-import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
 import LabelBox from "@components/trackers/boxs/LabelBox"
 import DeleteButton from "@components/trackers/items/DeleteButton"
@@ -13,25 +12,50 @@ import TrackerNumberBox from "@components/trackers/boxs/TrackerNumberBox"
 import TrackerStateBox from "@components/trackers/boxs/TrackerStateBox"
 import MemoBox from "@components/trackers/boxs/MemoBox"
 
-export default function TrackerBox({ tracker }: { tracker: ITracker }) {
+export default function TrackerBox({
+  tracker,
+  deleteTracker
+}: {
+  tracker: ITracker
+  deleteTracker: (id: string) => void
+}) {
   const { controllers } = useDependencies()
   const { setMessage } = useError()
   const { carriers } = useCarriers()
-  const { getTrackers } = useTrackers()
 
   const [isLoading, setLoading] = useState(false)
   const [errDeliveryMessage, setDeliveryErrorMessage] = useState("")
+
+  const [label, setLabel] = useState(tracker.label)
+  const [trackingNumber, setTrackingNumber] = useState(tracker.trackingNumber)
+  const [carrierId, setCarrierId] = useState(
+    tracker.carrierId || carriers[0].id
+  )
+  const [memos, setMemos] = useState(tracker.memos)
+
   const [deliveryState, setDeliverState] = useState(null)
   const [progresses, setProgresses] = useState([])
 
-  const handleClickDeleteTracker = async (id: string) => {
-    if (!window.confirm("조회 정보를 삭제하시겠습니까?")) return
-    const { isError } = await controllers.tracker.deleteTracker(id)
-    if (isError) {
-      setMessage()
-      return
-    }
-    getTrackers()
+  const carrier = carriers.find((c) => c.id === carrierId)
+
+  const handleChangeLabel = (label: string) => {
+    setLabel(label)
+    autoSaveTracker({ label })
+  }
+
+  const handleChangeCarrierId = (carrierId: string) => {
+    setCarrierId(carrierId)
+    autoSaveTracker({ carrierId })
+  }
+
+  const handleChangeTrackingNumber = (trackingNumber: string) => {
+    setTrackingNumber(trackingNumber)
+    autoSaveTracker({ trackingNumber })
+  }
+
+  const handleChangeMemo = (memos: string[]) => {
+    setMemos(memos)
+    autoSaveTracker({ memos })
   }
 
   const resetDeliveryState = () => {
@@ -70,21 +94,15 @@ export default function TrackerBox({ tracker }: { tracker: ITracker }) {
     setLoading(false)
   }
 
-  const handlePatchTracker = async (trackerProps: ITrackerProps) => {
+  const autoSaveTracker = useCallback(async (trackerProps: ITrackerProps) => {
     const { isError } = await controllers.tracker.patchTracker(
       tracker.id,
       trackerProps
     )
     if (isError) {
-      setMessage()
-      return
+      setMessage("자동 저장에 실패하였습니다.")
     }
-    getTrackers()
-  }
-
-  const carrier = tracker.carrierId
-    ? carriers.find((carrier) => carrier.id === tracker.carrierId)
-    : carriers[0]
+  }, [])
 
   return (
     <div
@@ -108,18 +126,20 @@ export default function TrackerBox({ tracker }: { tracker: ITracker }) {
           padding: 5px 0 10px;
         `}
       >
-        <LabelBox label={tracker.label} patchTracker={handlePatchTracker} />
-        <DeleteButton
-          handleClick={() => handleClickDeleteTracker(tracker.id)}
-        />
+        <LabelBox label={label} changeLabel={handleChangeLabel} />
+        <DeleteButton handleClick={() => deleteTracker(tracker.id)} />
       </div>
 
-      <CarrierSelectBox carrier={carrier} patchTracker={handlePatchTracker} />
+      <CarrierSelectBox
+        carriers={carriers}
+        carrier={carrier}
+        changeCarrierId={handleChangeCarrierId}
+      />
 
       <TrackerNumberBox
         carrier={carrier}
-        trackingNumber={tracker.trackingNumber}
-        patchTracker={handlePatchTracker}
+        trackingNumber={trackingNumber}
+        changeTrackingNumber={handleChangeTrackingNumber}
         getDelivery={handleClickDelivery}
       />
 
@@ -133,7 +153,7 @@ export default function TrackerBox({ tracker }: { tracker: ITracker }) {
         />
       )}
 
-      <MemoBox memos={tracker.memos} patchTracker={handlePatchTracker} />
+      <MemoBox memos={memos} changeMemo={handleChangeMemo} />
     </div>
   )
 }

@@ -6,12 +6,12 @@ import SubmitButton from "../items/SubmitButton"
 export default function TrackerNumberBox({
   carrier,
   trackingNumber,
-  patchTracker,
+  changeTrackingNumber,
   getDelivery
 }: {
   carrier: ICarrier
   trackingNumber: string
-  patchTracker: ({ trackingNumber }) => void
+  changeTrackingNumber: (trackingNumber) => void
   getDelivery: (carrierId: string, trackerTrackingNumber: string) => void
 }) {
   return (
@@ -45,7 +45,7 @@ export default function TrackerNumberBox({
         `}
         type="text"
         value={trackingNumber}
-        onChange={(e) => patchTracker({ trackingNumber: e.target.value })}
+        onChange={(e) => changeTrackingNumber(e.target.value)}
         placeholder="운송장 번호를 입력해주세요."
       />
       {carrier.isPopupEnabled && (
