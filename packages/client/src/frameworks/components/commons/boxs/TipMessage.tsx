@@ -1,23 +1,10 @@
 import { css } from "@emotion/react"
-import useDependencies from "@hooks/useDependencies"
-import useTrackers from "@hooks/useTrackers"
 
-export default function TipMessage() {
-  const { controllers } = useDependencies()
-  const { getTrackers } = useTrackers()
-
-  const handleClickReset = async () => {
-    if (
-      window.confirm(
-        "초기화하면 기존에 저장된 모든 운송장 번호가 삭제됩니다.\n미리 다른곳에 메모해 주세요."
-      )
-    ) {
-      const { isError } = await controllers.tracker.clearTrackers()
-      if (isError) return
-      getTrackers()
-    }
-  }
-
+export default function TipMessage({
+  resetTrackers
+}: {
+  resetTrackers: () => void
+}) {
   return (
     <section
       css={css`
@@ -48,7 +35,7 @@ export default function TipMessage() {
             padding: 2px 0;
             font-size: 13px;
           `}
-          onClick={handleClickReset}
+          onClick={resetTrackers}
         >
           [초기화]
         </button>

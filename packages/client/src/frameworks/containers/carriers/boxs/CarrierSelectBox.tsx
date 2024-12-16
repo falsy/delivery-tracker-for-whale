@@ -1,18 +1,17 @@
 import { KeyboardEvent, useEffect, useRef, useState } from "react"
 import { css } from "@emotion/react"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
-import useCarriers from "@hooks/useCarriers"
 import ArrowDownIcon from "@components/icons/ArrowDownIcon"
 
 export default function CarrierSelectBox({
+  carriers,
   carrier,
-  patchTracker
+  changeCarrierId
 }: {
+  carriers: ICarrier[]
   carrier: ICarrier
-  patchTracker: ({ carrierId }) => void
+  changeCarrierId: (carrierId: string) => void
 }) {
-  const { carriers } = useCarriers()
-
   const menuButtonRef = useRef(null)
   const menuRef = useRef(null)
 
@@ -23,7 +22,7 @@ export default function CarrierSelectBox({
     if (menuButtonRef?.current) {
       menuButtonRef.current.focus()
     }
-    patchTracker({ carrierId })
+    changeCarrierId(carrierId)
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {

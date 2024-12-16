@@ -4,7 +4,6 @@ import userEvent from "@testing-library/user-event"
 import TrackerBox from "@containers/trackers/boxs/TrackerBox"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
-import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
 import TrackerDTO from "@adapters/dtos/TrackerDTO"
 
@@ -22,6 +21,8 @@ describe("TrackerBox 컴포넌트", () => {
     memos: []
   })
 
+  const deleteTracker = jest.fn()
+
   beforeEach(() => {
     ;(useDependencies as any).mockReturnValue({
       controllers: {
@@ -33,10 +34,6 @@ describe("TrackerBox 컴포넌트", () => {
     })
     ;(useError as any).mockReturnValue({
       setMessage: jest.fn()
-    })
-    ;(useTrackers as any).mockReturnValue({
-      trackers: [tracker],
-      getTrackers: jest.fn()
     })
     ;(useCarriers as any).mockReturnValue({
       carriers: [
@@ -52,7 +49,7 @@ describe("TrackerBox 컴포넌트", () => {
   })
 
   test("초기 렌더링 시 하위 컴포넌트들이 렌더링되어야 한다", () => {
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
 
     expect(
       screen.getByPlaceholderText("배송에 대한 간단한 메모를 적을 수 있어요.")
@@ -71,7 +68,7 @@ describe("TrackerBox 컴포넌트", () => {
 
     jest.spyOn(window, "confirm").mockReturnValue(true)
 
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
     const deleteButton = screen.getByRole("button", { name: "delete-button" })
 
     await userEvent.click(deleteButton)
@@ -99,7 +96,7 @@ describe("TrackerBox 컴포넌트", () => {
       }
     })
 
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
     const getDeliveryButton = screen.getByRole("button", {
       name: "submit-button"
     })
@@ -121,7 +118,7 @@ describe("TrackerBox 컴포넌트", () => {
       data: null
     })
 
-    render(<TrackerBox tracker={tracker} />)
+    render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
     const getDeliveryButton = screen.getByRole("button", {
       name: "submit-button"
     })

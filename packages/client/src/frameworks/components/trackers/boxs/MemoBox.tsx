@@ -4,10 +4,10 @@ import CloseIcon from "@components/icons/CloseIcon"
 
 export default function MemoBox({
   memos,
-  patchTracker
+  changeMemo
 }: {
   memos: string[]
-  patchTracker: ({ memos }) => void
+  changeMemo: (memos: string[]) => void
 }) {
   const handleChangeMemo = async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -16,16 +16,16 @@ export default function MemoBox({
     const newMemos = memos.map((memo) => memo)
     const newMemo = e.target.value
     newMemos[idx] = newMemo
-    patchTracker({ memos: newMemos })
+    changeMemo(newMemos)
   }
 
   const handleClickAddMemo = async () => {
-    patchTracker({ memos: [...memos, ""] })
+    changeMemo([...memos, ""])
   }
 
   const handleDeleteMemo = async (idx: number) => {
     const newMemos = memos.filter((_, i) => i !== idx)
-    patchTracker({ memos: newMemos })
+    changeMemo(newMemos)
   }
 
   return (

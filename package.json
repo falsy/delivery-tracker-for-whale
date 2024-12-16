@@ -1,7 +1,7 @@
 {
   "name": "delivery-tracker-for-whale",
   "private": true,
-  "version": "1.8.7",
+  "version": "1.8.8",
   "author": "falsy",
   "license": "The Unlicense",
   "workspaces": [

@@ -2,10 +2,10 @@ import { css } from "@emotion/react"
 
 export default function LabelBox({
   label,
-  patchTracker
+  changeLabel
 }: {
   label: string
-  patchTracker: ({ label }) => void
+  changeLabel: (label: string) => void
 }) {
   return (
     <div
@@ -29,7 +29,7 @@ export default function LabelBox({
         `}
         type="text"
         value={label}
-        onChange={(e) => patchTracker({ label: e.target.value })}
+        onChange={(e) => changeLabel(e.target.value)}
         placeholder="배송에 대한 간단한 메모를 적을 수 있어요."
       />
     </div>

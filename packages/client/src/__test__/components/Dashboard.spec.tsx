@@ -2,7 +2,6 @@
 import { render, waitFor } from "@testing-library/react"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
-import useTrackers from "@hooks/useTrackers"
 import useCarriers from "@hooks/useCarriers"
 import Migration from "@services/Migration"
 import Dashboard from "@pages/Dashboard"
@@ -28,10 +27,6 @@ describe("Dashboard", () => {
     })
     ;(useError as any).mockReturnValue({
       setMessage: mockSetMessage
-    })
-    ;(useTrackers as any).mockReturnValue({
-      trackers: [],
-      getTrackers: mockGetTrackers
     })
     ;(useCarriers as any).mockReturnValue({
       carriers: [],
