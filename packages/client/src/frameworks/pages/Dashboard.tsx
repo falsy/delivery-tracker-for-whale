@@ -9,12 +9,14 @@ import TrackerSection from "@containers/sections/TrackerSection"
 import Header from "@components/commons/sections/Header"
 import TipMessage from "@components/commons/boxs/TipMessage"
 import Footer from "@components/commons/sections/Footer"
+import Loading from "@components/commons/items/Loading"
 
 const Dashboard = () => {
   const { controllers } = useDependencies()
   const { setMessage } = useError()
   const { carriers, setCarriers } = useCarriers()
 
+  const [isLoading, setLoading] = useState(true)
   const [trackers, setTrackers] = useState<ITracker[]>([])
 
   useEffect(() => {
@@ -34,9 +36,13 @@ const Dashboard = () => {
     const { isError, data } = await controllers.tracker.getTrackers()
     if (isError) {
       setMessage()
-      return []
+      setLoading(false)
+      return
     }
-    setTrackers(data)
+    setTimeout(() => {
+      setLoading(false)
+      setTrackers(data)
+    }, 200)
   }
 
   useEffect(() => {
@@ -72,8 +78,20 @@ const Dashboard = () => {
           padding-bottom: 40px;
         `}
       >
-        <TrackerSection trackers={trackers} getTrackers={getTrackers} />
-        <TipMessage resetTrackers={handleClickReset} />
+        {isLoading && (
+          <div>
+            <Loading />
+          </div>
+        )}
+        <div
+          css={css`
+            opacity: ${isLoading ? 0 : 1};
+            transition: opacity 0.3s;
+          `}
+        >
+          <TrackerSection trackers={trackers} getTrackers={getTrackers} />
+          <TipMessage resetTrackers={handleClickReset} />
+        </div>
       </main>
       <Footer />
     </>
