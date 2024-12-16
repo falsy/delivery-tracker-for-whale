@@ -9,7 +9,6 @@ import TrackerDTO from "@adapters/dtos/TrackerDTO"
 
 jest.mock("@hooks/useDependencies")
 jest.mock("@hooks/useError")
-jest.mock("@hooks/useTrackers")
 jest.mock("@hooks/useCarriers")
 
 describe("TrackerBox 컴포넌트", () => {
@@ -61,11 +60,6 @@ describe("TrackerBox 컴포넌트", () => {
   })
 
   test("삭제 버튼 클릭 시 deleteTracker 함수가 호출되어야 한다", async () => {
-    const { controllers } = useDependencies()
-    ;(controllers.tracker.deleteTracker as jest.Mock).mockResolvedValue({
-      isError: false
-    })
-
     jest.spyOn(window, "confirm").mockReturnValue(true)
 
     render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
@@ -73,7 +67,7 @@ describe("TrackerBox 컴포넌트", () => {
 
     await userEvent.click(deleteButton)
 
-    expect(controllers.tracker.deleteTracker).toHaveBeenCalledWith("aaa")
+    expect(deleteTracker).toHaveBeenCalledWith("aaa")
   })
 
   test("유효한 carrierId와 trackingNumber로 handleClickDelivery 호출 시 getDelivery 함수가 호출되어야 한다", async () => {

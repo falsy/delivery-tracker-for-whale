@@ -4,8 +4,12 @@ import userEvent from "@testing-library/user-event"
 import MemoBox from "@components/trackers/boxs/MemoBox"
 
 describe("MemoBox 컴포넌트", () => {
-  const memos = ["initial memo 1", "initial memo 2"]
+  let memos = []
   const changeMemo = jest.fn()
+
+  beforeEach(() => {
+    memos = ["initial memo 1", "initial memo 2"]
+  })
 
   test("초기 렌더링 시 tracker.memos 값이 input 필드에 설정되어야 한다", () => {
     render(<MemoBox memos={memos} changeMemo={changeMemo} />)
@@ -23,9 +27,11 @@ describe("MemoBox 컴포넌트", () => {
 
     await userEvent.click(addButton)
 
-    expect(changeMemo).toHaveBeenCalledWith({
-      memos: ["initial memo 1", "initial memo 2", ""]
-    })
+    expect(changeMemo).toHaveBeenCalledWith([
+      "initial memo 1",
+      "initial memo 2",
+      ""
+    ])
   })
 
   test("메모 입력 값을 변경하면 changeMemo 함수가 호출되어야 한다", async () => {
@@ -50,6 +56,6 @@ describe("MemoBox 컴포넌트", () => {
 
     await userEvent.click(deleteButtons[1]) // 두 번째 버튼이 첫 번째 메모 삭제 버튼임
 
-    expect(changeMemo).toHaveBeenCalledWith({ memos: ["initial memo 2"] })
+    waitFor(() => expect(changeMemo).toHaveBeenCalledWith(["initial memo 2"]))
   })
 })
