@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { css } from "@emotion/react"
+import { css } from "@styled-system/css"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import Migration from "@services/Migration"
 import useDependencies from "@hooks/useDependencies"
@@ -74,9 +74,9 @@ const Dashboard = () => {
     <>
       <Header />
       <main
-        css={css`
-          padding-bottom: 40px;
-        `}
+        className={css({
+          paddingBottom: 40
+        })}
       >
         {isLoading && (
           <div>
@@ -84,10 +84,11 @@ const Dashboard = () => {
           </div>
         )}
         <div
-          css={css`
-            opacity: ${isLoading ? 0 : 1};
-            transition: opacity 0.3s;
-          `}
+          className={css({
+            opacity: isLoading ? 0 : 1,
+            transition: "opacity",
+            transitionDuration: "0.3s"
+          })}
         >
           <TrackerSection trackers={trackers} getTrackers={getTrackers} />
           <TipMessage resetTrackers={handleClickReset} />

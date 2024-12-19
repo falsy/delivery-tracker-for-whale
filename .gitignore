@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
-package-lock.json
 *.zip
 .env
 tsconfig.tsbuildinfo
 tsconfig.build.tsbuildinfo
+styled-system
+styled-system-studio

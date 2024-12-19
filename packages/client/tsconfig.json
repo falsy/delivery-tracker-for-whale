@@ -10,21 +10,22 @@
     "allowJs": true,
     "moduleResolution": "node",
     "jsxImportSource": "@emotion/react",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "types": ["@testing-library/jest-dom", "jest"],
     "paths": {
-      "@constants/*": ["constants/*"],
-      "@domains/*": ["domains/*"],
-      "@adapters/*": ["adapters/*"],
-      "@services/*": ["services/*"],
-      "@di/*": ["frameworks/di/*"],
-      "@pages/*": ["frameworks/pages/*"],
-      "@providers/*": ["frameworks/providers/*"],
-      "@containers/*": ["frameworks/containers/*"],
-      "@components/*": ["frameworks/components/*"],
-      "@hooks/*": ["frameworks/hooks/*"]
+      "@constants/*": ["src/constants/*"],
+      "@domains/*": ["src/domains/*"],
+      "@adapters/*": ["src/adapters/*"],
+      "@services/*": ["src/services/*"],
+      "@di/*": ["src/frameworks/di/*"],
+      "@pages/*": ["src/frameworks/pages/*"],
+      "@providers/*": ["src/frameworks/providers/*"],
+      "@containers/*": ["src/frameworks/containers/*"],
+      "@components/*": ["src/frameworks/components/*"],
+      "@hooks/*": ["src/frameworks/hooks/*"],
+      "@styled-system/*": ["styled-system/*"]
     }
   },
-  "include": ["./src/**/*", "setupTests.ts"],
+  "include": ["./src/**/*", "setupTests.ts", "./styled-system/**/*"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,0 +1,36 @@
+::placeholder {
+  color: #bbb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#wrap {
+  height: 100%;
+}
+
+body {
+  background: #f7f7f7;
+  font-size: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: rgb(41, 41, 41);
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+}
