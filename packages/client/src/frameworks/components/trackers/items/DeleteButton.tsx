@@ -1,4 +1,4 @@
-import { css } from "@emotion/react"
+import { css, cx } from "@styled-system/css"
 import CloseIcon from "@components/icons/CloseIcon"
 
 export default function DeleteButton({
@@ -9,22 +9,23 @@ export default function DeleteButton({
   return (
     <button
       aria-label="delete-button"
-      className="delete-button"
-      css={css`
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        svg {
-          width: 18px;
-          height: 18px;
-          @media (prefers-color-scheme: dark) {
-            stroke: #fff;
+      className={cx(
+        "delete-button",
+        css({
+          width: "30px",
+          height: "30px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          "& > svg": {
+            width: "18px",
+            height: "18px",
+            "@media (prefers-color-scheme: dark)": {
+              stroke: "#fff"
+            }
           }
-        }
-      `}
+        })
+      )}
       onClick={handleClick}
     >
       <CloseIcon />

@@ -1,7 +1,7 @@
-import styled from "@emotion/styled"
-import { css } from "@emotion/react"
+import { css } from "@styled-system/css"
 import IDeliveryProgressVO from "@domains/vos/interfaces/IDeliveryProgressVO"
 import Loading from "@components/commons/items/Loading"
+import StateTable from "./StateTable"
 
 export default function TrackerStateBox({
   isLoading,
@@ -18,34 +18,34 @@ export default function TrackerStateBox({
 }) {
   return (
     <div
-      css={css`
-        border-top: 1px solid #eee;
-        padding: 20px 0;
-        @media (prefers-color-scheme: dark) {
-          border-color: rgb(85, 85, 85);
+      className={css({
+        borderTop: "1px solid #eee",
+        padding: "20px 0",
+        "@media (prefers-color-scheme: dark)": {
+          borderColor: "rgb(85, 85, 85)"
         }
-      `}
+      })}
     >
       <div
-        css={css`
-          height: 200px;
-          overflow: auto;
-          padding: 0 15px 0 0;
-          position: relative;
-        `}
+        className={css({
+          height: 200,
+          overflow: "auto",
+          padding: "0 15px 0 0",
+          position: "relative"
+        })}
       >
         {isLoading && (
           <div
-            css={css`
-              position: sticky;
-              top: 0;
-            `}
+            className={css({
+              position: "sticky",
+              top: 0
+            })}
           >
             <div
-              css={css`
-                position: absolute;
-                width: 100%;
-              `}
+              className={css({
+                position: "absolute",
+                width: "100%"
+              })}
             >
               <Loading />
             </div>
@@ -53,15 +53,14 @@ export default function TrackerStateBox({
         )}
         {!!errDeliveryMessage && (
           <p
-            css={css`
-              padding: 0 2px;
-              color: #bbb;
-              font-size: 13px;
-
-              @media (prefers-color-scheme: dark) {
-                color: #ddd;
+            className={css({
+              padding: "0 2px",
+              color: "#bbb",
+              fontSize: "13px",
+              "@media (prefers-color-scheme: dark)": {
+                color: "#ddd"
               }
-            `}
+            })}
           >
             {errDeliveryMessage}
           </p>
@@ -69,11 +68,11 @@ export default function TrackerStateBox({
         {progresses.length > 0 && !errDeliveryMessage && (
           <div>
             <div
-              css={css`
-                margin-bottom: 20px;
-              `}
+              className={css({
+                marginBottom: "20px"
+              })}
             >
-              <$table>
+              <StateTable>
                 <thead>
                   <tr>
                     <th>발송지</th>
@@ -88,56 +87,53 @@ export default function TrackerStateBox({
                     <td>{deliveryState.state}</td>
                   </tr>
                 </tbody>
-              </$table>
+              </StateTable>
             </div>
 
-            <$stateList>
-              <$table>
-                <thead>
-                  <tr>
-                    <th>단계/시간</th>
-                    <th>위치/현황</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {progresses.map((progress, i) => {
-                    return (
-                      <tr key={i}>
-                        <td>
-                          <p>[{progress.state.name}]</p>
-                          <p>{progress.time}</p>
-                        </td>
-                        <td>
-                          <p>[{progress.location}]</p>
-                          <p>{progress.description}</p>
-                        </td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </$table>
-            </$stateList>
+            <StateTable>
+              <thead>
+                <tr>
+                  <th>단계/시간</th>
+                  <th>위치/현황</th>
+                </tr>
+              </thead>
+              <tbody>
+                {progresses.map((progress, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>
+                        <p>[{progress.state.name}]</p>
+                        <p>{progress.time}</p>
+                      </td>
+                      <td>
+                        <p>[{progress.location}]</p>
+                        <p>{progress.description}</p>
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </StateTable>
           </div>
         )}
       </div>
       <button
-        css={css`
-          margin-top: 20px;
-          border: 0;
-          text-align: center;
-          width: 100%;
-          font-size: 12px;
-          line-height: 36px;
-          padding: 0;
-          background: #f5f5f5;
-          border: 1px solid #ddd;
-
-          @media (prefers-color-scheme: dark) {
-            background: rgb(44, 44, 44);
-            color: #ddd;
-            border-color: rgb(85, 85, 85);
+        className={css({
+          margin: "20px auto 0",
+          display: "block",
+          textAlign: "center",
+          width: "100%",
+          fontSize: "12px",
+          lineHeight: "36px",
+          padding: 0,
+          background: "#f5f5f5",
+          border: "1px solid #ddd",
+          "@media (prefers-color-scheme: dark)": {
+            background: "rgb(44, 44, 44)",
+            color: "#ddd",
+            borderColor: "rgb(85, 85, 85)"
           }
-        `}
+        })}
         onClick={closeFnc}
       >
         닫기
@@ -145,52 +141,3 @@ export default function TrackerStateBox({
     </div>
   )
 }
-
-const $table = styled.table`
-  table-layout: fixed;
-  width: 100%;
-  text-align: center;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  border-spacing: 0;
-  font-size: 13px;
-  @media (prefers-color-scheme: dark) {
-    border-color: rgb(85, 85, 85);
-    color: #fff;
-  }
-
-  th,
-  td {
-    border-left: 1px solid #ddd;
-    border-top: 1px solid #ddd;
-    @media (prefers-color-scheme: dark) {
-      border-color: rgb(85, 85, 85);
-    }
-  }
-
-  th {
-    background: #f5f5f5;
-    line-height: 34px;
-    @media (prefers-color-scheme: dark) {
-      background: rgb(44, 44, 44);
-    }
-  }
-
-  td {
-    line-height: 20px;
-    padding: 5px;
-  }
-`
-
-const $stateList = styled.div`
-  table {
-    th:first-of-type {
-      width: 35%;
-    }
-    td {
-      p {
-        margin: 5px 0;
-      }
-    }
-  }
-`

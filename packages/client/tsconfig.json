@@ -9,7 +9,6 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
-    "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "types": ["@testing-library/jest-dom", "jest"],
     "paths": {

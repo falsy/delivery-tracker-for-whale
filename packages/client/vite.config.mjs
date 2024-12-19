@@ -22,8 +22,8 @@ export default defineConfig({
     },
     extensions: [".ts", ".tsx", ".js", ".mjs"]
   },
-  plugins: [react()],
   build: {
     emptyOutDir: false
-  }
+  },
+  plugins: [react()]
 })

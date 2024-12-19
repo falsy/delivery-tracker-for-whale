@@ -1,5 +1,5 @@
 import { KeyboardEvent, useEffect, useRef, useState } from "react"
-import { css } from "@emotion/react"
+import { css } from "@styled-system/css"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
 import ArrowDownIcon from "@components/icons/ArrowDownIcon"
 
@@ -55,44 +55,43 @@ export default function CarrierSelectBox({
 
   return (
     <div
-      css={css`
-        position: relative;
-        padding-bottom: 10px;
-      `}
+      className={css({
+        position: "relative",
+        paddingBottom: "10px"
+      })}
     >
       <button
         ref={menuButtonRef}
         aria-expanded={isShowSelectBox}
         aria-controls="carrier-select-box"
-        css={css`
-          margin: 0;
-          line-height: 40px;
-          padding: 0 15px;
-          border: 1px solid #ddd;
-          display: block;
-          width: 100%;
-          background: transparent;
-          text-align: left;
-
-          @media (prefers-color-scheme: dark) {
-            border-color: rgb(85, 85, 85);
-            color: #fff;
+        className={css({
+          margin: 0,
+          lineHeight: "40px",
+          padding: "0 15px",
+          border: "1px solid #ddd",
+          display: "block",
+          width: "100%",
+          background: "transparent",
+          textAlign: "left",
+          "@media (prefers-color-scheme: dark)": {
+            borderColor: "rgb(85, 85, 85)",
+            color: "#fff"
           }
-        `}
+        })}
         onClick={() => setIsShowSelectBox((prevState) => !prevState)}
       >
         {carrier.displayName}
         <div
-          css={css`
-            position: absolute;
-            right: 15px;
-            top: 13px;
-            line-height: 0;
-            svg {
-              width: 16px;
-              height: auto;
+          className={css({
+            position: "absolute",
+            right: "15px",
+            top: "13px",
+            lineHeight: 0,
+            "& > svg": {
+              width: "16px",
+              height: "auto"
             }
-          `}
+          })}
         >
           <ArrowDownIcon />
         </div>
@@ -100,77 +99,76 @@ export default function CarrierSelectBox({
       {isShowSelectBox && (
         <div>
           <div
-            css={css`
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              z-index: 50;
-            `}
+            className={css({
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 50
+            })}
             onClick={() => setIsShowSelectBox(false)}
           />
           <div
             id="carrier-select-box"
-            css={css`
-              position: absolute;
-              width: 100%;
-              padding: 0;
-              line-height: 35px;
-              border-left: 1px solid #ddd;
-              border-right: 1px solid #ddd;
-              margin-top: 0;
-              background: #f9f9f9;
-              z-index: 100;
-              max-height: 240px;
-              overflow-y: scroll;
-              border-bottom: 1px solid #ddd;
-
-              @media (prefers-color-scheme: dark) {
-                border-color: rgb(85, 85, 85);
-                color: #fff;
+            className={css({
+              position: "absolute",
+              width: "100%",
+              padding: 0,
+              lineHeight: "38px",
+              border: "1px solid #ddd",
+              borderRadius: "6px",
+              marginTop: "4px",
+              background: "#f9f9f9",
+              zIndex: 100,
+              maxHeight: "240px",
+              overflowY: "scroll",
+              borderBottom: "1px solid #ddd",
+              boxShadow: "0 1px 12px rgba(0, 0, 0, 0.2)",
+              "@media (prefers-color-scheme: dark)": {
+                borderColor: "rgb(85, 85, 85)",
+                color: "#fff"
               }
-            `}
+            })}
           >
             <ul role={"menu"} ref={menuRef} onKeyDown={handleKeyDown}>
               {carriers.map((carrier) => (
                 <li
-                  css={css`
-                    padding: 1px 1px;
-                    border-bottom: 1px solid #ddd;
-                    cursor: pointer;
-                    font-size: 13px;
-                    &:hover {
-                      background: #fff;
-                    }
-                    &:last-child {
-                      border-bottom: 0;
-                    }
-
-                    @media (prefers-color-scheme: dark) {
-                      background: rgb(55, 55, 55);
-                      border-color: rgb(85, 85, 85);
-                      &:hover {
-                        background: rgb(65, 65, 65);
+                  key={carrier.id}
+                  className={css({
+                    padding: "1px 1px",
+                    borderBottom: "1px solid #ddd",
+                    cursor: "pointer",
+                    fontSize: "13px",
+                    "&:hover": {
+                      background: "#fff"
+                    },
+                    "&:last-child": {
+                      borderBottom: 0
+                    },
+                    "@media (prefers-color-scheme: dark)": {
+                      background: "rgb(55, 55, 55)",
+                      borderColor: "rgb(85, 85, 85)",
+                      "&:hover": {
+                        background: "rgb(65, 65, 65)"
                       }
                     }
-                  `}
-                  key={carrier.id}
+                  })}
                 >
                   <button
                     role={"menuitem"}
-                    css={css`
-                      display: block;
-                      width: 100%;
-                      border: 0;
-                      background: transparent;
-                      padding: 0 14px;
-                      text-align: left;
-                      line-height: 35px;
-                      @media (prefers-color-scheme: dark) {
-                        color: #fff;
+                    className={css({
+                      display: "block",
+                      width: "100%",
+                      border: 0,
+                      background: "transparent",
+                      padding: "0 14px",
+                      textAlign: "left",
+                      lineHeight: "38px",
+                      "@media (prefers-color-scheme: dark)": {
+                        color: "#fff"
                       }
-                    `}
+                    })}
                     onClick={() => handleClickSelect(carrier.id)}
                   >
                     {carrier.displayName}

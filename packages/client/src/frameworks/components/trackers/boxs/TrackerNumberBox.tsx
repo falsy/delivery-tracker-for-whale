@@ -1,4 +1,4 @@
-import { css } from "@emotion/react"
+import { css } from "@styled-system/css"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
 import NewWinodwButton from "../items/NewWinodwButton"
 import SubmitButton from "../items/SubmitButton"
@@ -16,33 +16,31 @@ export default function TrackerNumberBox({
 }) {
   return (
     <div
-      css={css`
-        padding-bottom: 10px;
-        display: flex;
-      `}
+      className={css({
+        paddingBottom: "10px",
+        display: "flex"
+      })}
     >
       <input
-        css={css`
-          flex-grow: 1;
-          width: 100%;
-          line-height: 24px;
-          margin: 0;
-          padding: 0 15px;
-          border: 1px solid #ddd;
-          border-right: 0;
-          font-size: 15px;
-          letter-spacing: 0.3px;
-
-          &::placeholder {
-            font-size: 13px;
+        className={css({
+          flexGrow: 1,
+          width: "100%",
+          lineHeight: "24px",
+          margin: 0,
+          padding: "0 15px",
+          border: "1px solid #ddd",
+          borderRight: 0,
+          fontSize: "15px",
+          letterSpacing: 0.3,
+          "&::placeholder": {
+            fontSize: "13px"
+          },
+          "@media (prefers-color-scheme: dark)": {
+            background: "rgb(55, 55, 55)",
+            borderColor: "rgb(85, 85, 85)",
+            color: "#fff"
           }
-
-          @media (prefers-color-scheme: dark) {
-            background: rgb(55, 55, 55);
-            border-color: rgb(85, 85, 85);
-            color: #fff;
-          }
-        `}
+        })}
         type="text"
         value={trackingNumber}
         onChange={(e) => changeTrackingNumber(e.target.value)}

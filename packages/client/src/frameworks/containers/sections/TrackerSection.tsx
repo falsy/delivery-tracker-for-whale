@@ -1,4 +1,4 @@
-import { css } from "@emotion/react"
+import { css } from "@styled-system/css"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import ErrorMessage from "@containers/commons/boxs/ErrorMessage"
@@ -39,9 +39,9 @@ export default function TrackerSection({
     <section>
       <ErrorMessage />
       <div
-        css={css`
-          padding: 20px 20px 0;
-        `}
+        className={css({
+          padding: "20px 20px 0"
+        })}
       >
         {trackers.length > 0 && (
           <ul id="tracker-list">
@@ -58,9 +58,9 @@ export default function TrackerSection({
         )}
       </div>
       <div
-        css={css`
-          padding: 0 20px 40px;
-        `}
+        className={css({
+          padding: "0 20px 40px"
+        })}
       >
         <Button
           id="create-tracker-button"
