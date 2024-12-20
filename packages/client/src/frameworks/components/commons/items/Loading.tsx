@@ -18,8 +18,8 @@ export default function Loading() {
           height: "40px",
           border: "3px solid rgba(255, 255, 255, 0)",
           borderRadius: "50%",
-          borderTopColor: "#00dc9b",
-          borderLeftColor: "#00dc9b",
+          borderTopColor: "#087e5b",
+          borderLeftColor: "#087e5b",
           animation: "spin 0.85s ease-in-out infinite"
         }
       })}

@@ -1,7 +1,6 @@
 import { css } from "@styled-system/css"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
-import ErrorMessage from "@containers/commons/boxs/ErrorMessage"
 import TrackerBox from "@containers/trackers/boxs/TrackerBox"
 import Button from "@components/commons/items/Button"
 import ITracker from "@domains/entities/interfaces/ITracker"
@@ -37,7 +36,6 @@ export default function TrackerSection({
 
   return (
     <section>
-      <ErrorMessage />
       <div
         className={css({
           padding: "20px 20px 0"

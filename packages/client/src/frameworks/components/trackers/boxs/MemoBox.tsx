@@ -43,14 +43,20 @@ export default function MemoBox({
             gap: "3px",
             padding: "0 2px 2px 0",
             fontSize: "12px",
-            color: "#05c38b",
+            color: "#087e5b",
             fontWeight: "bold",
+            "@media (prefers-color-scheme: dark)": {
+              color: "#05c38b"
+            },
             "& > svg": {
               marginTop: "2px",
               width: "16px",
               height: "auto",
               cursor: "pointer",
-              stroke: "#05c38b"
+              stroke: "#087e5b",
+              "@media (prefers-color-scheme: dark)": {
+                stroke: "#05c38b"
+              }
             }
           })}
           onClick={() => handleClickAddMemo()}
@@ -95,6 +101,7 @@ export default function MemoBox({
                     placeholder="이곳에 추가적인 메모를 입력할 수 있어요."
                   />
                   <button
+                    aria-label="delete-memo-button"
                     className={cx(
                       "delete-memo-button",
                       css({

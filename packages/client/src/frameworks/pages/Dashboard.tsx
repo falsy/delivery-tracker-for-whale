@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, lazy } from "react"
 import { css } from "@styled-system/css"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import Migration from "@services/Migration"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useCarriers from "@hooks/useCarriers"
-import TrackerSection from "@containers/sections/TrackerSection"
 import Header from "@components/commons/sections/Header"
-import TipMessage from "@components/commons/boxs/TipMessage"
 import Footer from "@components/commons/sections/Footer"
 import Loading from "@components/commons/items/Loading"
+import ErrorMessage from "@containers/commons/boxs/ErrorMessage"
+
+const TrackerSection = lazy(() => import("@containers/sections/TrackerSection"))
+const TipMessage = lazy(() => import("@components/commons/boxs/TipMessage"))
 
 const Dashboard = () => {
   const { controllers } = useDependencies()
@@ -27,6 +29,7 @@ const Dashboard = () => {
     const { isError, message, data } = await controllers.carrier.getCarriers()
     if (isError) {
       setMessage(message)
+      setLoading(false)
       return
     }
     setCarriers(data)
@@ -39,10 +42,10 @@ const Dashboard = () => {
       setLoading(false)
       return
     }
+    setTrackers(data)
     setTimeout(() => {
       setLoading(false)
-      setTrackers(data)
-    }, 200)
+    }, 100)
   }
 
   useEffect(() => {
@@ -75,23 +78,36 @@ const Dashboard = () => {
       <Header />
       <main
         className={css({
+          position: "relative",
           paddingBottom: 40
         })}
       >
         {isLoading && (
-          <div>
+          <div
+            className={css({
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%"
+            })}
+          >
             <Loading />
           </div>
         )}
+        <ErrorMessage />
         <div
           className={css({
             opacity: isLoading ? 0 : 1,
             transition: "opacity",
-            transitionDuration: "0.3s"
+            transitionDuration: "0.5s"
           })}
         >
-          <TrackerSection trackers={trackers} getTrackers={getTrackers} />
-          <TipMessage resetTrackers={handleClickReset} />
+          {carriers.length > 0 && !isLoading && (
+            <>
+              <TrackerSection trackers={trackers} getTrackers={getTrackers} />
+              <TipMessage resetTrackers={handleClickReset} />
+            </>
+          )}
         </div>
       </main>
       <Footer />

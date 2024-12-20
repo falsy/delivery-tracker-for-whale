@@ -4,12 +4,15 @@ export default function Footer() {
   return (
     <footer
       className={css({
-        color: "#aaa",
+        color: "#666",
         fontSize: "12px",
-        fontWeight: 500,
+        fontWeight: 400,
         position: "sticky",
         top: "100%",
-        padding: "15px 0 15px 20px"
+        padding: "15px 0 15px 20px",
+        "@media (prefers-color-scheme: dark)": {
+          color: "#999"
+        }
       })}
     >
       &copy;{" "}

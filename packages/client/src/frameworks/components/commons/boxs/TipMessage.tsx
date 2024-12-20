@@ -9,7 +9,7 @@ export default function TipMessage({
     <section
       className={css({
         padding: "0 20px",
-        fontSize: 12,
+        fontSize: "12px",
         color: "#444",
         "@media (prefers-color-scheme: dark)": {
           color: "#ddd"
@@ -29,10 +29,13 @@ export default function TipMessage({
           id="reset-button"
           className={css({
             display: "block",
-            color: "#05c38b",
+            color: "#087e5b",
             fontWeight: "bold",
             padding: "2px 0",
-            fontSize: 13
+            fontSize: "13px",
+            "@media (prefers-color-scheme: dark)": {
+              color: "#05c38b"
+            }
           })}
           onClick={resetTrackers}
         >

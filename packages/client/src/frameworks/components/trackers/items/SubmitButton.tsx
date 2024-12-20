@@ -9,10 +9,10 @@ export default function SubmitButton({
     <button
       aria-label="submit-button"
       className={css({
-        border: "1px solid #05c38b",
         lineHeight: "40px",
         padding: 0,
-        background: "#00dc9b",
+        background: "#087e5b",
+        border: "1px solid #087e5b",
         color: "#fff",
         width: "30%",
         minWidth: "60px",
