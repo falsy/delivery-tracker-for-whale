@@ -79,7 +79,7 @@ const Dashboard = () => {
       <main
         className={css({
           position: "relative",
-          paddingBottom: 40
+          paddingBottom: "40px"
         })}
       >
         {isLoading && (

@@ -71,6 +71,8 @@ export default function CarrierSelectBox({
           border: "1px solid #ddd",
           display: "block",
           width: "100%",
+          fontSize: "15px",
+          fontWeight: 500,
           background: "transparent",
           textAlign: "left",
           "@media (prefers-color-scheme: dark)": {

@@ -31,6 +31,7 @@ export default function TrackerNumberBox({
           border: "1px solid #ddd",
           borderRight: 0,
           fontSize: "15px",
+          fontWeight: 500,
           letterSpacing: 0.3,
           "&::placeholder": {
             fontSize: "13px"

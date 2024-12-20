@@ -18,10 +18,13 @@ export default function LabelBox({
           flex: 1,
           lineHeight: "20px",
           width: "100%",
-          fontSize: "13px",
+          fontSize: "14px",
           padding: "5px",
           border: 0,
           background: "transparent",
+          "&::placeholder": {
+            fontSize: "13px"
+          },
           "@media (prefers-color-scheme: dark)": {
             color: "#fff"
           }

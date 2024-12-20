@@ -1061,8 +1061,8 @@
     padding: 5px 0 10px;
 }
 
-  .pb_40 {
-    padding-bottom: var(--spacing-40);
+  .pb_40px {
+    padding-bottom: 40px;
 }
 
   .top_0 {
@@ -1167,6 +1167,10 @@
     font-size: 15px;
 }
 
+  .fw_500 {
+    font-weight: 500;
+}
+
   .mb_20px {
     margin-bottom: 20px;
 }
@@ -1185,10 +1189,6 @@
 
   .bd-b-c_rgb\(220\,_220\,_220\) {
     border-bottom-color: rgb(220, 220, 220);
-}
-
-  .fw_500 {
-    font-weight: 500;
 }
 
   .fs_14 {
@@ -1311,6 +1311,10 @@
     border-left-color: #087e5b;
 }
 
+  .\[\&\:\:placeholder\]\:fs_13px::placeholder {
+    font-size: 13px;
+}
+
   .\[\&_\>_svg\]\:mt_2px > svg {
     margin-top: 2px;
 }
@@ -1321,10 +1325,6 @@
 
   .\[\&_td\]\:lh_20px td {
     line-height: 20px;
-}
-
-  .\[\&\:\:placeholder\]\:fs_13px::placeholder {
-    font-size: 13px;
 }
 
   .hover\:op_0\.8:is(:hover, [data-hover]) {
