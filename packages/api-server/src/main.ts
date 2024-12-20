@@ -1,5 +1,6 @@
 import { NestFactory } from "@nestjs/core"
 import { AppModule } from "./frameworks/moduls/AppModule"
+import * as compression from "compression"
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -22,6 +23,12 @@ async function bootstrap() {
     credentials: true,
     exposedHeaders: ["ETag"]
   })
+
+  app.use(
+    compression({
+      threshold: 2048
+    })
+  )
 
   await app.listen(port)
 }
