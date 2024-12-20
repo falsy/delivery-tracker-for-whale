@@ -1,4 +1,4 @@
-import { css } from "@emotion/react"
+import { css } from "@styled-system/css"
 import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
 
 export default function NewWinodwButton({
@@ -20,42 +20,41 @@ export default function NewWinodwButton({
 
   return (
     <button
-      css={css`
-        width: 30%;
-        min-width: 60px;
-        line-height: 40px;
-        background: #f5f5f5;
-        border: 1px solid #ddd;
-        border-right: 0;
-        border-top-color: rgb(220, 220, 220);
-        border-bottom-color: rgb(220, 220, 220);
-        text-shadow: none;
-        color: #000;
-        font-weight: 500;
-        &:last-of-type {
-          border-right: 1px solid rgb(220, 220, 220);
-        }
-        transition: all 0.3s;
-        &:hover {
-          background: #eaeaea;
-          opacity: 0.8;
-        }
-
-        @media (prefers-color-scheme: dark) {
-          background: rgb(44, 44, 44);
-          color: #ddd;
-          border-color: rgb(85, 85, 85);
-          border-right: 0;
-          border-top-color: rgb(50, 50, 50);
-          border-bottom-color: rgb(50, 50, 50);
-          &:last-of-type {
-            border-right: 1px solid rgb(50, 50, 50);
+      className={css({
+        width: "30%",
+        minWidth: "60px",
+        lineHeight: "40px",
+        background: "#f5f5f5",
+        border: "1px solid #ddd",
+        borderRight: 0,
+        borderTopColor: "rgb(220, 220, 220)",
+        borderBottomColor: "rgb(220, 220, 220)",
+        textShadow: "none",
+        color: "#000",
+        fontWeight: 500,
+        "&:last-of-type": {
+          borderRight: "1px solid rgb(220, 220, 220)"
+        },
+        transition: "all 0.3s",
+        _hover: {
+          background: "#eaeaea",
+          opacity: 0.8
+        },
+        "@media (prefers-color-scheme: dark)": {
+          background: "rgb(44, 44, 44)",
+          color: "#ddd",
+          borderColor: "rgb(85, 85, 85)",
+          borderRight: 0,
+          borderTopColor: "rgb(50, 50, 50)",
+          borderBottomColor: "rgb(50, 50, 50)",
+          "&:last-of-type": {
+            borderRight: "1px solid rgb(50, 50, 50)"
+          },
+          _hover: {
+            background: "rgb(30, 30, 30)"
           }
-          &:hover {
-            background: rgb(30, 30, 30);
-          }
         }
-      `}
+      })}
       onClick={handleClickNewWindowTracker}
     >
       새창

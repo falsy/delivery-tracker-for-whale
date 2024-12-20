@@ -1,4 +1,4 @@
-import { css } from "@emotion/react"
+import { css } from "@styled-system/css"
 
 export default function LabelBox({
   label,
@@ -9,24 +9,23 @@ export default function LabelBox({
 }) {
   return (
     <div
-      css={css`
-        display: flex;
-      `}
+      className={css({
+        display: "flex"
+      })}
     >
       <input
-        css={css`
-          flex-grow: 1;
-          line-height: 20px;
-          width: 100%;
-          font-size: 13px;
-          padding: 5px;
-          border: 0;
-          background: transparent;
-
-          @media (prefers-color-scheme: dark) {
-            color: #fff;
+        className={css({
+          flex: 1,
+          lineHeight: "20px",
+          width: "100%",
+          fontSize: "13px",
+          padding: "5px",
+          border: 0,
+          background: "transparent",
+          "@media (prefers-color-scheme: dark)": {
+            color: "#fff"
           }
-        `}
+        })}
         type="text"
         value={label}
         onChange={(e) => changeLabel(e.target.value)}

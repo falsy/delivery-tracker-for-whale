@@ -1,4 +1,4 @@
-import { css } from "@emotion/react"
+import { css } from "@styled-system/css"
 
 export default function Button({
   text,
@@ -12,23 +12,24 @@ export default function Button({
   return (
     <button
       id={id}
-      css={css`
-        display: inline-block;
-        width: 80px;
-        font-size: 14px;
-        line-height: 32px;
-        color: #fff;
-        background: #00dc9b;
-        border: 1px solid #05c38b;
-        text-shadow: 0px 0px 1px #075c43;
-        letter-spacing: 1px;
-        font-weight: 700;
-        opacity: 1;
-        transition: opacity 0.3s;
-        &:hover {
-          opacity: 0.8;
+      className={css({
+        display: "inline-block",
+        width: "80px",
+        fontSize: "14px",
+        lineHeight: "32px",
+        color: "#fff",
+        background: "#087e5b",
+        border: "1px solid #087e5b",
+        textShadow: "0px 0px 1px #075c43",
+        letterSpacing: 1,
+        fontWeight: 700,
+        opacity: 1,
+        transition: "opacity",
+        transitionDuration: "0.3s",
+        _hover: {
+          opacity: 0.8
         }
-      `}
+      })}
       onClick={handleClick}
     >
       {text}

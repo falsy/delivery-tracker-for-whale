@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react"
-import { css } from "@emotion/react"
+import { css } from "@styled-system/css"
 import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import useDependencies from "@hooks/useDependencies"
@@ -106,25 +106,24 @@ export default function TrackerBox({
 
   return (
     <div
-      css={css`
-        position: relative;
-        padding: 10px 20px 0;
-        margin-bottom: 20px;
-        background: #fff;
-        box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-
-        @media (prefers-color-scheme: dark) {
-          background: rgb(55, 55, 55);
+      className={css({
+        position: "relative",
+        padding: "10px 20px 0",
+        marginBottom: "20px",
+        background: "#fff",
+        boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.1)",
+        "@media (prefers-color-scheme: dark)": {
+          background: "rgb(55, 55, 55)"
         }
-      `}
+      })}
     >
       <div
-        css={css`
-          display: grid;
-          grid-template-columns: 1fr 30px;
-          gap: 10px;
-          padding: 5px 0 10px;
-        `}
+        className={css({
+          display: "grid",
+          gridTemplateColumns: "1fr 30px",
+          gap: "10px",
+          padding: "5px 0 10px"
+        })}
       >
         <LabelBox label={label} changeLabel={handleChangeLabel} />
         <DeleteButton handleClick={() => deleteTracker(tracker.id)} />

@@ -1,34 +1,28 @@
-import { css, keyframes } from "@emotion/react"
-
-const spin = keyframes`
-  to {
-    transform: rotate(360deg);
-  }
-`
+import { css } from "@styled-system/css"
 
 export default function Loading() {
   return (
     <div
-      css={css`
-        height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        text-indent: -9999px;
-        font-size: 0;
-        &::after {
-          content: "";
-          display: inline-block;
-          width: 40px;
-          height: 40px;
-          border: 3px solid rgba(255, 255, 255, 0);
-          border-radius: 50%;
-          border-top-color: #00dc9b;
-          border-left-color: #00dc9b;
-          animation: ${spin} 0.85s ease-in-out infinite;
+      className={css({
+        height: 200,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+        textIndent: -9999,
+        fontSize: 0,
+        _after: {
+          content: '""',
+          display: "inline-block",
+          width: "40px",
+          height: "40px",
+          border: "3px solid rgba(255, 255, 255, 0)",
+          borderRadius: "50%",
+          borderTopColor: "#087e5b",
+          borderLeftColor: "#087e5b",
+          animation: "spin 0.85s ease-in-out infinite"
         }
-      `}
+      })}
     >
       loading...
     </div>
