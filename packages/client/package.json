@@ -1,9 +1,12 @@
 {
   "name": "client",
   "packageManager": "yarn@4.2.2",
+  "sideEffects": false,
   "scripts": {
     "start": "vite",
     "build": "rm -rf dist/assets && vite build",
+    "build:dev": "vite build --mode development",
+    "explorer": "source-map-explorer ./dist/assets/*.js",
     "panda": "panda",
     "test": "jest",
     "prepare": "panda codegen",
