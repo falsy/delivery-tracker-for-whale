@@ -93,6 +93,6 @@ describe("TrackerNumberBox 컴포넌트", () => {
     const submitButton = screen.getByRole("button", { name: /submit/i })
     await userEvent.click(submitButton)
 
-    expect(getDeliveryMock).toHaveBeenCalledWith("carrier-id", "123456789")
+    expect(getDeliveryMock).toHaveBeenCalledWith(carrier, "123456789")
   })
 })
