@@ -26,7 +26,7 @@ async function bootstrap() {
 
   app.use(
     compression({
-      threshold: 2048
+      threshold: 1000
     })
   )
 

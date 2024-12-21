@@ -24,7 +24,7 @@ async function bootstrap() {
         exposedHeaders: ["ETag"]
     });
     app.use(compression({
-        threshold: 2048
+        threshold: 1000
     }));
     await app.listen(port);
 }
