@@ -12,7 +12,7 @@ export default function TrackerNumberBox({
   carrier: ICarrier
   trackingNumber: string
   changeTrackingNumber: (trackingNumber) => void
-  getDelivery: (carrierId: string, trackerTrackingNumber: string) => void
+  getDelivery: (carrier: ICarrier, trackerTrackingNumber: string) => void
 }) {
   return (
     <div
@@ -52,7 +52,7 @@ export default function TrackerNumberBox({
       )}
       {carrier.isCrawlable && (
         <SubmitButton
-          handleClick={() => getDelivery(carrier.id, trackingNumber)}
+          handleClick={() => getDelivery(carrier, trackingNumber)}
         />
       )}
     </div>

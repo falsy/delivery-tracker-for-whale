@@ -16,7 +16,7 @@
       "@domains/*": ["src/domains/*"],
       "@adapters/*": ["src/adapters/*"],
       "@services/*": ["src/services/*"],
-      "@di/*": ["src/frameworks/di/*"],
+      "@di/*": ["src/di/*"],
       "@pages/*": ["src/frameworks/pages/*"],
       "@providers/*": ["src/frameworks/providers/*"],
       "@containers/*": ["src/frameworks/containers/*"],

@@ -1,7 +1,7 @@
-import ICarrierDTO from "@domains/dtos/interfaces/ICarrierDTO"
 import ILayerDTO from "@domains/dtos/interfaces/ILayerDTO"
+import ICarrier from "@domains/entities/interfaces/ICarrier"
 
 export default interface ICarrierUseCase {
-  getCarriers(): Promise<ILayerDTO<ICarrierDTO[]>>
-  getCarrier(carrierId: string): Promise<ILayerDTO<ICarrierDTO>>
+  getCachedCarriers(): ICarrier[]
+  getCarriers(): Promise<ILayerDTO<ICarrier[]>>
 }

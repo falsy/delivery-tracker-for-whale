@@ -1,7 +1,8 @@
 import { useLayoutEffect } from "react"
-import { useAtom } from "jotai"
+import { atom, useAtom } from "jotai"
 import useDependencies from "./useDependencies"
-import { carriersAtom } from "./atoms/carriersAtom"
+
+const carriersAtom = atom([])
 
 export default function useCarriers() {
   const { controllers } = useDependencies()

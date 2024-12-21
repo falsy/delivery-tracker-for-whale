@@ -2,6 +2,7 @@ import { useCallback, useState } from "react"
 import { css } from "@styled-system/css"
 import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ITracker from "@domains/entities/interfaces/ITracker"
+import ICarrier from "@domains/entities/interfaces/ICarrier"
 import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useCarriers from "@hooks/useCarriers"
@@ -65,7 +66,7 @@ export default function TrackerBox({
   }
 
   const handleClickDelivery = async (
-    carrierId: string,
+    carrier: ICarrier,
     trackingNumber: string
   ) => {
     if (trackingNumber === "") return
@@ -74,7 +75,7 @@ export default function TrackerBox({
     setLoading(true)
 
     const { isError, message, data } = await controllers.tracker.getDelivery(
-      carrierId,
+      carrier,
       trackingNumber
     )
 

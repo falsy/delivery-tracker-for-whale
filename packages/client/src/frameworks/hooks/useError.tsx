@@ -1,5 +1,6 @@
-import { useAtom } from "jotai"
-import { errorMessageAtom } from "./atoms/errorMessageAtom"
+import { atom, useAtom } from "jotai"
+
+const errorMessageAtom = atom("")
 
 export default function useError() {
   const [message, setMessage] = useAtom(errorMessageAtom)
@@ -8,8 +9,13 @@ export default function useError() {
     setMessage(message)
   }
 
+  const handleResetMessage = () => {
+    setMessage("")
+  }
+
   return {
     message,
-    setMessage: handleChangeMessage
+    setMessage: handleChangeMessage,
+    resetMessage: handleResetMessage
   }
 }

@@ -13,7 +13,7 @@ module.exports = {
     "^@constants/(.*)$": "<rootDir>/src/constants/$1",
     "^@domains/(.*)$": "<rootDir>/src/domains/$1",
     "^@adapters/(.*)$": "<rootDir>/src/adapters/$1",
-    "^@di/(.*)$": "<rootDir>/src/frameworks/di/$1",
+    "^@di/(.*)$": "<rootDir>/src/di/$1",
     "^@pages/(.*)$": "<rootDir>/src/frameworks/pages/$1",
     "^@providers/(.*)$": "<rootDir>/src/frameworks/providers/$1",
     "^@containers/(.*)$": "<rootDir>/src/frameworks/containers/$1",

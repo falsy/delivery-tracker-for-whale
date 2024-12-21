@@ -3,7 +3,7 @@ import useError from "@hooks/useError"
 import CloseIcon from "@components/icons/CloseIcon"
 
 export default function ErrorMessage() {
-  const { message, setMessage } = useError()
+  const { message, resetMessage } = useError()
 
   if (message === "") return null
 
@@ -38,7 +38,7 @@ export default function ErrorMessage() {
             lineHeight: 0,
             padding: "5px"
           })}
-          onClick={() => setMessage("")}
+          onClick={resetMessage}
         >
           <CloseIcon />
         </button>

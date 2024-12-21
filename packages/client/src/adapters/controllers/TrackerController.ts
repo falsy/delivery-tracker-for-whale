@@ -1,18 +1,19 @@
 import IDeliveryDTO from "@domains/dtos/interfaces/IDeliveryDTO"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import ILayerDTO from "@domains/dtos/interfaces/ILayerDTO"
-import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ITrackerUseCase from "@domains/useCases/interfaces/ITrackerUseCase"
+import ICarrier from "@domains/entities/interfaces/ICarrier"
+import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ITrackerController from "./interfaces/ITrackerController"
 
 export default class TrackerController implements ITrackerController {
   constructor(private readonly trackerUseCase: ITrackerUseCase) {}
 
   getDelivery(
-    carrierId: string,
+    carrier: ICarrier,
     trackingNumber: string
   ): Promise<ILayerDTO<IDeliveryDTO>> {
-    return this.trackerUseCase.getDelivery(carrierId, trackingNumber)
+    return this.trackerUseCase.getDelivery(carrier, trackingNumber)
   }
 
   addTracker(): Promise<ILayerDTO<boolean>> {
