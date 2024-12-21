@@ -1,10 +1,15 @@
-import { useErrorMessage } from "./zustands/useErrorMessage"
+import { useAtom } from "jotai"
+import { errorMessageAtom } from "./atoms/errorMessageAtom"
 
 export default function useError() {
-  const { errMessage, setErrMessage } = useErrorMessage()
+  const [message, setMessage] = useAtom(errorMessageAtom)
+
+  const handleChangeMessage = (message: string = "error") => {
+    setMessage(message)
+  }
 
   return {
-    message: errMessage,
-    setMessage: setErrMessage
+    message,
+    setMessage: handleChangeMessage
   }
 }
