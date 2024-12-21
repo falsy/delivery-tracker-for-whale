@@ -1073,9 +1073,9 @@
     left: var(--spacing-0);
 }
 
-  .trs-dur_0\.5s {
-    --transition-duration: 0.5s;
-    transition-duration: 0.5s;
+  .trs-dur_0\.3s {
+    --transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
   .fs_12px {
@@ -1104,11 +1104,6 @@
 
   .fw_700 {
     font-weight: 700;
-}
-
-  .trs-dur_0\.3s {
-    --transition-duration: 0.3s;
-    transition-duration: 0.3s;
 }
 
   .ai_center {
@@ -1169,6 +1164,11 @@
 
   .fw_500 {
     font-weight: 500;
+}
+
+  .trs-dur_0\.2s {
+    --transition-duration: 0.2s;
+    transition-duration: 0.2s;
 }
 
   .mb_20px {

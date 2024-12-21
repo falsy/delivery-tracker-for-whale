@@ -101,7 +101,7 @@ const Dashboard = () => {
           className={css({
             opacity: isLoading ? 0 : 1,
             transition: "opacity",
-            transitionDuration: "0.5s"
+            transitionDuration: "0.3s"
           })}
         >
           {carriers.length > 0 && !isLoading && (

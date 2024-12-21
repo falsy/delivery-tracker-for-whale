@@ -66,7 +66,13 @@ export default function TrackerStateBox({
           </p>
         )}
         {progresses.length > 0 && !errDeliveryMessage && (
-          <div>
+          <div
+            className={css({
+              opacity: isLoading ? 0 : 1,
+              transition: "opacity",
+              transitionDuration: "0.2s"
+            })}
+          >
             <div
               className={css({
                 marginBottom: "20px"

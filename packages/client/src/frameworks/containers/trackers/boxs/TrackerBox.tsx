@@ -92,7 +92,9 @@ export default function TrackerBox({
       state: state.name
     })
     setProgresses(progresses)
-    setLoading(false)
+    setTimeout(() => {
+      setLoading(false)
+    }, 100)
   }
 
   const autoSaveTracker = useCallback(async (trackerProps: ITrackerProps) => {
