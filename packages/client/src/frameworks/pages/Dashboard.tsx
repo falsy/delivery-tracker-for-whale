@@ -10,7 +10,9 @@ import Footer from "@components/commons/sections/Footer"
 import Loading from "@components/commons/items/Loading"
 import ErrorMessage from "@containers/commons/boxs/ErrorMessage"
 
-const TrackerSection = lazy(() => import("@containers/sections/TrackerSection"))
+const TrackerSection = lazy(
+  () => import("@containers/trackers/sections/TrackerSection")
+)
 const TipMessage = lazy(() => import("@components/commons/boxs/TipMessage"))
 
 const Dashboard = () => {

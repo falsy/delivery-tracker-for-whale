@@ -1,5 +1,5 @@
 import { css, cx } from "@styled-system/css"
-import CloseIcon from "@components/icons/CloseIcon"
+import CloseIcon from "@components/commons/icons/CloseIcon"
 
 export default function DeleteButton({
   handleClick

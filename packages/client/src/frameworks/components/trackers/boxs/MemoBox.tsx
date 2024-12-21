@@ -1,6 +1,6 @@
 import { css, cx } from "@styled-system/css"
-import PlusIcon from "@components/icons/PlusIcon"
-import CloseIcon from "@components/icons/CloseIcon"
+import PlusIcon from "@components/commons/icons/PlusIcon"
+import CloseIcon from "@components/commons/icons/CloseIcon"
 
 export default function MemoBox({
   memos,

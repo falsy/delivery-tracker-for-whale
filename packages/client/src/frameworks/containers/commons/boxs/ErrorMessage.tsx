@@ -1,6 +1,6 @@
 import { css } from "@styled-system/css"
 import useError from "@hooks/useError"
-import CloseIcon from "@components/icons/CloseIcon"
+import CloseIcon from "@components/commons/icons/CloseIcon"
 
 export default function ErrorMessage() {
   const { message, resetMessage } = useError()

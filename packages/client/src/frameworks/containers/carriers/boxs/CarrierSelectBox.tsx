@@ -1,7 +1,7 @@
 import { KeyboardEvent, useEffect, useRef, useState } from "react"
 import { css } from "@styled-system/css"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
-import ArrowDownIcon from "@components/icons/ArrowDownIcon"
+import ArrowDownIcon from "@components/commons/icons/ArrowDownIcon"
 
 export default function CarrierSelectBox({
   carriers,
