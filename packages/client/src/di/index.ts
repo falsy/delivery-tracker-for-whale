@@ -11,6 +11,7 @@ export default function controllers() {
   const repositories = repositoriesFn(
     infrastructures.clientHTTP,
     infrastructures.browserStorage,
+    infrastructures.cacheWebStorage,
     etagManager
   )
   const useCases = useCasesFn(repositories)

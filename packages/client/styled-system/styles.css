@@ -729,14 +729,6 @@
     transition-duration: var(--transition-duration, 150ms);
 }
 
-  .p_20px_20px_0 {
-    padding: 20px 20px 0;
-}
-
-  .p_0_20px_40px {
-    padding: 0 20px 40px;
-}
-
   .p_0_20px {
     padding: 0 20px;
 }
@@ -1059,6 +1051,14 @@
 
   .p_5px_0_10px {
     padding: 5px 0 10px;
+}
+
+  .p_20px_20px_0 {
+    padding: 20px 20px 0;
+}
+
+  .p_0_20px_40px {
+    padding: 0 20px 40px;
 }
 
   .pb_40px {

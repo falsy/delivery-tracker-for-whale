@@ -3,10 +3,12 @@ import IClientHTTP from "@adapters/infrastructures/interfaces/IClientHTTP"
 import LayerDTO from "@adapters/dtos/LayerDTO"
 import CarrierRepository from "@adapters/repositories/CarrierRepository"
 import IETagManager from "@services/interfaces/IETagManager"
+import ICacheWebStorage from "@adapters/infrastructures/interfaces/ICacheWebStorage"
 
 describe("CarrierRepository", () => {
   let mockClientHTTP: jest.Mocked<IClientHTTP>
   let mockETagManager: jest.Mocked<IETagManager>
+  let mockCacheWebStorage: jest.Mocked<ICacheWebStorage>
   let carrierRepository: CarrierRepository
 
   beforeEach(() => {
@@ -21,7 +23,17 @@ describe("CarrierRepository", () => {
       getData: jest.fn(),
       setETagData: jest.fn()
     }
-    carrierRepository = new CarrierRepository(mockClientHTTP, mockETagManager)
+    mockCacheWebStorage = {
+      getItem: jest.fn(),
+      setItem: jest.fn(),
+      removeItem: jest.fn(),
+      clear: jest.fn()
+    }
+    carrierRepository = new CarrierRepository(
+      mockClientHTTP,
+      mockCacheWebStorage,
+      mockETagManager
+    )
   })
 
   describe("getCarriers", () => {
@@ -59,51 +71,6 @@ describe("CarrierRepository", () => {
       mockClientHTTP.get.mockRejectedValueOnce(new Error("Network Error"))
 
       const result = await carrierRepository.getCarriers()
-
-      expect(result).toEqual(
-        new LayerDTO({ isError: true, message: "Network Error" })
-      )
-    })
-  })
-
-  describe("getCarrier", () => {
-    it("성공 시 carrier 데이터를 반환해야 한다", async () => {
-      const carrierId = "1"
-      const mockData = { id: carrierId, name: "Carrier1" }
-      mockClientHTTP.get.mockResolvedValueOnce({
-        ok: true,
-        headers: new Headers(),
-        json: async () => ({ isError: false, data: mockData })
-      } as Response)
-
-      const result = await carrierRepository.getCarrier(carrierId)
-
-      expect(mockClientHTTP.get).toHaveBeenCalledWith(
-        `${API_URL}/carrier/${carrierId}`,
-        null
-      )
-      expect(result).toEqual(new LayerDTO({ data: mockData }))
-    })
-
-    it("응답이 성공적이지 않을 때 에러 메시지를 반환해야 한다", async () => {
-      const carrierId = "1"
-      mockClientHTTP.get.mockResolvedValueOnce({
-        ok: false,
-        json: async () => ({ isError: true, message: "Server Error" })
-      } as Response)
-
-      const result = await carrierRepository.getCarrier(carrierId)
-
-      expect(result).toEqual(
-        new LayerDTO({ isError: true, message: "Server Error" })
-      )
-    })
-
-    it("예외가 발생할 때 에러 메시지를 반환해야 한다", async () => {
-      const carrierId = "1"
-      mockClientHTTP.get.mockRejectedValueOnce(new Error("Network Error"))
-
-      const result = await carrierRepository.getCarrier(carrierId)
 
       expect(result).toEqual(
         new LayerDTO({ isError: true, message: "Network Error" })

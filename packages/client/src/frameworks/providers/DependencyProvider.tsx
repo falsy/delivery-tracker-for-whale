@@ -1,5 +1,5 @@
-import controllersFn from "@di/index"
 import { createContext, ReactNode } from "react"
+import controllersFn from "@di/index"
 
 interface Dependencies {
   controllers: ReturnType<typeof controllersFn>

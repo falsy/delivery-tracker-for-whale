@@ -20,6 +20,14 @@ describe("TrackerBox 컴포넌트", () => {
     memos: []
   })
 
+  const carrier = {
+    id: "carrierId",
+    name: "CarrierName",
+    displayName: "CarrierName",
+    popupURL: "https://example.com",
+    isCrawlable: true
+  }
+
   const deleteTracker = jest.fn()
 
   beforeEach(() => {
@@ -35,15 +43,7 @@ describe("TrackerBox 컴포넌트", () => {
       setMessage: jest.fn()
     })
     ;(useCarriers as any).mockReturnValue({
-      carriers: [
-        {
-          id: "carrierId",
-          name: "CarrierName",
-          displayName: "CarrierName",
-          popupURL: "https://example.com",
-          isCrawlable: true
-        }
-      ]
+      carriers: [carrier]
     })
   })
 
@@ -98,7 +98,7 @@ describe("TrackerBox 컴포넌트", () => {
     await userEvent.click(getDeliveryButton)
 
     expect(controllers.tracker.getDelivery).toHaveBeenCalledWith(
-      "carrierId",
+      carrier,
       "123456789"
     )
   })

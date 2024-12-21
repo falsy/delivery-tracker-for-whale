@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy } from "react"
+import { useEffect, useState, lazy, Suspense } from "react"
 import { css } from "@styled-system/css"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import Migration from "@services/Migration"
@@ -10,7 +10,9 @@ import Footer from "@components/commons/sections/Footer"
 import Loading from "@components/commons/items/Loading"
 import ErrorMessage from "@containers/commons/boxs/ErrorMessage"
 
-const TrackerSection = lazy(() => import("@containers/sections/TrackerSection"))
+const TrackerSection = lazy(
+  () => import("@containers/trackers/sections/TrackerSection")
+)
 const TipMessage = lazy(() => import("@components/commons/boxs/TipMessage"))
 
 const Dashboard = () => {
@@ -35,19 +37,6 @@ const Dashboard = () => {
     setCarriers(data)
   }
 
-  const getTrackers = async () => {
-    const { isError, data } = await controllers.tracker.getTrackers()
-    if (isError) {
-      setMessage()
-      setLoading(false)
-      return
-    }
-    setTrackers(data)
-    setTimeout(() => {
-      setLoading(false)
-    }, 100)
-  }
-
   useEffect(() => {
     if (carriers.length === 0) return
     checkDataMigration()
@@ -56,6 +45,19 @@ const Dashboard = () => {
   const checkDataMigration = async () => {
     await new Migration(carriers).migration()
     getTrackers()
+  }
+
+  const getTrackers = async () => {
+    const { isError, message, data } = await controllers.tracker.getTrackers()
+    if (isError) {
+      setMessage(message)
+      setLoading(false)
+      return
+    }
+    setTrackers(data)
+    setTimeout(() => {
+      setLoading(false)
+    }, 150)
   }
 
   const handleClickReset = async () => {
@@ -103,10 +105,10 @@ const Dashboard = () => {
           })}
         >
           {carriers.length > 0 && !isLoading && (
-            <>
+            <Suspense>
               <TrackerSection trackers={trackers} getTrackers={getTrackers} />
               <TipMessage resetTrackers={handleClickReset} />
-            </>
+            </Suspense>
           )}
         </div>
       </main>

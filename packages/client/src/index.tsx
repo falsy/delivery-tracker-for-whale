@@ -13,4 +13,5 @@ const App = () => {
     </DependencyProvider>
   )
 }
+
 root.render(<App />)

@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
         "@domains": path.resolve(__dirname, "./src/domains/"),
         "@adapters": path.resolve(__dirname, "./src/adapters/"),
         "@services": path.resolve(__dirname, "./src/services/"),
-        "@di": path.resolve(__dirname, "./src/frameworks/di/"),
+        "@di": path.resolve(__dirname, "./src/di/"),
         "@pages": path.resolve(__dirname, "./src/frameworks/pages/"),
         "@providers": path.resolve(__dirname, "./src/frameworks/providers/"),
         "@containers": path.resolve(__dirname, "./src/frameworks/containers/"),
