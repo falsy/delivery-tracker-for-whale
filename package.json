@@ -11,7 +11,6 @@
     "lint": "eslint packages/*/src --ext .ts",
     "dev:server": "yarn workspace api-server dev",
     "panda": "yarn workspace client panda",
-    "prepare": "yarn workspace client prepare",
     "start:client": "yarn workspace client start",
     "start:server": "yarn workspace api-server start",
     "build:client": "yarn workspace client build",

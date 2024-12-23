@@ -1,7 +1,6 @@
 {
   "name": "client",
   "packageManager": "yarn@4.2.2",
-  "sideEffects": false,
   "scripts": {
     "start": "vite",
     "build": "rm -rf dist/assets && vite build",
@@ -9,7 +8,6 @@
     "explorer": "source-map-explorer ./dist/assets/*.js",
     "panda": "panda",
     "test": "jest",
-    "prepare": "panda codegen",
     "cypress": "cypress open"
   },
   "devDependencies": {

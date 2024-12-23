@@ -25,10 +25,6 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       emptyOutDir: false,
-      minify: "esbuild",
-      rollupOptions: {
-        treeshake: true
-      },
       sourcemap: mode !== "production"
     },
     plugins: [react()]
