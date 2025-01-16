@@ -1,36 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, waitFor } from "@testing-library/react"
-import useDependencies from "@hooks/useDependencies"
-import useError from "@hooks/useError"
 import useCarriers from "@hooks/useCarriers"
+import useTrackers from "@hooks/useTrackers"
 import Migration from "@services/Migration"
 import Dashboard from "@pages/Dashboard"
 
-jest.mock("@hooks/useDependencies")
-jest.mock("@hooks/useError")
 jest.mock("@hooks/useCarriers")
+jest.mock("@hooks/useTrackers")
 jest.mock("@services/Migration")
 
 describe("Dashboard", () => {
-  const mockSetMessage = jest.fn()
   const mockSetCarriers = jest.fn()
   const mockGetCarriers = jest.fn()
   const mockMigration = jest.fn()
   const mockGetTrackers = jest.fn()
 
   beforeEach(() => {
-    ;(useDependencies as any).mockReturnValue({
-      controllers: {
-        carrier: { getCarriers: mockGetCarriers },
-        tracker: { getTrackers: mockGetTrackers }
-      }
-    })
-    ;(useError as any).mockReturnValue({
-      setMessage: mockSetMessage
-    })
     ;(useCarriers as any).mockReturnValue({
       carriers: [],
+      getCarriers: mockGetCarriers,
       setCarriers: mockSetCarriers
+    })
+    ;(useTrackers as any).mockReturnValue({
+      isPending: false,
+      getTrackers: mockGetTrackers
     })
     ;(Migration as jest.Mock).mockImplementation(() => ({
       migration: mockMigration
@@ -47,24 +40,12 @@ describe("Dashboard", () => {
     })
   })
 
-  test("getCarrierList에서 에러 발생 시 setMessage 함수가 호출되어야 한다", async () => {
-    mockGetCarriers.mockResolvedValue({
-      isError: true,
-      message: "Failed to fetch carriers"
-    })
-
-    render(<Dashboard />)
-
-    await waitFor(() => {
-      expect(mockSetMessage).toHaveBeenCalledWith("Failed to fetch carriers")
-    })
-  })
-
   test("carriers가 업데이트되면 Migration 후 getTrackers가 호출되어야 한다", async () => {
     mockGetCarriers.mockResolvedValue({ isError: false, data: [{ id: "1" }] })
     mockGetTrackers.mockResolvedValue({ isError: false, data: [] })
     ;(useCarriers as any).mockReturnValue({
       carriers: [{ id: "1" }],
+      getCarriers: mockGetCarriers,
       setCarriers: mockSetCarriers
     })
 

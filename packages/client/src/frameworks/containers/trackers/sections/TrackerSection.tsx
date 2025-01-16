@@ -1,5 +1,5 @@
 import { css } from "@styled-system/css"
-import useTrackers from "@hooks/useTrakers"
+import useTrackers from "@hooks/useTrackers"
 import TrackerBox from "@containers/trackers/boxs/TrackerBox"
 import Button from "@components/commons/items/Button"
 
