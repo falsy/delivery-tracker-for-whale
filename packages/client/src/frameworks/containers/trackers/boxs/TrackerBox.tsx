@@ -3,9 +3,8 @@ import { css } from "@styled-system/css"
 import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
-import useDependencies from "@hooks/useDependencies"
-import useError from "@hooks/useError"
 import useCarriers from "@hooks/useCarriers"
+import useTrackers from "@hooks/useTrakers"
 import LabelBox from "@components/trackers/boxs/LabelBox"
 import DeleteButton from "@components/trackers/items/DeleteButton"
 import CarrierSelectBox from "@containers/carriers/boxs/CarrierSelectBox"
@@ -20,9 +19,8 @@ export default function TrackerBox({
   tracker: ITracker
   deleteTracker: (id: string) => void
 }) {
-  const { controllers } = useDependencies()
-  const { setMessage } = useError()
   const { carriers } = useCarriers()
+  const { patchTracker, getDelivery } = useTrackers()
 
   const [isLoading, setLoading] = useState(false)
   const [errDeliveryMessage, setDeliveryErrorMessage] = useState("")
@@ -74,7 +72,7 @@ export default function TrackerBox({
     setDeliveryErrorMessage("")
     setLoading(true)
 
-    const { isError, message, data } = await controllers.tracker.getDelivery(
+    const { isError, message, data } = await getDelivery(
       carrier,
       trackingNumber
     )
@@ -98,13 +96,7 @@ export default function TrackerBox({
   }
 
   const autoSaveTracker = useCallback(async (trackerProps: ITrackerProps) => {
-    const { isError } = await controllers.tracker.patchTracker(
-      tracker.id,
-      trackerProps
-    )
-    if (isError) {
-      setMessage("자동 저장에 실패하였습니다.")
-    }
+    patchTracker(tracker.id, trackerProps)
   }, [])
 
   return (

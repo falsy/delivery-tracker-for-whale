@@ -1,37 +1,18 @@
 import { css } from "@styled-system/css"
-import useDependencies from "@hooks/useDependencies"
-import useError from "@hooks/useError"
+import ITracker from "@domains/entities/interfaces/ITracker"
+import useTrackers from "@hooks/useTrakers"
 import TrackerBox from "@containers/trackers/boxs/TrackerBox"
 import Button from "@components/commons/items/Button"
-import ITracker from "@domains/entities/interfaces/ITracker"
 
-export default function TrackerSection({
-  trackers,
-  getTrackers
-}: {
-  trackers: ITracker[]
-  getTrackers: () => void
-}) {
-  const { controllers } = useDependencies()
-  const { setMessage } = useError()
+export default function TrackerSection({ trackers }: { trackers: ITracker[] }) {
+  const { createTracker, deleteTracker } = useTrackers()
 
   const handleClickCreateTracker = async () => {
-    const { isError } = await controllers.tracker.addTracker()
-    if (isError) {
-      setMessage()
-      return
-    }
-    getTrackers()
+    createTracker()
   }
 
   const handleClickDeleteTracker = async (id: string) => {
-    if (!window.confirm("조회 정보를 삭제하시겠습니까?")) return
-    const { isError } = await controllers.tracker.deleteTracker(id)
-    if (isError) {
-      setMessage()
-      return
-    }
-    getTrackers()
+    deleteTracker(id)
   }
 
   return (

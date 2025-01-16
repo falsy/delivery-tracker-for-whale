@@ -1,10 +1,8 @@
-import { useEffect, useState, lazy, Suspense } from "react"
+import { useEffect, lazy, Suspense, useState } from "react"
 import { css } from "@styled-system/css"
-import ITracker from "@domains/entities/interfaces/ITracker"
 import Migration from "@services/Migration"
-import useDependencies from "@hooks/useDependencies"
-import useError from "@hooks/useError"
 import useCarriers from "@hooks/useCarriers"
+import useTrackers from "@hooks/useTrakers"
 import Header from "@components/commons/sections/Header"
 import Footer from "@components/commons/sections/Footer"
 import Loading from "@components/commons/items/Loading"
@@ -16,48 +14,27 @@ const TrackerSection = lazy(
 const TipMessage = lazy(() => import("@components/commons/boxs/TipMessage"))
 
 const Dashboard = () => {
-  const { controllers } = useDependencies()
-  const { setMessage } = useError()
-  const { carriers, setCarriers } = useCarriers()
+  const { carriers, getCarriers } = useCarriers()
+  const { trackers, getTrackers, clearTrackers } = useTrackers()
 
   const [isLoading, setLoading] = useState(true)
-  const [trackers, setTrackers] = useState<ITracker[]>([])
 
   useEffect(() => {
-    getCarrierList()
+    getCarriers()
   }, [])
-
-  const getCarrierList = async () => {
-    const { isError, message, data } = await controllers.carrier.getCarriers()
-    if (isError) {
-      setMessage(message)
-      setLoading(false)
-      return
-    }
-    setCarriers(data)
-  }
 
   useEffect(() => {
     if (carriers.length === 0) return
+    console.log("checkDataMigration")
     checkDataMigration()
   }, [carriers])
 
   const checkDataMigration = async () => {
     await new Migration(carriers).migration()
-    getTrackers()
-  }
-
-  const getTrackers = async () => {
-    const { isError, message, data } = await controllers.tracker.getTrackers()
-    if (isError) {
-      setMessage(message)
-      setLoading(false)
-      return
+    const isSuccess = await getTrackers()
+    if (isSuccess) {
+      setTimeout(() => setLoading(false), 150)
     }
-    setTrackers(data)
-    setTimeout(() => {
-      setLoading(false)
-    }, 150)
   }
 
   const handleClickReset = async () => {
@@ -66,12 +43,7 @@ const Dashboard = () => {
         "초기화하면 기존에 저장된 모든 운송장 번호가 삭제됩니다.\n미리 다른곳에 메모해 주세요."
       )
     ) {
-      const { isError } = await controllers.tracker.clearTrackers()
-      if (isError) {
-        setMessage()
-        return
-      }
-      setTrackers([])
+      clearTrackers()
     }
   }
 
@@ -104,9 +76,9 @@ const Dashboard = () => {
             transitionDuration: "0.3s"
           })}
         >
-          {carriers.length > 0 && !isLoading && (
+          {carriers.length > 0 && (
             <Suspense>
-              <TrackerSection trackers={trackers} getTrackers={getTrackers} />
+              <TrackerSection trackers={trackers} />
               <TipMessage resetTrackers={handleClickReset} />
             </Suspense>
           )}

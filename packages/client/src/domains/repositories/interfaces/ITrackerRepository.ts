@@ -11,7 +11,7 @@ export default interface ITrackerRepository {
     trackingNumber: string
   ): Promise<ILayerDTO<IDeliveryDTO>>
   getTrackers(): Promise<ILayerDTO<ITrackerDTO[]>>
-  addTracker(tracker: ITrackerDTO): Promise<ILayerDTO<boolean>>
+  createTracker(tracker: ITrackerDTO): Promise<ILayerDTO<boolean>>
   patchTracker(
     id: string,
     trackerProps: ITrackerProps

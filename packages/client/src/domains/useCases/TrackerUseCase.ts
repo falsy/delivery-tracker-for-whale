@@ -24,12 +24,12 @@ export default class TrackerUseCase implements ITrackerUseCase {
     return this.trackerRepository.getDelivery(carrier, trackingNumber)
   }
 
-  async addTracker(): Promise<ILayerDTO<boolean>> {
+  async createTracker(): Promise<ILayerDTO<boolean>> {
     const tracker = new Tracker({
       id: this.generateUUID()
     })
 
-    return this.trackerRepository.addTracker(tracker)
+    return this.trackerRepository.createTracker(tracker)
   }
 
   async getTrackers(): Promise<ILayerDTO<ITracker[]>> {

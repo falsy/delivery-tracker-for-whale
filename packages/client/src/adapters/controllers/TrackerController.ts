@@ -16,8 +16,8 @@ export default class TrackerController implements ITrackerController {
     return this.trackerUseCase.getDelivery(carrier, trackingNumber)
   }
 
-  addTracker(): Promise<ILayerDTO<boolean>> {
-    return this.trackerUseCase.addTracker()
+  createTracker(): Promise<ILayerDTO<boolean>> {
+    return this.trackerUseCase.createTracker()
   }
 
   getTrackers(): Promise<ILayerDTO<ITracker[]>> {
