@@ -1,11 +1,10 @@
 import { css } from "@styled-system/css"
-import ITracker from "@domains/entities/interfaces/ITracker"
 import useTrackers from "@hooks/useTrakers"
 import TrackerBox from "@containers/trackers/boxs/TrackerBox"
 import Button from "@components/commons/items/Button"
 
-export default function TrackerSection({ trackers }: { trackers: ITracker[] }) {
-  const { createTracker, deleteTracker } = useTrackers()
+export default function TrackerSection() {
+  const { trackers, createTracker, deleteTracker } = useTrackers()
 
   const handleClickCreateTracker = async () => {
     createTracker()

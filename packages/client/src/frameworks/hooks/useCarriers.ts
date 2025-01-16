@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useMemo } from "react"
+import { useCallback, useMemo } from "react"
 import { atom, useAtom } from "jotai"
 import di from "@di/index"
 import useError from "./useError"
@@ -10,10 +10,9 @@ export default function useCarriers() {
   const { setMessage } = useError()
   const [carriers, setCarriers] = useAtom(carriersAtom)
 
-  useLayoutEffect(() => {
-    const getCacheCarriers = controllers.carrier.getCachedCarriers()
-    setCarriers(getCacheCarriers)
-  }, [])
+  const getCachedCarriers = useCallback(() => {
+    return controllers.carrier.getCachedCarriers()
+  }, [controllers.carrier])
 
   const getCarriers = useCallback(async () => {
     const { isError, message, data } = await controllers.carrier.getCarriers()
@@ -26,6 +25,8 @@ export default function useCarriers() {
 
   return {
     carriers,
-    getCarriers
+    getCarriers,
+    getCachedCarriers,
+    setCarriers
   }
 }

@@ -1,26 +1,32 @@
-import { useCallback, useMemo } from "react"
+import { useCallback, useMemo, useState, useTransition } from "react"
 import { atom, useAtom } from "jotai"
 import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
 import di from "@di/index"
 import useError from "./useError"
+import IDeliveryDTO from "@domains/dtos/interfaces/IDeliveryDTO"
 
 const trakersAtom = atom([])
 
 export default function useTrackers() {
   const controllers = useMemo(() => di(), [])
-  const { setMessage } = useError()
+  const [isPending, startTransition] = useTransition()
+
   const [trackers, setTrackers] = useAtom(trakersAtom)
+  const { setMessage } = useError()
+
+  const [deliveryErrorMessage, setDeliveryErrorMessage] = useState("")
+  const [delivery, setDelivery] = useState<IDeliveryDTO>(null)
 
   const getTrackers = useCallback(async () => {
-    const { isError, message, data } = await controllers.tracker.getTrackers()
-    if (isError) {
-      setMessage(message)
-      return
-    }
-    setTrackers(data)
-
-    return !isError
+    startTransition(async () => {
+      const { isError, message, data } = await controllers.tracker.getTrackers()
+      if (isError) {
+        setMessage(message)
+        return
+      }
+      setTrackers(data)
+    })
   }, [setMessage, controllers.tracker, setTrackers])
 
   const clearTrackers = useCallback(async () => {
@@ -70,28 +76,36 @@ export default function useTrackers() {
 
   const getDelivery = useCallback(
     async (carrier: ICarrier, trackingNumber: string) => {
-      const { isError, message, data } = await controllers.tracker.getDelivery(
-        carrier,
-        trackingNumber
-      )
+      setDeliveryErrorMessage("")
+      startTransition(async () => {
+        const { isError, message, data } =
+          await controllers.tracker.getDelivery(carrier, trackingNumber)
 
-      if (isError) {
-        setMessage(message)
-        return
-      }
-
-      return { isError, message, data }
+        if (isError) {
+          setDeliveryErrorMessage(message)
+          return
+        }
+        setDelivery(data)
+      })
     },
     [setMessage, controllers.tracker]
   )
 
+  const clearDelivery = useCallback(() => {
+    setDelivery(null)
+  }, [setDelivery])
+
   return {
+    isPending,
     trackers,
     getTrackers,
     clearTrackers,
     createTracker,
     deleteTracker,
     patchTracker,
-    getDelivery
+    delivery,
+    deliveryErrorMessage,
+    getDelivery,
+    clearDelivery
   }
 }

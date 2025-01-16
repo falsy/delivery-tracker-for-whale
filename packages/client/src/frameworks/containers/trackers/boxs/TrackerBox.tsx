@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { css } from "@styled-system/css"
 import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ITracker from "@domains/entities/interfaces/ITracker"
@@ -20,10 +20,14 @@ export default function TrackerBox({
   deleteTracker: (id: string) => void
 }) {
   const { carriers } = useCarriers()
-  const { patchTracker, getDelivery } = useTrackers()
-
-  const [isLoading, setLoading] = useState(false)
-  const [errDeliveryMessage, setDeliveryErrorMessage] = useState("")
+  const {
+    isPending,
+    delivery,
+    patchTracker,
+    deliveryErrorMessage,
+    getDelivery,
+    clearDelivery
+  } = useTrackers()
 
   const [label, setLabel] = useState(tracker.label)
   const [trackingNumber, setTrackingNumber] = useState(tracker.trackingNumber)
@@ -58,41 +62,31 @@ export default function TrackerBox({
   }
 
   const resetDeliveryState = () => {
-    setDeliveryErrorMessage("")
-    setDeliverState(null)
-    setProgresses([])
+    clearDelivery()
   }
 
-  const handleClickDelivery = async (
-    carrier: ICarrier,
-    trackingNumber: string
-  ) => {
-    if (trackingNumber === "") return
-
-    setDeliveryErrorMessage("")
-    setLoading(true)
-
-    const { isError, message, data } = await getDelivery(
-      carrier,
-      trackingNumber
-    )
-
-    if (isError) {
-      setLoading(false)
-      setDeliveryErrorMessage(message)
+  useEffect(() => {
+    if (!delivery) {
+      setDeliverState(null)
+      setProgresses([])
       return
     }
 
-    const { from, to, progresses, state } = data
+    const { from, to, progresses, state } = delivery
     setDeliverState({
       from: from.name,
       to: to.name,
       state: state.name
     })
     setProgresses(progresses)
-    setTimeout(() => {
-      setLoading(false)
-    }, 100)
+  }, [delivery])
+
+  const handleClickDelivery = async (
+    carrier: ICarrier,
+    trackingNumber: string
+  ) => {
+    if (trackingNumber === "") return
+    getDelivery(carrier, trackingNumber)
   }
 
   const autoSaveTracker = useCallback(async (trackerProps: ITrackerProps) => {
@@ -137,10 +131,10 @@ export default function TrackerBox({
         getDelivery={handleClickDelivery}
       />
 
-      {(isLoading || deliveryState !== null || errDeliveryMessage !== "") && (
+      {(isPending || deliveryState !== null || deliveryErrorMessage !== "") && (
         <TrackerStateBox
-          isLoading={isLoading}
-          errDeliveryMessage={errDeliveryMessage}
+          isLoading={isPending}
+          errDeliveryMessage={deliveryErrorMessage}
           deliveryState={deliveryState}
           progresses={progresses}
           closeFnc={resetDeliveryState}
