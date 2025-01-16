@@ -4,13 +4,13 @@ import Loading from "@components/commons/items/Loading"
 import StateTable from "./StateTable"
 
 export default function TrackerStateBox({
-  isLoading,
+  isPending,
   errDeliveryMessage,
   deliveryState,
   progresses,
   closeFnc
 }: {
-  isLoading: boolean
+  isPending: boolean
   errDeliveryMessage: string
   deliveryState: { from: string; to: string; state: string }
   progresses: IDeliveryProgressVO[]
@@ -34,7 +34,7 @@ export default function TrackerStateBox({
           position: "relative"
         })}
       >
-        {isLoading && (
+        {isPending && (
           <div
             className={css({
               position: "sticky",
@@ -68,9 +68,9 @@ export default function TrackerStateBox({
         {progresses.length > 0 && !errDeliveryMessage && (
           <div
             className={css({
-              opacity: isLoading ? 0 : 1,
+              opacity: isPending ? 0 : 1,
               transition: "opacity",
-              transitionDuration: "0.2s"
+              transitionDuration: "0.15s"
             })}
           >
             <div

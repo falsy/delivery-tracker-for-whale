@@ -3,9 +3,9 @@ import { css } from "@styled-system/css"
 import Migration from "@services/Migration"
 import useCarriers from "@hooks/useCarriers"
 import useTrackers from "@hooks/useTrakers"
+import ErrorMessage from "@containers/commons/boxs/ErrorMessage"
 import Header from "@components/commons/sections/Header"
 import Footer from "@components/commons/sections/Footer"
-import ErrorMessage from "@containers/commons/boxs/ErrorMessage"
 
 const TrackerSection = lazy(
   () => import("@containers/trackers/sections/TrackerSection")
@@ -13,16 +13,12 @@ const TrackerSection = lazy(
 const TipMessage = lazy(() => import("@components/commons/boxs/TipMessage"))
 
 const Dashboard = () => {
-  const { carriers, getCarriers, getCachedCarriers, setCarriers } =
-    useCarriers()
-  const { isPending, getTrackers, clearTrackers } = useTrackers()
+  const { isPending: isCPending, carriers, getCarriers } = useCarriers()
+  const { isPending: isTPending, getTrackers, clearTrackers } = useTrackers()
+
+  const isLoading = carriers.length === 0 || isCPending || isTPending
 
   useLayoutEffect(() => {
-    const getCacheCarriers = getCachedCarriers()
-    setCarriers(getCacheCarriers)
-  }, [])
-
-  useEffect(() => {
     getCarriers()
   }, [])
 
@@ -51,16 +47,15 @@ const Dashboard = () => {
       <Header />
       <main
         className={css({
-          position: "relative",
           paddingBottom: "40px"
         })}
       >
         <ErrorMessage />
         <div
           className={css({
-            opacity: carriers.length === 0 || isPending ? 0 : 1,
+            opacity: isLoading ? 0 : 1,
             transition: "opacity",
-            transitionDuration: "0.3s"
+            transitionDuration: "0.15s"
           })}
         >
           {carriers.length > 0 && (
