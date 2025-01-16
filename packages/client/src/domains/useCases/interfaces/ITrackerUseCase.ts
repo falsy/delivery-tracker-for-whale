@@ -11,7 +11,7 @@ export default interface ITrackerUseCase {
   ): Promise<ILayerDTO<IDeliveryDTO>>
   getTrackers(): Promise<ILayerDTO<ITracker[]>>
   clearTrackers(): Promise<ILayerDTO<boolean>>
-  addTracker(): Promise<ILayerDTO<boolean>>
+  createTracker(): Promise<ILayerDTO<boolean>>
   patchTracker(
     id: string,
     trackerProps: ITrackerProps

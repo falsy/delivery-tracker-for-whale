@@ -143,7 +143,7 @@ export default class TrackerRepository implements ITrackerRepository {
     }
   }
 
-  async addTracker(tracker: ITracker): Promise<ILayerDTO<boolean>> {
+  async createTracker(tracker: ITracker): Promise<ILayerDTO<boolean>> {
     try {
       const { isError, message, data } = await this.getTrackers()
 

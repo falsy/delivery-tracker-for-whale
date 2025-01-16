@@ -2,14 +2,14 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import TrackerBox from "@containers/trackers/boxs/TrackerBox"
-import useDependencies from "@hooks/useDependencies"
 import useError from "@hooks/useError"
 import useCarriers from "@hooks/useCarriers"
 import TrackerDTO from "@adapters/dtos/TrackerDTO"
+import useTrackers from "@hooks/useTrackers"
 
-jest.mock("@hooks/useDependencies")
 jest.mock("@hooks/useError")
 jest.mock("@hooks/useCarriers")
+jest.mock("@hooks/useTrackers")
 
 describe("TrackerBox 컴포넌트", () => {
   const tracker = new TrackerDTO({
@@ -31,19 +31,19 @@ describe("TrackerBox 컴포넌트", () => {
   const deleteTracker = jest.fn()
 
   beforeEach(() => {
-    ;(useDependencies as any).mockReturnValue({
-      controllers: {
-        tracker: {
-          deleteTracker: jest.fn(),
-          getDelivery: jest.fn()
-        }
-      }
-    })
     ;(useError as any).mockReturnValue({
       setMessage: jest.fn()
     })
     ;(useCarriers as any).mockReturnValue({
       carriers: [carrier]
+    })
+    ;(useTrackers as any).mockReturnValue({
+      isPending: false,
+      delivery: null,
+      patchTracker: jest.fn(),
+      deliveryErrorMessage: "",
+      getDelivery: jest.fn(),
+      clearDelivery: jest.fn()
     })
   })
 
@@ -71,23 +71,14 @@ describe("TrackerBox 컴포넌트", () => {
   })
 
   test("유효한 carrierId와 trackingNumber로 handleClickDelivery 호출 시 getDelivery 함수가 호출되어야 한다", async () => {
-    const { controllers } = useDependencies()
-    ;(controllers.tracker.getDelivery as jest.Mock).mockResolvedValue({
-      isError: false,
-      message: "",
-      data: {
-        from: { name: "Origin", time: "2024-01-01" },
-        to: { name: "Destination", time: "2024-01-01" },
-        progresses: [
-          {
-            state: { id: "b", name: "In Transit" },
-            location: "Location",
-            description: "description",
-            time: "2024-01-01"
-          }
-        ],
-        state: { id: "a", name: "Delivered" }
-      }
+    const getDelivery = jest.fn()
+    ;(useTrackers as any).mockReturnValue({
+      isPending: false,
+      delivery: null,
+      patchTracker: jest.fn(),
+      deliveryErrorMessage: "",
+      getDelivery,
+      clearDelivery: jest.fn()
     })
 
     render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
@@ -97,20 +88,26 @@ describe("TrackerBox 컴포넌트", () => {
 
     await userEvent.click(getDeliveryButton)
 
-    expect(controllers.tracker.getDelivery).toHaveBeenCalledWith(
-      carrier,
-      "123456789"
-    )
+    expect(getDelivery).toHaveBeenCalledWith(carrier, "123456789")
   })
 
   test("getDelivery 호출 시 에러가 발생하면 에러 메시지가 표시되어야 한다", async () => {
-    const { controllers } = useDependencies()
-    const { setMessage } = useError()
-    ;(controllers.tracker.getDelivery as jest.Mock).mockResolvedValue({
+    const getDelivery = jest.fn()
+    ;(useTrackers as any).mockReturnValue({
+      isPending: false,
+      delivery: null,
+      patchTracker: jest.fn(),
+      deliveryErrorMessage: "",
+      getDelivery,
+      clearDelivery: jest.fn()
+    })
+    getDelivery.mockResolvedValue({
       isError: true,
       message: "Error occurred",
       data: null
     })
+
+    const { setMessage } = useError()
 
     render(<TrackerBox tracker={tracker} deleteTracker={deleteTracker} />)
     const getDeliveryButton = screen.getByRole("button", {

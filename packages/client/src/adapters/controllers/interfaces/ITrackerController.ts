@@ -9,7 +9,7 @@ export default interface ITrackerController {
     carrier: ICarrier,
     trackingNumber: string
   ): Promise<ILayerDTO<IDeliveryDTO>>
-  addTracker(): Promise<ILayerDTO<boolean>>
+  createTracker(): Promise<ILayerDTO<boolean>>
   getTrackers(): Promise<ILayerDTO<ITracker[]>>
   patchTracker(
     id: string,

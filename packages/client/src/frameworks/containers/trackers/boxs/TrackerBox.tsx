@@ -1,11 +1,10 @@
-import { useCallback, useState } from "react"
+import { useEffect, useState } from "react"
 import { css } from "@styled-system/css"
 import { ITrackerProps } from "@domains/dtos/interfaces/ITrackerDTO"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
-import useDependencies from "@hooks/useDependencies"
-import useError from "@hooks/useError"
 import useCarriers from "@hooks/useCarriers"
+import useTrackers from "@hooks/useTrackers"
 import LabelBox from "@components/trackers/boxs/LabelBox"
 import DeleteButton from "@components/trackers/items/DeleteButton"
 import CarrierSelectBox from "@containers/carriers/boxs/CarrierSelectBox"
@@ -20,24 +19,41 @@ export default function TrackerBox({
   tracker: ITracker
   deleteTracker: (id: string) => void
 }) {
-  const { controllers } = useDependencies()
-  const { setMessage } = useError()
   const { carriers } = useCarriers()
-
-  const [isLoading, setLoading] = useState(false)
-  const [errDeliveryMessage, setDeliveryErrorMessage] = useState("")
+  const {
+    isPending,
+    delivery,
+    patchTracker,
+    deliveryErrorMessage,
+    getDelivery,
+    clearDelivery
+  } = useTrackers()
+  const initCarrierId = tracker.carrierId || carriers[0].id
 
   const [label, setLabel] = useState(tracker.label)
   const [trackingNumber, setTrackingNumber] = useState(tracker.trackingNumber)
-  const [carrierId, setCarrierId] = useState(
-    tracker.carrierId || carriers[0].id
-  )
+  const [carrierId, setCarrierId] = useState(initCarrierId)
   const [memos, setMemos] = useState(tracker.memos)
-
   const [deliveryState, setDeliverState] = useState(null)
   const [progresses, setProgresses] = useState([])
 
   const carrier = carriers.find((c) => c.id === carrierId)
+
+  useEffect(() => {
+    if (!delivery) {
+      setDeliverState(null)
+      setProgresses([])
+      return
+    }
+
+    const { from, to, progresses, state } = delivery
+    setDeliverState({
+      from: from.name,
+      to: to.name,
+      state: state.name
+    })
+    setProgresses(progresses)
+  }, [delivery])
 
   const handleChangeLabel = (label: string) => {
     setLabel(label)
@@ -59,10 +75,12 @@ export default function TrackerBox({
     autoSaveTracker({ memos })
   }
 
+  const autoSaveTracker = async (trackerProps: ITrackerProps) => {
+    patchTracker(tracker.id, trackerProps)
+  }
+
   const resetDeliveryState = () => {
-    setDeliveryErrorMessage("")
-    setDeliverState(null)
-    setProgresses([])
+    clearDelivery()
   }
 
   const handleClickDelivery = async (
@@ -70,42 +88,8 @@ export default function TrackerBox({
     trackingNumber: string
   ) => {
     if (trackingNumber === "") return
-
-    setDeliveryErrorMessage("")
-    setLoading(true)
-
-    const { isError, message, data } = await controllers.tracker.getDelivery(
-      carrier,
-      trackingNumber
-    )
-
-    if (isError) {
-      setLoading(false)
-      setDeliveryErrorMessage(message)
-      return
-    }
-
-    const { from, to, progresses, state } = data
-    setDeliverState({
-      from: from.name,
-      to: to.name,
-      state: state.name
-    })
-    setProgresses(progresses)
-    setTimeout(() => {
-      setLoading(false)
-    }, 100)
+    getDelivery(carrier, trackingNumber)
   }
-
-  const autoSaveTracker = useCallback(async (trackerProps: ITrackerProps) => {
-    const { isError } = await controllers.tracker.patchTracker(
-      tracker.id,
-      trackerProps
-    )
-    if (isError) {
-      setMessage("자동 저장에 실패하였습니다.")
-    }
-  }, [])
 
   return (
     <div
@@ -145,10 +129,10 @@ export default function TrackerBox({
         getDelivery={handleClickDelivery}
       />
 
-      {(isLoading || deliveryState !== null || errDeliveryMessage !== "") && (
+      {(isPending || deliveryState !== null || deliveryErrorMessage !== "") && (
         <TrackerStateBox
-          isLoading={isLoading}
-          errDeliveryMessage={errDeliveryMessage}
+          isPending={isPending}
+          errDeliveryMessage={deliveryErrorMessage}
           deliveryState={deliveryState}
           progresses={progresses}
           closeFnc={resetDeliveryState}

@@ -222,7 +222,7 @@ describe("TrackerRepository", () => {
         })
       )
 
-      const result = await trackerRepository.addTracker(tracker)
+      const result = await trackerRepository.createTracker(tracker)
 
       expect(result).toEqual(new LayerDTO({ data: true }))
     })
@@ -240,7 +240,7 @@ describe("TrackerRepository", () => {
       )
       mockBrowserStorage.setItem.mockRejectedValue(new Error("Error"))
 
-      const result = await trackerRepository.addTracker(tracker)
+      const result = await trackerRepository.createTracker(tracker)
 
       expect(result).toEqual(
         new LayerDTO({
