@@ -17,7 +17,7 @@ const carriers = [
     displayName: "CJ 대한통운",
     isCrawlable: true,
     isPopupEnabled: true,
-    popupURL: "http://nplus.doortodoor.co.kr/web/detail.jsp?slipno="
+    popupURL: "https://trace.cjlogistics.com/next/tracking.html?wblNo="
   },
   {
     id: "2de9109b-1fda-11ef-8884-0a8cb08d3aea",
