@@ -14,7 +14,7 @@ export default function NewWinodwButton({
     window.open(
       popupURL + trackingNumber,
       "",
-      "resizable=yes,scrollbars=yes,width=720,height=600"
+      "resizable=yes,scrollbars=yes,width=900,height=700"
     )
   }
 
