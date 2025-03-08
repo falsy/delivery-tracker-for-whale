@@ -2,13 +2,14 @@
   "name": "client",
   "packageManager": "yarn@4.2.2",
   "scripts": {
-    "start": "vite",
-    "build": "rm -rf dist/assets && vite build",
-    "build:dev": "vite build --mode development",
+    "dev": "vite --mode development",
+    "start": "vite --mode production",
+    "build": "rm -rf dist/assets && nx vite:build",
+    "build:dev": "nx vite:build --mode development",
     "explorer": "source-map-explorer ./dist/assets/*.js",
     "panda": "panda",
-    "test": "jest",
-    "cypress": "cypress open"
+    "test": "nx jest:test",
+    "cypress": "nx open-cypress"
   },
   "devDependencies": {
     "@pandacss/dev": "^0.47.1",

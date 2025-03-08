@@ -2,5 +2,12 @@
 node_modules
 *.zip
 .env
+.env.*
 tsconfig.tsbuildinfo
 tsconfig.build.tsbuildinfo
+
+
+.nx/cache
+.nx/workspace-data
+vite.config.*.timestamp*
+vitest.config.*.timestamp*

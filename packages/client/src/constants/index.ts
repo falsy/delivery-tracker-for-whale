@@ -1,3 +1,3 @@
-export const API_URL = "https://parcel.falsy.me"
+export const API_URL = import.meta.env.VITE_API_URL
 export const TRACKER_LIST = "TRACKER_LIST"
 export const CARRIER_LIST = "CARRIER_LIST"
