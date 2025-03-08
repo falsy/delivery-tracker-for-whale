@@ -15,6 +15,8 @@
     "lint": "nx run-many --target=lint --parallel",
     "panda": "nx run client:panda",
     "cypress": "nx run client:cypress",
+    "dev:server": "nx run api-server:dev",
+    "dev:client": "nx run client:dev",
     "start:client": "nx run client:start",
     "start:server": "nx run api-server:start",
     "build:client": "nx run client:build",

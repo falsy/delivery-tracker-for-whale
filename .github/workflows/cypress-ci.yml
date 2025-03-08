@@ -25,16 +25,21 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Start development servers (client & server)
-        run: yarn dev &
+      - name: Start server
+        run: yarn dev:server &
+        env:
+          NODE_ENV: development
+
+      - name: Wait for server(3000)
+        run: npx wait-on http://localhost:3000 --timeout 60000
+
+      - name: Start client
+        run: yarn dev:client &
         env:
           NODE_ENV: development
 
       - name: Wait for client(2000)
         run: npx wait-on http://localhost:2000 --timeout 60000
-
-      - name: Wait for server(3000)
-        run: npx wait-on http://localhost:3000 --timeout 60000
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
