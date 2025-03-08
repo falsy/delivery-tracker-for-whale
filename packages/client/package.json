@@ -8,7 +8,7 @@
     "build:dev": "nx vite:build --mode development",
     "explorer": "source-map-explorer ./dist/assets/*.js",
     "panda": "panda",
-    "test": "nx jest:test",
+    "test": "vitest",
     "cypress": "nx open-cypress"
   },
   "devDependencies": {
@@ -20,9 +20,11 @@
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/ui": "^3.0.8",
     "cypress": "^13.16.1",
-    "jest-environment-jsdom": "^29.7.0",
-    "vite": "^6.0.9"
+    "jsdom": "^26.0.0",
+    "vite": "^6.0.9",
+    "vitest": "^3.0.8"
   },
   "dependencies": {
     "jotai": "^2.10.4",

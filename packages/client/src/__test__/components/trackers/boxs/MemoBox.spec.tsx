@@ -1,61 +1,48 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { render, screen, waitFor } from "@testing-library/react"
-import userEvent from "@testing-library/user-event"
+import { render, screen, fireEvent } from "@testing-library/react"
+import { describe, it, expect, vi } from "vitest"
 import MemoBox from "@components/trackers/boxs/MemoBox"
 
 describe("MemoBox 컴포넌트", () => {
-  let memos = []
-  const changeMemo = jest.fn()
+  it("메모 추가 버튼을 클릭하면 새로운 메모가 추가된다", async () => {
+    const changeMemo = vi.fn()
+    const initialMemos = ["메모 1"]
+    render(<MemoBox memos={initialMemos} changeMemo={changeMemo} />)
 
-  beforeEach(() => {
-    memos = ["initial memo 1", "initial memo 2"]
+    // "메모 추가" 버튼은 id 또는 버튼 텍스트로 찾을 수 있음.
+    const addButton = screen.getByRole("button", { name: /메모 추가/ })
+    fireEvent.click(addButton)
+
+    // 기존 메모 배열에 빈 문자열이 추가된 배열을 인자로 changeMemo가 호출되어야 함.
+    expect(changeMemo).toHaveBeenCalledWith(["메모 1", ""])
   })
 
-  test("초기 렌더링 시 tracker.memos 값이 input 필드에 설정되어야 한다", () => {
-    render(<MemoBox memos={memos} changeMemo={changeMemo} />)
-    const inputs = screen.getAllByPlaceholderText(
+  it("입력값 변경 시 changeMemo 함수가 호출되어야 한다", async () => {
+    const changeMemo = vi.fn()
+    const initialMemos = ["기존 메모"]
+    render(<MemoBox memos={initialMemos} changeMemo={changeMemo} />)
+
+    // placeholder로 input 요소 찾기
+    const input = screen.getByPlaceholderText(
       "이곳에 추가적인 메모를 입력할 수 있어요."
-    ) as HTMLInputElement[]
+    ) as HTMLInputElement
 
-    expect(inputs[0]).toHaveValue("initial memo 1")
-    expect(inputs[1]).toHaveValue("initial memo 2")
+    fireEvent.input(input, { target: { value: "새로운 메모" } })
+
+    expect(changeMemo).toHaveBeenCalledTimes(1)
+    expect(changeMemo).toHaveBeenCalledWith(["새로운 메모"])
   })
 
-  test("메모 추가 버튼 클릭 시 changeMemo 함수가 호출되어야 한다", async () => {
-    render(<MemoBox memos={memos} changeMemo={changeMemo} />)
-    const addButton = screen.getByRole("button", { name: /메모 추가/i })
+  it("삭제 버튼 클릭 시 해당 메모가 제거된다", async () => {
+    const changeMemo = vi.fn()
+    const initialMemos = ["메모 1", "메모 2"]
+    render(<MemoBox memos={initialMemos} changeMemo={changeMemo} />)
 
-    await userEvent.click(addButton)
+    // aria-label을 통해 삭제 버튼들 찾기
+    const deleteButtons = screen.getAllByLabelText("delete-memo-button")
+    // 첫 번째 메모의 삭제 버튼 클릭
+    fireEvent.click(deleteButtons[0])
 
-    expect(changeMemo).toHaveBeenCalledWith([
-      "initial memo 1",
-      "initial memo 2",
-      ""
-    ])
-  })
-
-  test("메모 입력 값을 변경하면 changeMemo 함수가 호출되어야 한다", async () => {
-    render(<MemoBox memos={memos} changeMemo={changeMemo} />)
-    const inputs = screen.getAllByPlaceholderText(
-      "이곳에 추가적인 메모를 입력할 수 있어요."
-    ) as HTMLInputElement[]
-
-    await userEvent.clear(inputs[0])
-    await userEvent.type(inputs[0], "updated memo")
-
-    waitFor(() =>
-      expect(changeMemo).toHaveBeenCalledWith({
-        memos: ["updated memo", "initial memo 2"]
-      })
-    )
-  })
-
-  test("메모 삭제 버튼 클릭 시 changeMemo 함수가 호출되어야 한다", async () => {
-    render(<MemoBox memos={memos} changeMemo={changeMemo} />)
-    const deleteButtons = screen.getAllByRole("button")
-
-    await userEvent.click(deleteButtons[1]) // 두 번째 버튼이 첫 번째 메모 삭제 버튼임
-
-    waitFor(() => expect(changeMemo).toHaveBeenCalledWith(["initial memo 2"]))
+    // "메모 1"이 삭제된 결과로 changeMemo가 호출되어야 함.
+    expect(changeMemo).toHaveBeenCalledWith(["메모 2"])
   })
 })

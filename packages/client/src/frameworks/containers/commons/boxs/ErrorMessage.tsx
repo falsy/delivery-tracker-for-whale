@@ -7,6 +7,10 @@ export default function ErrorMessage() {
 
   if (message === "") return null
 
+  const handleClickReset = () => {
+    resetMessage()
+  }
+
   return (
     <div
       className={css({
@@ -38,7 +42,7 @@ export default function ErrorMessage() {
             lineHeight: 0,
             padding: "5px"
           })}
-          onClick={resetMessage}
+          onClick={handleClickReset}
         >
           <CloseIcon />
         </button>

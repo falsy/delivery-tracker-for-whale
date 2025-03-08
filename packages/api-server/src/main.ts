@@ -31,6 +31,7 @@ async function bootstrap() {
     })
   )
 
+  console.log("port:", port)
   await app.listen(port)
 }
 bootstrap()

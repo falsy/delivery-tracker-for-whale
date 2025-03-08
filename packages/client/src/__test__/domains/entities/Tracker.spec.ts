@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest"
 import Tracker from "@domains/entities/Tracker"
 
 describe("Tracker 클래스 테스트", () => {

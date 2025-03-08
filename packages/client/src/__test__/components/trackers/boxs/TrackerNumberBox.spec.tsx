@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { render, screen, waitFor } from "@testing-library/react"
+import { render, screen, fireEvent } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { describe, it, expect, vi } from "vitest"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
 import TrackerNumberBox from "@components/trackers/boxs/TrackerNumberBox"
 
@@ -15,10 +16,10 @@ describe("TrackerNumberBox 컴포넌트", () => {
     popupURL: "https://example.com/track"
   }
   const trackingNumber = "123456789"
-  const changeTrackingNumber = jest.fn()
-  const getDeliveryMock = jest.fn()
+  const changeTrackingNumber = vi.fn()
+  const getDeliveryMock = vi.fn()
 
-  test("초기 렌더링 시 trackingNumber 값이 input 필드에 설정되어야 한다", () => {
+  it("초기 렌더링 시 trackingNumber 값이 input 필드에 설정되어야 한다", () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
@@ -32,7 +33,7 @@ describe("TrackerNumberBox 컴포넌트", () => {
     expect(input).toHaveValue("123456789")
   })
 
-  test("운송장 번호 입력 값을 변경하면 changeTrackingNumber 함수가 호출되어야 한다", async () => {
+  it("운송장 번호 입력 값을 변경하면 changeTrackingNumber 함수가 호출되어야 한다", async () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
@@ -44,17 +45,13 @@ describe("TrackerNumberBox 컴포넌트", () => {
 
     const input = screen.getByPlaceholderText("운송장 번호를 입력해주세요.")
 
-    await userEvent.clear(input)
-    await userEvent.type(input, "987654321")
+    fireEvent.input(input, { target: { value: "987654321" } })
 
-    waitFor(() =>
-      expect(changeTrackingNumber).toHaveBeenCalledWith({
-        trackingNumber: "987654321"
-      })
-    )
+    expect(changeTrackingNumber).toHaveBeenCalledTimes(1)
+    expect(changeTrackingNumber).toHaveBeenCalledWith("987654321")
   })
 
-  test("isPopupEnabled가 true일 때 NewWindowButton이 렌더링되어야 한다", () => {
+  it("isPopupEnabled가 true일 때 NewWindowButton이 렌더링되어야 한다", () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
@@ -67,7 +64,7 @@ describe("TrackerNumberBox 컴포넌트", () => {
     expect(screen.getByRole("button", { name: /새창/i })).toBeInTheDocument()
   })
 
-  test("isCrawlable이 true일 때 SubmitButton이 렌더링되어야 한다", () => {
+  it("isCrawlable이 true일 때 SubmitButton이 렌더링되어야 한다", () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
@@ -80,7 +77,7 @@ describe("TrackerNumberBox 컴포넌트", () => {
     expect(screen.getByRole("button", { name: /submit/i })).toBeInTheDocument()
   })
 
-  test("제출 버튼 클릭 시 getDelivery 함수가 호출되어야 한다", async () => {
+  it("제출 버튼 클릭 시 getDelivery 함수가 호출되어야 한다", async () => {
     render(
       <TrackerNumberBox
         carrier={carrier}
