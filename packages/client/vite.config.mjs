@@ -27,6 +27,17 @@ export default defineConfig(({ mode }) => {
       emptyOutDir: false,
       sourcemap: mode !== "production"
     },
-    plugins: [react()]
+    plugins: [react()],
+    test: {
+      globals: true,
+      environment: "jsdom",
+      setupFiles: path.resolve(__dirname, "setupTests.ts"),
+      includeSource: ["src/**/*.{ts,tsx}"],
+      coverage: {
+        provider: "v8",
+        reporter: ["text", "json", "html"]
+      },
+      watch: false
+    }
   }
 })

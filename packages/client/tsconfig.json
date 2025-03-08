@@ -3,14 +3,14 @@
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "outDir": "./dist/",
-    "module": "ESNext",
+    "module": "esnext",
     "esModuleInterop": true,
     "target": "es5",
     "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
     "baseUrl": ".",
-    "types": ["@testing-library/jest-dom", "jest"],
+    "types": ["@testing-library/jest-dom", "jest", "vite/client", "node"],
     "paths": {
       "@constants/*": ["src/constants/*"],
       "@domains/*": ["src/domains/*"],

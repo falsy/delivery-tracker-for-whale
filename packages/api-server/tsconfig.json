@@ -21,6 +21,7 @@
     "baseUrl": "./",
     "rootDir": "./src",
     "types": ["jest"],
+    "preserveWatchOutput": true,
     "paths": {
       "@domains/*": ["src/domains/*"],
       "@frameworks/*": ["src/frameworks/*"]

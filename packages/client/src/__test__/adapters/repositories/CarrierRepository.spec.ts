@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach, vi } from "vitest"
 import { API_URL } from "@constants/index"
 import IClientHTTP from "@adapters/infrastructures/interfaces/IClientHTTP"
 import LayerDTO from "@adapters/dtos/LayerDTO"
@@ -6,29 +7,32 @@ import IETagManager from "@services/interfaces/IETagManager"
 import ICacheWebStorage from "@adapters/infrastructures/interfaces/ICacheWebStorage"
 
 describe("CarrierRepository", () => {
-  let mockClientHTTP: jest.Mocked<IClientHTTP>
-  let mockETagManager: jest.Mocked<IETagManager>
-  let mockCacheWebStorage: jest.Mocked<ICacheWebStorage>
+  let mockClientHTTP: IClientHTTP
+  let mockETagManager: IETagManager
+  let mockCacheWebStorage: ICacheWebStorage
   let carrierRepository: CarrierRepository
 
   beforeEach(() => {
     mockClientHTTP = {
-      get: jest.fn(),
-      post: jest.fn(),
-      put: jest.fn(),
-      delete: jest.fn()
-    } as jest.Mocked<IClientHTTP>
+      get: vi.fn(),
+      post: vi.fn(),
+      put: vi.fn(),
+      delete: vi.fn()
+    }
+
     mockETagManager = {
-      getETag: jest.fn(),
-      getData: jest.fn(),
-      setETagData: jest.fn()
+      getETag: vi.fn(),
+      getData: vi.fn(),
+      setETagData: vi.fn()
     }
+
     mockCacheWebStorage = {
-      getItem: jest.fn(),
-      setItem: jest.fn(),
-      removeItem: jest.fn(),
-      clear: jest.fn()
+      getItem: vi.fn(),
+      setItem: vi.fn(),
+      removeItem: vi.fn(),
+      clear: vi.fn()
     }
+
     carrierRepository = new CarrierRepository(
       mockClientHTTP,
       mockCacheWebStorage,
@@ -38,15 +42,18 @@ describe("CarrierRepository", () => {
 
   describe("getCarriers", () => {
     it("성공 시 carriers 데이터를 반환해야 한다", async () => {
+      // Mock 데이터 설정
       const mockData = [{ id: "1", name: "Carrier1" }]
-      mockClientHTTP.get.mockResolvedValueOnce({
+      vi.spyOn(mockClientHTTP, "get").mockResolvedValue({
         ok: true,
         headers: new Headers(),
         json: async () => ({ isError: false, data: mockData })
       } as Response)
 
+      // 테스트 실행
       const result = await carrierRepository.getCarriers()
 
+      // 검증
       expect(mockClientHTTP.get).toHaveBeenCalledWith(
         `${API_URL}/carriers`,
         null
@@ -54,24 +61,32 @@ describe("CarrierRepository", () => {
       expect(result).toEqual(new LayerDTO({ data: mockData }))
     })
 
-    it("응답이 성공적이지 않을 때 에러 메시지를 반환해야 한다", async () => {
-      mockClientHTTP.get.mockResolvedValueOnce({
+    it("응답이 실패할 경우 에러 메시지를 반환해야 한다", async () => {
+      // 실패하는 응답 설정
+      vi.spyOn(mockClientHTTP, "get").mockResolvedValue({
         ok: false,
         json: async () => ({ isError: true, message: "Server Error" })
       } as Response)
 
+      // 테스트 실행
       const result = await carrierRepository.getCarriers()
 
+      // 검증
       expect(result).toEqual(
         new LayerDTO({ isError: true, message: "Server Error" })
       )
     })
 
-    it("예외가 발생할 때 에러 메시지를 반환해야 한다", async () => {
-      mockClientHTTP.get.mockRejectedValueOnce(new Error("Network Error"))
+    it("네트워크 예외가 발생할 경우 에러 메시지를 반환해야 한다", async () => {
+      // 네트워크 에러 시뮬레이션
+      vi.spyOn(mockClientHTTP, "get").mockRejectedValue(
+        new Error("Network Error")
+      )
 
+      // 테스트 실행
       const result = await carrierRepository.getCarriers()
 
+      // 검증
       expect(result).toEqual(
         new LayerDTO({ isError: true, message: "Network Error" })
       )

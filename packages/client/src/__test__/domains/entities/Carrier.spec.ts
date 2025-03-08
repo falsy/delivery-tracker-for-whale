@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest"
 import Carrier from "@domains/entities/Carrier"
 
 describe("Carrier 클래스 테스트", () => {

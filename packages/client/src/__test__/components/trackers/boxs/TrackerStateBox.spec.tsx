@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { describe, it, expect, vi } from "vitest"
 import IDeliveryProgressVO from "@domains/vos/interfaces/IDeliveryProgressVO"
 import TrackerStateBox from "@components/trackers/boxs/TrackerStateBox"
 
@@ -31,9 +32,9 @@ describe("TrackerStateBox 컴포넌트", () => {
     }
   ]
 
-  const closeFncMock = jest.fn()
+  const closeFncMock = vi.fn()
 
-  test("isPending이 true일 때 로딩 컴포넌트가 표시되어야 한다", () => {
+  it("isPending이 true일 때 로딩 컴포넌트가 표시되어야 한다", () => {
     render(
       <TrackerStateBox
         isPending={true}
@@ -47,7 +48,7 @@ describe("TrackerStateBox 컴포넌트", () => {
     expect(screen.getByText("loading...")).toBeInTheDocument()
   })
 
-  test("isPending이 false이고 에러 메시지가 있을 때 에러 메시지가 표시되어야 한다", () => {
+  it("isPending이 false이고 에러 메시지가 있을 때 에러 메시지가 표시되어야 한다", () => {
     render(
       <TrackerStateBox
         isPending={false}
@@ -61,7 +62,7 @@ describe("TrackerStateBox 컴포넌트", () => {
     expect(screen.getByText("Delivery not found")).toBeInTheDocument()
   })
 
-  test("배송 상태와 이력이 올바르게 렌더링되어야 한다", () => {
+  it("배송 상태와 이력이 올바르게 렌더링되어야 한다", () => {
     render(
       <TrackerStateBox
         isPending={false}
@@ -84,7 +85,7 @@ describe("TrackerStateBox 컴포넌트", () => {
     })
   })
 
-  test("닫기 버튼 클릭 시 closeFnc 함수가 호출되어야 한다", async () => {
+  it("닫기 버튼 클릭 시 closeFnc 함수가 호출되어야 한다", async () => {
     render(
       <TrackerStateBox
         isPending={false}

@@ -26,6 +26,7 @@ async function bootstrap() {
     app.use(compression({
         threshold: 1000
     }));
+    console.log("port:", port);
     await app.listen(port);
 }
 bootstrap();

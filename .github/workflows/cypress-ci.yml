@@ -26,12 +26,12 @@ jobs:
         run: yarn install
 
       - name: Start client
-        run: yarn start:client &
+        run: yarn dev:client &
         env:
           NODE_ENV: development
 
       - name: Wait for client
-        run: npx wait-on http://localhost:2000
+        run: npx wait-on http://localhost:2000 --timeout 60000
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4

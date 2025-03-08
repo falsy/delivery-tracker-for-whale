@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, waitFor } from "@testing-library/react"
+import { describe, it, expect, beforeEach, vi } from "vitest"
 import useCarriers from "@hooks/useCarriers"
 import useTrackers from "@hooks/useTrackers"
 import Migration from "@services/Migration"
 import Dashboard from "@pages/Dashboard"
 
-jest.mock("@hooks/useCarriers")
-jest.mock("@hooks/useTrackers")
-jest.mock("@services/Migration")
+vi.mock("@hooks/useCarriers")
+vi.mock("@hooks/useTrackers")
+vi.mock("@services/Migration")
 
 describe("Dashboard", () => {
-  const mockSetCarriers = jest.fn()
-  const mockGetCarriers = jest.fn()
-  const mockMigration = jest.fn()
-  const mockGetTrackers = jest.fn()
+  const mockSetCarriers = vi.fn()
+  const mockGetCarriers = vi.fn()
+  const mockMigration = vi.fn()
+  const mockGetTrackers = vi.fn()
 
   beforeEach(() => {
+    vi.clearAllMocks()
     ;(useCarriers as any).mockReturnValue({
       carriers: [],
       getCarriers: mockGetCarriers,
@@ -25,12 +27,12 @@ describe("Dashboard", () => {
       isPending: false,
       getTrackers: mockGetTrackers
     })
-    ;(Migration as jest.Mock).mockImplementation(() => ({
+    ;(Migration as any).mockImplementation(() => ({
       migration: mockMigration
     }))
   })
 
-  test("컴포넌트가 렌더링될 때 getCarrierList 함수가 호출되어야 한다", async () => {
+  it("컴포넌트가 렌더링될 때 getCarrierList 함수가 호출되어야 한다", async () => {
     mockGetCarriers.mockResolvedValue({ isError: false, data: [] })
 
     render(<Dashboard />)
@@ -40,7 +42,7 @@ describe("Dashboard", () => {
     })
   })
 
-  test("carriers가 업데이트되면 Migration 후 getTrackers가 호출되어야 한다", async () => {
+  it("carriers가 업데이트되면 Migration 후 getTrackers가 호출되어야 한다", async () => {
     mockGetCarriers.mockResolvedValue({ isError: false, data: [{ id: "1" }] })
     mockGetTrackers.mockResolvedValue({ isError: false, data: [] })
     ;(useCarriers as any).mockReturnValue({
