@@ -24,6 +24,7 @@ export default function Listbox({
   return (
     <HUIListbox value={selected} onChange={onChange}>
       <ListboxButton
+        data-testid="carrier-select-box"
         className={clsx(
           "relative w-full text-left text-sm font-medium border border-gray-300 dark:border-gray-600 dark:text-white bg-transparent py-2 pl-3 pr-8 z-10"
         )}

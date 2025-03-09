@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react"
 import CloseIcon from "@components/atoms/icons/CloseIcon"
+import { Button } from "@headlessui/react"
 
 export default function MemoItem({
   index,
@@ -32,13 +33,13 @@ export default function MemoItem({
         onBlur={handleChangeMemo}
         placeholder="이곳에 추가적인 메모를 입력할 수 있어요."
       />
-      <button
+      <Button
         aria-label="delete-memo-button"
         className="flex items-center justify-center"
         onClick={handleDeleteMemo}
       >
         <CloseIcon className="opacity-50 dark:stroke-gray-200" />
-      </button>
+      </Button>
     </div>
   )
 }
