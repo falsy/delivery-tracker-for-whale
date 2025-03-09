@@ -1,7 +1,7 @@
 {
   "name": "delivery-tracker-for-whale",
   "private": true,
-  "version": "1.11.1",
+  "version": "1.12.0",
   "author": "falsy",
   "license": "The Unlicense",
   "workspaces": [
@@ -12,9 +12,8 @@
     "start": "nx run-many --target=start --parallel",
     "dev": "nx run-many --target=dev --parallel",
     "test": "nx run-many --target=test --parallel",
-    "lint": "nx run-many --target=lint --parallel",
-    "panda": "nx run client:panda",
     "cypress": "nx run client:cypress",
+    "storybook": "nx run client:storybook",
     "dev:server": "nx run api-server:dev",
     "dev:client": "nx run client:dev",
     "start:client": "nx run client:start",

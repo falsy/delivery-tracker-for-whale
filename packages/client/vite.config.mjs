@@ -1,6 +1,7 @@
 import path from "path"
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
+import tailwindcss from "@tailwindcss/vite"
 
 export default defineConfig(({ mode }) => {
   return {
@@ -18,8 +19,7 @@ export default defineConfig(({ mode }) => {
         "@providers": path.resolve(__dirname, "./src/frameworks/providers/"),
         "@containers": path.resolve(__dirname, "./src/frameworks/containers/"),
         "@components": path.resolve(__dirname, "./src/frameworks/components/"),
-        "@hooks": path.resolve(__dirname, "./src/frameworks/hooks/"),
-        "@styled-system": path.resolve(__dirname, "./styled-system/")
+        "@hooks": path.resolve(__dirname, "./src/frameworks/hooks/")
       },
       extensions: [".ts", ".tsx", ".js", ".mjs"]
     },
@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => {
       emptyOutDir: false,
       sourcemap: mode !== "production"
     },
-    plugins: [react()],
+    plugins: [react(), tailwindcss()],
     test: {
       globals: true,
       environment: "jsdom",
