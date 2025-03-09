@@ -34,6 +34,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/ui": "^3.0.8",
     "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
     "cypress": "^13.16.1",
     "jsdom": "^26.0.0",
     "storybook": "^8.6.4",

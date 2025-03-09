@@ -17,7 +17,7 @@
       "@adapters/*": ["src/adapters/*"],
       "@services/*": ["src/services/*"],
       "@di/*": ["src/di/*"],
-      "@pages/*": ["src/frameworks/pages/*"],
+      "@pages/*": ["src/frameworks/components/pages/*"],
       "@providers/*": ["src/frameworks/providers/*"],
       "@containers/*": ["src/frameworks/containers/*"],
       "@components/*": ["src/frameworks/components/*"],

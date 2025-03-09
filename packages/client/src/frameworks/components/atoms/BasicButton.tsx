@@ -1,0 +1,24 @@
+import clsx from "clsx"
+import { Button } from "@headlessui/react"
+
+export default function BasicButton({
+  value,
+  onClick
+}: {
+  value: string
+  onClick(): void
+}) {
+  return (
+    <Button
+      aria-label={value}
+      className={clsx([
+        "inline-block w-20 bg-green-600 border-green-600 border-1 cursor-pointer",
+        "text-white text-sm h-9 font-weight-[500]",
+        "transition-opacity transition-03s hover:opacity-80"
+      ])}
+      onClick={onClick}
+    >
+      {value}
+    </Button>
+  )
+}
