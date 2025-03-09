@@ -7,7 +7,6 @@
     "build": "rm -rf dist/assets && nx vite:build",
     "build:dev": "nx vite:build --mode development",
     "explorer": "source-map-explorer ./dist/assets/*.js",
-    "panda": "panda",
     "storybook": "storybook dev -p 6006",
     "test": "vitest",
     "cypress": "nx open-cypress"
@@ -16,7 +15,6 @@
     "@chromatic-com/storybook": "^3.2.5",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
-    "@pandacss/dev": "^0.47.1",
     "@storybook/addon-essentials": "^8.5.0",
     "@storybook/addon-interactions": "^8.5.0",
     "@storybook/blocks": "^8.5.0",

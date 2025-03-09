@@ -12,8 +12,8 @@ export default function useTrackers() {
   const controllers = useMemo(() => di(), [])
   const [isPending, startTransition] = useTransition()
 
-  const [trackers, setTrackers] = useAtom(trakersAtom)
   const { setMessage } = useError()
+  const [trackers, setTrackers] = useAtom(trakersAtom)
 
   const [deliveryErrorMessage, setDeliveryErrorMessage] = useState("")
   const [delivery, setDelivery] = useState<IDeliveryDTO>(null)

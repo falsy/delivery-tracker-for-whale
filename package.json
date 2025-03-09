@@ -12,8 +12,6 @@
     "start": "nx run-many --target=start --parallel",
     "dev": "nx run-many --target=dev --parallel",
     "test": "nx run-many --target=test --parallel",
-    "lint": "nx run-many --target=lint --parallel",
-    "panda": "nx run client:panda",
     "cypress": "nx run client:cypress",
     "storybook": "nx run client:storybook",
     "dev:server": "nx run api-server:dev",
