@@ -19,8 +19,7 @@ export default defineConfig(({ mode }) => {
         "@providers": path.resolve(__dirname, "./src/frameworks/providers/"),
         "@containers": path.resolve(__dirname, "./src/frameworks/containers/"),
         "@components": path.resolve(__dirname, "./src/frameworks/components/"),
-        "@hooks": path.resolve(__dirname, "./src/frameworks/hooks/"),
-        "@styled-system": path.resolve(__dirname, "./styled-system/")
+        "@hooks": path.resolve(__dirname, "./src/frameworks/hooks/")
       },
       extensions: [".ts", ".tsx", ".js", ".mjs"]
     },

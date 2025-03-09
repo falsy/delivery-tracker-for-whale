@@ -21,10 +21,9 @@
       "@providers/*": ["src/frameworks/providers/*"],
       "@containers/*": ["src/frameworks/containers/*"],
       "@components/*": ["src/frameworks/components/*"],
-      "@hooks/*": ["src/frameworks/hooks/*"],
-      "@styled-system/*": ["styled-system/*"]
+      "@hooks/*": ["src/frameworks/hooks/*"]
     }
   },
-  "include": ["./src/**/*", "setupTests.ts", "./styled-system/**/*"],
+  "include": ["./src/**/*", "setupTests.ts"],
   "exclude": ["node_modules", "dist"]
 }
