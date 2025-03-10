@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react"
-import CloseIcon from "@components/atoms/icons/CloseIcon"
 import { Button } from "@headlessui/react"
+import CloseIcon from "@components/atoms/icons/CloseIcon"
 
 export default function MemoItem({
   index,

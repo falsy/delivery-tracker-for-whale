@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Header />
+      <Header title={"택배 배송 조회"} />
       <main className="pb-10">
         <ErrorMessageBox />
         <div

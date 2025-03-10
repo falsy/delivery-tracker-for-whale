@@ -7,7 +7,7 @@ import {
 } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/24/outline"
 
-export interface IListboxItem {
+interface IListboxItem {
   id: string
   name: string
 }

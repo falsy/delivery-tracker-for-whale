@@ -1,7 +1,7 @@
 import IDeliveryProgressVO from "@domains/vos/interfaces/IDeliveryProgressVO"
 import LoadingBox from "./LoadingBox"
-import DeliveryErrorMessage from "@components/atoms/DeliveryErrorMesage"
-import StateSummary from "@components/atoms/StateSumary"
+import DeliveryErrorMessage from "@components/atoms/DeliveryErrorMessage"
+import StateSummary from "@components/atoms/StateSummary"
 import StateList from "@components/atoms/StateList"
 import CloseButton from "@components/atoms/CloseButton"
 

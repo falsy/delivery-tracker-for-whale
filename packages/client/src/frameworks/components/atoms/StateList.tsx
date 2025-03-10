@@ -1,3 +1,5 @@
+import clsx from "clsx"
+
 export default function StateList({
   progresses
 }: {
@@ -8,33 +10,37 @@ export default function StateList({
     description: string
   }[]
 }) {
+  const tableBaseClass = "border-border dark:border-border-dark"
+  const thClass = clsx(
+    "bg-tableHeader dark:bg-tableHeader-dark border-l border-t",
+    "leading-[34px] font-[500]",
+    tableBaseClass
+  )
+  const tdClass = clsx("border-l border-t leading-[20px] p-1.5", tableBaseClass)
+
   return (
-    <table className="table-fixed w-full text-center border-r border-b border-border dark:border-border-dark text-sm border-spacing-0 text-black dark:text-white">
+    <table
+      className={clsx("table-fixed w-full text-center text-sm", tableBaseClass)}
+    >
       <thead>
         <tr>
-          <th className="bg-tableHeader dark:bg-tableHeader-dark leading-[34px] border-l border-t border-border dark:border-border-dark font-[500] w-[35%]">
-            단계/시간
-          </th>
-          <th className="bg-tableHeader dark:bg-tableHeader-dark leading-[34px] border-l border-t border-border dark:border-border-dark font-[500]">
-            위치/현황
-          </th>
+          <th className={clsx(thClass, "w-[35%]")}>단계/시간</th>
+          <th className={thClass}>위치/현황</th>
         </tr>
       </thead>
       <tbody>
-        {progresses.map((progress, i) => {
-          return (
-            <tr key={i}>
-              <td className="border-l border-t border-border dark:border-border-dark leading-[20px] p-1.5">
-                <p>[{progress.state.name}]</p>
-                <p>{progress.time}</p>
-              </td>
-              <td className="border-l border-t border-border dark:border-border-dark leading-[20px] p-1.5">
-                <p>[{progress.location}]</p>
-                <p>{progress.description}</p>
-              </td>
-            </tr>
-          )
-        })}
+        {progresses.map((progress, i) => (
+          <tr key={i}>
+            <td className={tdClass}>
+              <p>[{progress.state.name}]</p>
+              <p>{progress.time}</p>
+            </td>
+            <td className={tdClass}>
+              <p>[{progress.location}]</p>
+              <p>{progress.description}</p>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )
