@@ -35,7 +35,7 @@ export default function MemoItem({
       />
       <Button
         aria-label="delete-memo-button"
-        className="flex items-center justify-center"
+        className="flex items-center justify-center cursor-pointer"
         onClick={handleDeleteMemo}
       >
         <CloseIcon className="opacity-50 dark:stroke-gray-200" />

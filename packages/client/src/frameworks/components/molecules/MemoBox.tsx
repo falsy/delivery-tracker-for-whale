@@ -18,10 +18,10 @@ export default function MemoBox({
       <div>
         <Button
           id="create-memo-button"
-          className="flex items-center gap-1 text-xs font-bold text-green-700 dark:text-green-400 px-0 py-0.5"
+          className="flex items-center gap-1 text-xs font-bold text-green-700 dark:text-green-400 px-0 py-0.5 cursor-pointer"
           onClick={handleClickAddMemo}
         >
-          <PlusIcon className="mt-[2px] w-4 stroke-green-700 dark:stroke-green-400" />
+          <PlusIcon className="w-4 stroke-green-700 dark:stroke-green-400" />
           메모 추가
         </Button>
       </div>

@@ -10,3 +10,20 @@
     @apply bg-[#f7f7f7] dark:bg-[rgb(41,41,41)];
   }
 }
+
+@theme {
+  --color-primary: oklch(0.627 0.194 149.214);
+  --color-primary-border: oklch(0.627 0.194 149.214);
+  --color-buttonBG: rgb(240, 240, 240);
+  --color-buttonBG-dark: rgb(40, 40, 40);
+  --color-border: #ddd;
+  --color-border-dark: rgb(85, 85, 85);
+  --color-sectionBG: #fff;
+  --color-sectionBG-dark: rgb(55, 55, 55);
+  --color-listBG: rgb(245, 245, 245);
+  --color-listBG-dark: rgb(50, 50, 50);
+  --color-listBG-hover: rgb(235, 235, 235);
+  --color-listBG-hover-dark: rgb(40, 40, 40);
+  --color-tableHeader: rgb(245, 245, 245);
+  --color-tableHeader-dark: rgb(40, 40, 40);
+}

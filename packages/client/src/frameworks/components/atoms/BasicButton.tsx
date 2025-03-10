@@ -12,7 +12,7 @@ export default function BasicButton({
     <Button
       aria-label={value}
       className={clsx([
-        "inline-block w-20 bg-green-600 border-green-600 border-1 cursor-pointer",
+        "inline-block w-20 bg-primary cursor-pointer",
         "text-white text-sm h-9 font-weight-[500]",
         "transition-opacity transition-03s hover:opacity-80"
       ])}

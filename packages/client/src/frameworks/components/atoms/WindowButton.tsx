@@ -10,10 +10,11 @@ export default function WinodwButton({ url }: { url: string }) {
     <Button
       aria-label="new-window-button"
       className={clsx([
-        "w-[30%] min-w-[60px] h-10 bg-[#f5f5f5] text-sm font-weight-[500] cursor-pointer",
-        "border-[1px] border-solid border-[#ddd]",
+        "w-[30%] min-w-[60px] h-10 bg-buttonBG text-sm font-weight-[500] cursor-pointer",
+        "border-[1px] border-border border-l-0",
         "transition-all duration-300 hover:bg-[#eaeaea] hover:opacity-80",
-        "dark:bg-[rgb(44,44,44)] dark:text-[#ddd] dark:border-[rgb(85,85,85)] dark:hover:bg-[rgb(30,30,30)]"
+        "text-black dark:text-white",
+        "dark:bg-buttonBG-dark dark:border-border-dark dark:hover:bg-[rgb(30,30,30)]"
       ])}
       onClick={handleClickNewWindowTracker}
     >

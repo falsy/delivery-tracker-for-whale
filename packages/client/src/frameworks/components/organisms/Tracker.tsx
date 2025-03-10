@@ -91,7 +91,7 @@ export default function Tracker({
   }
 
   return (
-    <div className="relative mb-5 px-5 pt-2.5 pb-4 bg-white shadow-md dark:bg-gray-700">
+    <div className="relative mb-5 px-5 pt-2.5 pb-4 shadow-md bg-sectionBG dark:bg-sectionBG-dark">
       <div className="grid grid-cols-[1fr_30px] gap-2.5 py-1.5">
         <LabelInput label={label} changeLabel={handleChangeLabel} />
         <DeleteButton handleClick={() => deleteTracker(tracker.id)} />

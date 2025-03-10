@@ -7,7 +7,7 @@ export default function TrackingNumberInput({
 }) {
   return (
     <input
-      className="flex-grow w-full text-base font-medium leading-[24px] px-3 border border-gray-300 border-r-0 placeholder:text-sm tracking-wide dark:bg-gray-700 dark:border-gray-600 dark:text-white relative z-10"
+      className="flex-grow w-full text-base font-medium leading-[24px] px-3 placeholder:text-sm tracking-wide dark:text-white relative z-10 border border-border dark:border-border-dark"
       type="text"
       value={trackingNumber}
       onChange={(e) => changeTrackingNumber(e.target.value)}

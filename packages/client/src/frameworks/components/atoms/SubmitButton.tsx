@@ -9,9 +9,10 @@ export default function SubmitButton({
     <button
       aria-label="submit-button"
       className={clsx([
-        "w-[30%] min-w-[60px] h-10 bg-green-600 border-green-600 border-1 cursor-pointer",
-        "text-white text-sm h-10 font-weight-[500]",
-        "transition-opacity transition-03s hover:opacity-80"
+        "w-[30%] min-w-[60px] h-10 bg-primary cursor-pointer",
+        "text-white text-sm font-weight-[500]",
+        "transition-opacity transition-03s hover:opacity-80",
+        "border border-primary dark:border-border-dark border-l-0"
       ])}
       onClick={handleClick}
     >
