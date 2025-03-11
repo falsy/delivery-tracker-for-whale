@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import { Button } from "@headlessui/react"
 
-export default function WinodwButton({ url }: { url: string }) {
+export default function WindowButton({ url }: { url: string }) {
   const handleClickNewWindowTracker = () => {
     window.open(url, "", "resizable=yes,scrollbars=yes,width=900,height=700")
   }
