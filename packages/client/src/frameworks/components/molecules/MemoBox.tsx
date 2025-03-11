@@ -1,6 +1,6 @@
+import { Button } from "@headlessui/react"
 import PlusIcon from "@components/atoms/icons/PlusIcon"
 import MemoItem from "@components/atoms/MemoItem"
-import { Button } from "@headlessui/react"
 
 export default function MemoBox({
   memos,
@@ -27,9 +27,9 @@ export default function MemoBox({
       </div>
       {memos.length > 0 && (
         <div>
-          <ul id="memo-list">
-            {memos.map((_, i) => (
-              <li key={i}>
+          <ul id="memo-list" aria-label="memo-list">
+            {memos.map((memo, i) => (
+              <li key={`${i}-${memo}`}>
                 <MemoItem index={i} memos={memos} changeMemos={changeMemos} />
               </li>
             ))}

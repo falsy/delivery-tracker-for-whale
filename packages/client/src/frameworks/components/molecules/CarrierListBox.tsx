@@ -1,13 +1,13 @@
-import Listbox from "@components/atoms/Listbox"
 import ICarrier from "@domains/entities/interfaces/ICarrier"
+import Listbox from "@components/atoms/Listbox"
 
 export default function CarrierListBox({
-  carriers,
   carrier,
+  carriers,
   changeCarrierId
 }: {
-  carriers: ICarrier[]
   carrier: ICarrier
+  carriers: ICarrier[]
   changeCarrierId: (carrierId: string) => void
 }) {
   return (

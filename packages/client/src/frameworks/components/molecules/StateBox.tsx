@@ -1,5 +1,5 @@
 import IDeliveryProgressVO from "@domains/vos/interfaces/IDeliveryProgressVO"
-import LoadingBox from "./LoadingBox"
+import LoadingBox from "@components/molecules/LoadingBox"
 import DeliveryErrorMessage from "@components/atoms/DeliveryErrorMessage"
 import StateSummary from "@components/atoms/StateSummary"
 import StateList from "@components/atoms/StateList"

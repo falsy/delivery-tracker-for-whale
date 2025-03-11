@@ -5,19 +5,19 @@ describe("StateList", () => {
   const progresses = [
     {
       state: { name: "배송 출발" },
-      time: "2024-03-11 10:00",
+      time: "2025-03-11 10:00",
       location: "서울센터",
       description: "배송이 시작되었습니다."
     },
     {
       state: { name: "배송 중" },
-      time: "2024-03-11 12:30",
+      time: "2025-03-11 12:30",
       location: "경기 물류센터",
       description: "물류센터에서 이동 중입니다."
     },
     {
       state: { name: "배송 완료" },
-      time: "2024-03-11 15:00",
+      time: "2025-03-11 15:00",
       location: "고객 주소",
       description: "배송이 완료되었습니다."
     }

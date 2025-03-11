@@ -1,4 +1,4 @@
-import Loading from "../atoms/Loading"
+import Loading from "@components/atoms/Loading"
 
 export default function LoadingBox() {
   return (
