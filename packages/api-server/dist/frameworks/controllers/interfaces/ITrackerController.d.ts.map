@@ -1,1 +1,0 @@
-{"version":3,"file":"ITrackerController.d.ts","sourceRoot":"","sources":["../../../../src/frameworks/controllers/interfaces/ITrackerController.ts"],"names":[],"mappings":"AAAA,OAAO,YAAY,MAAM,+CAA+C,CAAA;AACxE,OAAO,SAAS,MAAM,4CAA4C,CAAA;AAElE,MAAM,CAAC,OAAO,WAAW,kBAAkB;IACzC,WAAW,CACT,SAAS,EAAE,MAAM,EACjB,cAAc,EAAE,MAAM,GACrB,OAAO,CAAC,SAAS,CAAC,YAAY,CAAC,CAAC,CAAA;CACpC"}

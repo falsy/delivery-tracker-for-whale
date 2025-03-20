@@ -1,1 +1,0 @@
-{"version":3,"file":"DeliveryStateGenerator.d.ts","sourceRoot":"","sources":["../../../../../src/frameworks/services/scrapingService/helpers/DeliveryStateGenerator.ts"],"names":[],"mappings":"AAAA,OAAO,eAAe,MAAM,8BAA8B,CAAA;AAE1D,MAAM,CAAC,OAAO,OAAO,sBAAsB;IACzC,MAAM,CAAC,QAAQ,CACb,MAAM,EAAE,OAAO,GAAG,MAAM,GAAG,MAAM,GAAG,MAAM,GAAG,OAAO;CA8BvD"}
