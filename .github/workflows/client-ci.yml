@@ -1,9 +1,7 @@
 on:
-  pull_request:
+  push:
     branches:
       - main
-    paths:
-      - "packages/client/**"
 
 jobs:
   build:
@@ -28,4 +26,4 @@ jobs:
         run: yarn install
 
       - name: Run tests
-        run: yarn test:client
+        run: yarn test

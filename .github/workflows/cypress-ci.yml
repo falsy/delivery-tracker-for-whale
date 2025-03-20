@@ -1,5 +1,5 @@
 on:
-  pull_request:
+  push:
     branches:
       - main
 
@@ -26,7 +26,7 @@ jobs:
         run: yarn install
 
       - name: Start client
-        run: yarn dev:client &
+        run: yarn dev
         env:
           NODE_ENV: development
 
