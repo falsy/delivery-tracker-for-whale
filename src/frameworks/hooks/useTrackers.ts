@@ -93,6 +93,7 @@ export default function useTrackers() {
 
   const clearDelivery = useCallback(() => {
     setDelivery(null)
+    setDeliveryErrorMessage("")
   }, [setDelivery])
 
   return {

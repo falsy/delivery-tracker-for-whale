@@ -1,22 +1,12 @@
-import {
-  useEffect,
-  lazy,
-  Suspense,
-  useLayoutEffect,
-  useCallback,
-  useRef
-} from "react"
+import { useEffect, useLayoutEffect, useCallback, useRef } from "react"
 import Migration from "@services/Migration"
 import useCarriers from "@hooks/useCarriers"
 import useTrackers from "@hooks/useTrackers"
 import Header from "@components/atoms/Header"
 import Footer from "@components/atoms/Footer"
 import ErrorMessageBox from "@components/molecules/ErrorMessageBox"
-
-const TrackerSection = lazy(
-  () => import("@components/templates/TrackerSection")
-)
-const TipMessageBox = lazy(() => import("@components/molecules/TipMessageBox"))
+import TrackerSection from "@components/templates/TrackerSection"
+import TipMessageBox from "@components/molecules/TipMessageBox"
 
 const Dashboard = () => {
   const { isPending: isCPending, carriers, getCarriers } = useCarriers()
@@ -60,10 +50,10 @@ const Dashboard = () => {
           className={`transition-opacity duration-150 ${isLoading ? "opacity-0" : "opacity-100"}`}
         >
           {carriers.length > 0 && (
-            <Suspense>
+            <>
               <TrackerSection />
               <TipMessageBox resetTrackers={handleClickReset} />
-            </Suspense>
+            </>
           )}
         </div>
       </main>
