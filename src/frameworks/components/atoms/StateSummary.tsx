@@ -5,7 +5,8 @@ export default function StateSummary({
 }: {
   state: { from: string; to: string; state: string }
 }) {
-  const tableBaseClass = "border-border dark:border-border-dark"
+  const tableBaseClass =
+    "border-border dark:border-border-dark border-b border-r"
   const thClass = clsx(
     "bg-tableHeader dark:bg-tableHeader-dark border-l border-t",
     "leading-[34px] font-[500]",

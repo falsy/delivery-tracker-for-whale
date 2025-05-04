@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import DeleteButton from "@components/atoms/DeleteButton"
 import LabelInput from "@components/atoms/LabelInput"
 import CarrierListBox from "@components/molecules/CarrierListBox"
@@ -9,7 +10,6 @@ import ICarrier from "@domains/entities/interfaces/ICarrier"
 import ITracker from "@domains/entities/interfaces/ITracker"
 import useCarriers from "@hooks/useCarriers"
 import useTrackers from "@hooks/useTrackers"
-import { useEffect, useState } from "react"
 
 export default function Tracker({
   tracker,
@@ -118,7 +118,11 @@ export default function Tracker({
           onClose={resetDeliveryState}
         />
       )}
-      <MemoBox memos={memos} changeMemos={handleChangeMemo} />
+      <MemoBox
+        memos={memos}
+        changeMemos={handleChangeMemo}
+        autoSaveTracker={autoSaveTracker}
+      />
     </div>
   )
 }

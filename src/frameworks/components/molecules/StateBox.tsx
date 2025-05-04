@@ -19,7 +19,7 @@ export default function StateBox({
   onClose: () => void
 }) {
   return (
-    <div className="border-t border-border dark:border-border-dark py-5">
+    <div className="border-t border-border dark:border-border-dark py-2">
       <div className="relative h-[200px] overflow-auto pr-4">
         {isPending && <LoadingBox />}
         {!!deliveryErrorMessage && (

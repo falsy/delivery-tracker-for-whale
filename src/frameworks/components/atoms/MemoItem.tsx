@@ -1,26 +1,29 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, useState } from "react"
 import { Button } from "@headlessui/react"
 import CloseIcon from "@components/atoms/icons/CloseIcon"
 
 export default function MemoItem({
   index,
   memos,
-  changeMemos
+  deleteMemo,
+  autoSaveMemos
 }: {
   index: number
   memos: string[]
-  changeMemos: (memos: string[]) => void
+  deleteMemo: (index: number) => void
+  autoSaveMemos: (index: number, value: string) => void
 }) {
-  const memo = memos[index]
+  const [memo, setMemo] = useState(memos[index])
 
   const handleChangeMemo = (e: ChangeEvent<HTMLInputElement>) => {
-    const newMemos = [...memos]
-    newMemos[index] = e.target.value
-    changeMemos(newMemos)
+    const { value } = e.target
+
+    setMemo(value)
+    autoSaveMemos(index, value)
   }
 
-  const handleDeleteMemo = () => {
-    changeMemos(memos.filter((_, i) => i !== index))
+  const handleClickDeleteMemo = () => {
+    deleteMemo(index)
   }
 
   return (
@@ -36,7 +39,7 @@ export default function MemoItem({
       <Button
         aria-label="delete-memo-button"
         className="flex items-center justify-center cursor-pointer"
-        onClick={handleDeleteMemo}
+        onClick={handleClickDeleteMemo}
       >
         <CloseIcon className="opacity-50 dark:stroke-gray-200" />
       </Button>

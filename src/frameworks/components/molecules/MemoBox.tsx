@@ -4,13 +4,25 @@ import MemoItem from "@components/atoms/MemoItem"
 
 export default function MemoBox({
   memos,
-  changeMemos
+  changeMemos,
+  autoSaveTracker
 }: {
   memos: string[]
   changeMemos: (memos: string[]) => void
+  autoSaveTracker: (tracker: { memos: string[] }) => void
 }) {
   const handleClickAddMemo = () => {
     changeMemos([...memos, ""])
+  }
+
+  const deleteMemo = (index: number) => {
+    changeMemos(memos.filter((_, i) => i !== index))
+  }
+
+  const handleChangeAutoSaveMemos = (index: number, value: string) => {
+    const newMemos = [...memos]
+    newMemos[index] = value
+    autoSaveTracker({ memos: newMemos })
   }
 
   return (
@@ -30,7 +42,12 @@ export default function MemoBox({
           <ul id="memo-list" aria-label="memo-list">
             {memos.map((memo, i) => (
               <li key={`${i}-${memo}`}>
-                <MemoItem index={i} memos={memos} changeMemos={changeMemos} />
+                <MemoItem
+                  index={i}
+                  memos={memos}
+                  deleteMemo={deleteMemo}
+                  autoSaveMemos={handleChangeAutoSaveMemos}
+                />
               </li>
             ))}
           </ul>
