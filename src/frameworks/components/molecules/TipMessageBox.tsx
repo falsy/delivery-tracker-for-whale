@@ -14,7 +14,7 @@ export default function TipMessageBox({
       <p>
         <Button
           aria-label="reset-button"
-          className="block text-green-700 dark:text-green-400 font-bold py-0.5 text-xs cursor-pointer"
+          className="block text-primary font-bold py-0.5 text-xs cursor-pointer"
           onClick={resetTrackers}
         >
           [초기화]

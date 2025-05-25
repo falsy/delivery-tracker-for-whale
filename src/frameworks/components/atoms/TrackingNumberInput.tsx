@@ -7,11 +7,11 @@ export default function TrackingNumberInput({
 }) {
   return (
     <input
-      className="flex-grow w-full text-base font-medium leading-[24px] px-3 placeholder:text-sm tracking-wide dark:text-white relative z-10 border border-border dark:border-border-dark"
+      className="flex-1 text-base font-[400] leading-[24px] px-5 placeholder:text-sm tracking-wide dark:text-white relative z-10 border border-border dark:border-border-dark rounded-4xl"
       type="text"
       value={trackingNumber}
       onChange={(e) => changeTrackingNumber(e.target.value)}
-      placeholder="운송장 번호를 입력해주세요."
+      placeholder="운송장 번호"
     />
   )
 }

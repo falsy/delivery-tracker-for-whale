@@ -26,8 +26,9 @@ export default function Listbox({
       <ListboxButton
         data-testid="carrier-select-box"
         className={clsx(
-          "relative w-full text-left text-sm font-medium border border-border dark:border-border-dark dark:text-white bg-transparent py-2 pl-3 pr-8 z-10",
-          "cursor-pointer"
+          "relative w-full text-left text-sm font-medium border border-border dark:border-border-dark dark:text-white bg-transparent py-2 pl-5 pr-8 z-10 h-[40px]",
+          "cursor-pointer",
+          "rounded-4xl"
         )}
       >
         {selected.name}
@@ -40,9 +41,9 @@ export default function Listbox({
         anchor="bottom"
         transition
         className={clsx(
-          "w-[var(--button-width)] rounded-lg border p-1 [--anchor-gap:4px] focus:outline-none",
+          "w-[var(--button-width)] border p-1 [--anchor-gap:4px] focus:outline-none",
           "transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0",
-          "border border-border dark:border-border-dark dark:text-white bg-listBG dark:bg-listBG-dark shadow-md rounded-md",
+          "border border-border dark:border-border-dark dark:text-white bg-listBG dark:bg-listBG-dark shadow-md rounded-2xl",
           "z-10"
         )}
       >
@@ -51,7 +52,7 @@ export default function Listbox({
             key={item.id}
             value={item}
             className={clsx(
-              "group flex cursor-pointer text-sm items-center gap-2 rounded-lg py-2 px-3 select-none",
+              "group flex cursor-pointer text-sm items-center gap-2 rounded-4xl py-2 px-3 select-none",
               "hover:bg-listBG-hover dark:hover:bg-listBG-hover-dark",
               "data-[focus]:bg-listBG-hover dark:data-[focus]:bg-listBG-hover-dark"
             )}

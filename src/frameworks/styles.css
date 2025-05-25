@@ -7,17 +7,21 @@
     @apply h-full;
   }
   body {
-    @apply bg-[#f7f7f7] dark:bg-[rgb(41,41,41)];
+    @apply bg-[#f9f9f9] dark:bg-[rgb(41,41,41)];
   }
 }
 
 @theme {
-  --color-primary: oklch(0.627 0.194 149.214);
-  --color-primary-border: oklch(0.627 0.194 149.214);
-  --color-buttonBG: rgb(240, 240, 240);
+  /* --color-primary: oklch(0.627 0.194 149.214);
+  --color-primary-border: oklch(0.627 0.194 149.214); */
+  --color-primary: #1dac8e;
+  --color-primary-border: #29b392;
+  --color-buttonBG: rgb(245, 245, 245);
   --color-buttonBG-dark: rgb(40, 40, 40);
   --color-border: #ddd;
   --color-border-dark: rgb(85, 85, 85);
+  --color-divider: #eee;
+  --color-divider-dark: rgb(85, 85, 85);
   --color-sectionBG: #fff;
   --color-sectionBG-dark: rgb(55, 55, 55);
   --color-listBG: rgb(245, 245, 245);
@@ -26,4 +30,7 @@
   --color-listBG-hover-dark: rgb(40, 40, 40);
   --color-tableHeader: rgb(245, 245, 245);
   --color-tableHeader-dark: rgb(40, 40, 40);
+  --color-primary-gradient: linear-gradient(150deg, #6aea55 0%, #59c9e3 100%);
+  --shadow-custom: 0 6px 5px -5px rgba(107, 119, 172, 0.2);
+  --shadow-custom-dark: 0 6px 5px -5px rgba(0, 0, 0, 0.2);
 }

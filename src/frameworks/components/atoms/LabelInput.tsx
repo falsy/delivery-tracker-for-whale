@@ -12,7 +12,7 @@ export default function LabelInput({
         type="text"
         value={label}
         onChange={(e) => changeLabel(e.target.value)}
-        placeholder="배송에 대한 간단한 메모를 적을 수 있어요."
+        placeholder="메모"
       />
     </div>
   )

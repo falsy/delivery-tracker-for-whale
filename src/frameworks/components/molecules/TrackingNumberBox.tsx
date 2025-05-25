@@ -14,15 +14,14 @@ export default function TrackingNumberBox({
   changeTrackingNumber: (trackingNumber: string) => void
   getDelivery: (carrier: ICarrier, trackerTrackingNumber: string) => void
 }) {
+  const popupUrl = `https://falsy.me/tracker/${carrier.id}/${trackingNumber}`
   return (
-    <div className="pb-2 flex">
+    <div className="pb-2 flex gap-1">
       <TrackingNumberInput
         trackingNumber={trackingNumber}
         changeTrackingNumber={changeTrackingNumber}
       />
-      {carrier.isPopupEnabled && (
-        <WindowButton url={carrier.popupURL + trackingNumber} />
-      )}
+      {carrier.isPopupEnabled && <WindowButton url={popupUrl} />}
       {carrier.isCrawlable && (
         <SubmitButton
           handleClick={() => getDelivery(carrier, trackingNumber)}

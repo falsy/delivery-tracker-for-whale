@@ -14,8 +14,9 @@ export default function BasicButton({
       className={clsx([
         "inline-block w-20 cursor-pointer",
         "bg-buttonBG border border-border dark:bg-buttonBG-dark dark:border-border-dark text-black dark:text-white",
-        "text-sm h-10 font-weight-[500]",
-        "transition-opacity transition-03s hover:opacity-80"
+        "text-sm h-10 font-[500]",
+        "transition-opacity transition-03s hover:opacity-80",
+        "rounded-4xl"
       ])}
       onClick={onClick}
     >

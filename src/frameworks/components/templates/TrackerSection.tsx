@@ -15,7 +15,7 @@ export default function TrackerSection() {
 
   return (
     <section>
-      <div className="pt-5 px-5">
+      <div className="pt-3 px-3">
         {trackers.length > 0 && (
           <ul id="tracker-list">
             {trackers.map((tracker) => (
@@ -30,7 +30,7 @@ export default function TrackerSection() {
           </ul>
         )}
       </div>
-      <div className="pb-10 px-5">
+      <div className="pb-10 px-3">
         <BasicButton value="추가" onClick={handleClickCreateTracker} />
       </div>
     </section>

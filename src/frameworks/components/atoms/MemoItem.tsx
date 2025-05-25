@@ -34,7 +34,7 @@ export default function MemoItem({
         value={memo}
         onChange={handleChangeMemo}
         onBlur={handleChangeMemo}
-        placeholder="이곳에 추가적인 메모를 입력할 수 있어요."
+        placeholder="메모"
       />
       <Button
         aria-label="delete-memo-button"
