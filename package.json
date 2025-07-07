@@ -1,7 +1,7 @@
 {
   "name": "delivery-tracker-for-whale",
   "private": true,
-  "version": "1.12.4",
+  "version": "1.12.5",
   "author": "falsy",
   "license": "The Unlicense",
   "packageManager": "yarn@4.2.2",
