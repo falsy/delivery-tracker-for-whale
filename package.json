@@ -1,7 +1,7 @@
 {
   "name": "delivery-tracker-for-whale",
   "private": true,
-  "version": "1.12.5",
+  "version": "1.13.0",
   "author": "falsy",
   "license": "The Unlicense",
   "packageManager": "yarn@4.2.2",
@@ -13,8 +13,7 @@
     "explorer": "source-map-explorer ./dist/assets/*.js",
     "storybook": "storybook dev -p 6006",
     "typecheck": "tsc --noEmit",
-    "test": "vitest",
-    "cypress": "cypress open"
+    "test": "vitest"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.5",
@@ -32,6 +31,7 @@
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
+    "@types/node": "22.14.1",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@typescript-eslint/eslint-plugin": "^8.10.0",
@@ -40,7 +40,6 @@
     "@vitest/ui": "^3.0.8",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
-    "cypress": "^13.16.1",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
