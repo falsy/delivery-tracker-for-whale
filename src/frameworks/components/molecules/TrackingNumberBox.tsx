@@ -14,7 +14,7 @@ export default function TrackingNumberBox({
   changeTrackingNumber: (trackingNumber: string) => void
   getDelivery: (carrier: ICarrier, trackerTrackingNumber: string) => void
 }) {
-  const popupUrl = `https://falsy.me/tracker/${carrier.id}/${trackingNumber}`
+  const popupUrl = carrier.popupURL + trackingNumber
   return (
     <div className="pb-2 flex gap-1">
       <TrackingNumberInput

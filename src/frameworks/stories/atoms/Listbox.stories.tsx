@@ -1,10 +1,10 @@
-import { Meta, StoryObj } from "@storybook/react/*"
+import type { Meta, StoryObj } from "@storybook/react"
 import Listbox from "@components/atoms/Listbox"
 import { useState } from "react"
 
 const meta = {
   title: "Atoms/Listbox",
-  component: () => {
+  component: function ListboxExample() {
     const [selected, setSelected] = useState({
       id: "1",
       name: "Option 1"

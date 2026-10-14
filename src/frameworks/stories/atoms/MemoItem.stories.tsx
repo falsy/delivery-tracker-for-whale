@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react/*"
+import type { Meta, StoryObj } from "@storybook/react"
 import MemoItem from "@components/atoms/MemoItem"
 
 const meta = {
@@ -16,6 +16,7 @@ export const Primary: Story = {
   args: {
     index: 0,
     memos: ["memo", "memo2"],
-    changeMemo: () => console.log("changed")
+    deleteMemo: (index) => console.log("deleted", index),
+    autoSaveMemos: (index, value) => console.log("saved", index, value)
   }
 }

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react/*"
+import type { Meta, StoryObj } from "@storybook/react"
 import TipMessageBox from "@components/molecules/TipMessageBox"
 
 const meta = {

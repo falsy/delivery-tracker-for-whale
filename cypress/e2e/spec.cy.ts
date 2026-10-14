@@ -1,7 +1,9 @@
+import { API_URL } from "../../src/constants"
+
 describe("배송 조회 페이지", () => {
   beforeEach(() => {
     // 배송 조회 박스 추가
-    cy.intercept("GET", "https://parcel.falsy.me/carriers").as("getCarriers")
+    cy.intercept("GET", `${API_URL}/carriers`).as("getCarriers")
     cy.visit("http://localhost:2000")
     cy.wait("@getCarriers")
     cy.get("button[aria-label='추가']").click()

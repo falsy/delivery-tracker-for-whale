@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react/*"
+import type { Meta, StoryObj } from "@storybook/react"
 import LabelInput from "@components/atoms/LabelInput"
 
 const meta = {

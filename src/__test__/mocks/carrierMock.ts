@@ -88,7 +88,7 @@ const carriers = [
     id: "2de911ca-1fda-11ef-8884-0a8cb08d3aea",
     no: 10,
     name: "ilyanglogis",
-    displayName: "일량로지스",
+    displayName: "일양로지스",
     isCrawlable: false,
     isPopupEnabled: true,
     popupURL:
@@ -98,7 +98,7 @@ const carriers = [
     id: "2de911fb-1fda-11ef-8884-0a8cb08d3aea",
     no: 11,
     name: "ems",
-    displayName: "국체우편(EMS)",
+    displayName: "국제우편(EMS)",
     isCrawlable: false,
     isPopupEnabled: true,
     popupURL:
